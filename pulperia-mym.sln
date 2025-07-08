@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pulperia-mym", "pulperia-mym.csproj", "{5E43C893-FBF4-49E0-AE45-948C686EB9AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E43C893-FBF4-49E0-AE45-948C686EB9AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E43C893-FBF4-49E0-AE45-948C686EB9AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E43C893-FBF4-49E0-AE45-948C686EB9AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E43C893-FBF4-49E0-AE45-948C686EB9AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B987A04E-BB20-4494-8D82-8B65B83A56DC}
+	EndGlobalSection
+EndGlobal
