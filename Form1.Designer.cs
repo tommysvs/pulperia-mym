@@ -30,26 +30,40 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            panel2 = new Panel();
             tabPage2 = new TabPage();
             panel1 = new Panel();
-            panel2 = new Panel();
             tabPage3 = new TabPage();
-            tabPage4 = new TabPage();
-            tabPage5 = new TabPage();
-            tabPage6 = new TabPage();
-            tabPage7 = new TabPage();
-            tabPage8 = new TabPage();
-            tabPage9 = new TabPage();
             panel3 = new Panel();
+            tabPage4 = new TabPage();
             panel4 = new Panel();
+            tabPage5 = new TabPage();
             panel5 = new Panel();
+            tabPage6 = new TabPage();
             panel6 = new Panel();
+            tabPage7 = new TabPage();
             panel7 = new Panel();
+            tabPage8 = new TabPage();
             panel8 = new Panel();
+            tabPage9 = new TabPage();
             panel9 = new Panel();
             tabPage10 = new TabPage();
+            menuStrip1 = new MenuStrip();
+            ventasToolStripMenuItem = new ToolStripMenuItem();
+            productosToolStripMenuItem = new ToolStripMenuItem();
+            comprasToolStripMenuItem = new ToolStripMenuItem();
+            proveedoresToolStripMenuItem = new ToolStripMenuItem();
+            usuariosToolStripMenuItem = new ToolStripMenuItem();
+            reportesToolStripMenuItem = new ToolStripMenuItem();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
+            textBox1 = new TextBox();
+            toolStripComboBox1 = new ToolStripComboBox();
+            button1 = new Button();
+            label1 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            panel2.SuspendLayout();
             tabPage2.SuspendLayout();
             tabPage3.SuspendLayout();
             tabPage4.SuspendLayout();
@@ -58,6 +72,9 @@
             tabPage7.SuspendLayout();
             tabPage8.SuspendLayout();
             tabPage9.SuspendLayout();
+            menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -89,6 +106,19 @@
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // panel2
+            // 
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(textBox1);
+            panel2.Controls.Add(pictureBox2);
+            panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(menuStrip1);
+            panel2.Location = new Point(20, 28);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(877, 487);
+            panel2.TabIndex = 2;
+            // 
             // tabPage2
             // 
             tabPage2.Controls.Add(panel1);
@@ -107,13 +137,6 @@
             panel1.Size = new Size(877, 487);
             panel1.TabIndex = 1;
             // 
-            // panel2
-            // 
-            panel2.Location = new Point(28, 25);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(877, 487);
-            panel2.TabIndex = 2;
-            // 
             // tabPage3
             // 
             tabPage3.Controls.Add(panel3);
@@ -124,6 +147,13 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            panel3.Location = new Point(28, 25);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(877, 487);
+            panel3.TabIndex = 2;
             // 
             // tabPage4
             // 
@@ -136,6 +166,13 @@
             tabPage4.Text = "tabPage4";
             tabPage4.UseVisualStyleBackColor = true;
             // 
+            // panel4
+            // 
+            panel4.Location = new Point(28, 25);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(877, 487);
+            panel4.TabIndex = 2;
+            // 
             // tabPage5
             // 
             tabPage5.Controls.Add(panel5);
@@ -146,6 +183,13 @@
             tabPage5.TabIndex = 4;
             tabPage5.Text = "tabPage5";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // panel5
+            // 
+            panel5.Location = new Point(28, 25);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(877, 487);
+            panel5.TabIndex = 2;
             // 
             // tabPage6
             // 
@@ -158,6 +202,13 @@
             tabPage6.Text = "tabPage6";
             tabPage6.UseVisualStyleBackColor = true;
             // 
+            // panel6
+            // 
+            panel6.Location = new Point(28, 25);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(877, 487);
+            panel6.TabIndex = 2;
+            // 
             // tabPage7
             // 
             tabPage7.Controls.Add(panel7);
@@ -168,6 +219,13 @@
             tabPage7.TabIndex = 6;
             tabPage7.Text = "tabPage7";
             tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // panel7
+            // 
+            panel7.Location = new Point(28, 25);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(877, 487);
+            panel7.TabIndex = 2;
             // 
             // tabPage8
             // 
@@ -180,6 +238,13 @@
             tabPage8.Text = "tabPage8";
             tabPage8.UseVisualStyleBackColor = true;
             // 
+            // panel8
+            // 
+            panel8.Location = new Point(28, 25);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(877, 487);
+            panel8.TabIndex = 2;
+            // 
             // tabPage9
             // 
             tabPage9.Controls.Add(panel9);
@@ -190,48 +255,6 @@
             tabPage9.TabIndex = 8;
             tabPage9.Text = "tabPage9";
             tabPage9.UseVisualStyleBackColor = true;
-            // 
-            // panel3
-            // 
-            panel3.Location = new Point(28, 25);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(877, 487);
-            panel3.TabIndex = 2;
-            // 
-            // panel4
-            // 
-            panel4.Location = new Point(28, 25);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(877, 487);
-            panel4.TabIndex = 2;
-            // 
-            // panel5
-            // 
-            panel5.Location = new Point(28, 25);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(877, 487);
-            panel5.TabIndex = 2;
-            // 
-            // panel6
-            // 
-            panel6.Location = new Point(28, 25);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(877, 487);
-            panel6.TabIndex = 2;
-            // 
-            // panel7
-            // 
-            panel7.Location = new Point(28, 25);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(877, 487);
-            panel7.TabIndex = 2;
-            // 
-            // panel8
-            // 
-            panel8.Location = new Point(28, 25);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(877, 487);
-            panel8.TabIndex = 2;
             // 
             // panel9
             // 
@@ -250,6 +273,102 @@
             tabPage10.Text = "tabPage10";
             tabPage10.UseVisualStyleBackColor = true;
             // 
+            // menuStrip1
+            // 
+            menuStrip1.ImageScalingSize = new Size(24, 24);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ventasToolStripMenuItem, productosToolStripMenuItem, comprasToolStripMenuItem, proveedoresToolStripMenuItem, reportesToolStripMenuItem, usuariosToolStripMenuItem, toolStripComboBox1 });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(877, 37);
+            menuStrip1.TabIndex = 0;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // ventasToolStripMenuItem
+            // 
+            ventasToolStripMenuItem.Name = "ventasToolStripMenuItem";
+            ventasToolStripMenuItem.Size = new Size(80, 29);
+            ventasToolStripMenuItem.Text = "Ventas";
+            ventasToolStripMenuItem.Click += ventasToolStripMenuItem_Click;
+            // 
+            // productosToolStripMenuItem
+            // 
+            productosToolStripMenuItem.Name = "productosToolStripMenuItem";
+            productosToolStripMenuItem.Size = new Size(109, 29);
+            productosToolStripMenuItem.Text = "Productos";
+            // 
+            // comprasToolStripMenuItem
+            // 
+            comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
+            comprasToolStripMenuItem.Size = new Size(100, 29);
+            comprasToolStripMenuItem.Text = "Compras";
+            // 
+            // proveedoresToolStripMenuItem
+            // 
+            proveedoresToolStripMenuItem.Name = "proveedoresToolStripMenuItem";
+            proveedoresToolStripMenuItem.Size = new Size(127, 29);
+            proveedoresToolStripMenuItem.Text = "Proveedores";
+            // 
+            // usuariosToolStripMenuItem
+            // 
+            usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
+            usuariosToolStripMenuItem.Size = new Size(96, 29);
+            usuariosToolStripMenuItem.Text = "Usuarios";
+            // 
+            // reportesToolStripMenuItem
+            // 
+            reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            reportesToolStripMenuItem.Size = new Size(98, 29);
+            reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(55, 79);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(106, 97);
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Location = new Point(54, 228);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(770, 222);
+            pictureBox2.TabIndex = 2;
+            pictureBox2.TabStop = false;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(716, 59);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(108, 31);
+            textBox1.TabIndex = 3;
+            textBox1.Text = "Buscar";
+            // 
+            // toolStripComboBox1
+            // 
+            toolStripComboBox1.Name = "toolStripComboBox1";
+            toolStripComboBox1.Size = new Size(121, 33);
+            toolStripComboBox1.Text = "Inicio";
+            toolStripComboBox1.Click += toolStripComboBox1_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(667, 61);
+            button1.Name = "button1";
+            button1.Size = new Size(36, 30);
+            button1.TabIndex = 4;
+            button1.Text = "s";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(202, 85);
+            label1.Name = "label1";
+            label1.Size = new Size(149, 25);
+            label1.TabIndex = 5;
+            label1.Text = "descripcion MYM";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -260,6 +379,8 @@
             Text = "Pulperia MYM";
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             tabPage2.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
@@ -268,6 +389,10 @@
             tabPage7.ResumeLayout(false);
             tabPage8.ResumeLayout(false);
             tabPage9.ResumeLayout(false);
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -293,5 +418,18 @@
         private TabPage tabPage9;
         private Panel panel9;
         private TabPage tabPage10;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem ventasToolStripMenuItem;
+        private ToolStripMenuItem productosToolStripMenuItem;
+        private ToolStripMenuItem comprasToolStripMenuItem;
+        private ToolStripMenuItem proveedoresToolStripMenuItem;
+        private ToolStripMenuItem usuariosToolStripMenuItem;
+        private ToolStripMenuItem reportesToolStripMenuItem;
+        private TextBox textBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
+        private ToolStripComboBox toolStripComboBox1;
+        private Label label1;
+        private Button button1;
     }
 }
