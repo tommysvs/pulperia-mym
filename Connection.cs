@@ -1,37 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
+using System.Windows.Forms;
 using Microsoft.Data.SqlClient;
 
 namespace pulperia_mym
 {
     public class Connection
     {
-        public string Server { get; set; }
-        public string Database { get; set; }
-        public string UserId { get; set; }
-        public string Password { get; set; }
-        public Connection(string server, string database, string userId, string password)
-        {
-            Server = server;
-            Database = database;
-            UserId = userId;
-            Password = password;
-        }
+        private const string server = @"(localdb)\MSSQLLocalDB";
+        private const string database = "Pulperia_MYM";
+
+        public Connection() { }
 
         public bool Connected()
         {
             try
             {
-                var conString = $"Server={Server};Database={Database};User Id={UserId};Password={Password};";
-
-                var Con = new SqlConnection(conString);
-                Con.Open();
-
-                return true;
+                var conString = $"Server={server};Database={database};Trusted_Connection=True;TrustServerCertificate=True;";
+                using (var con = new SqlConnection(conString))
+                {
+                    con.Open();
+                    return true;
+                }
             }
             catch (Exception)
             {
@@ -40,9 +29,10 @@ namespace pulperia_mym
             }
         }
 
-        internal SqlConnection GetConnection()
+        public SqlConnection GetConnection()
         {
-            throw new NotImplementedException();
+            var conString = $"Server={server};Database={database};Trusted_Connection=True;TrustServerCertificate=True;";
+            return new SqlConnection(conString);
         }
     }
 }

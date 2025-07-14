@@ -6,34 +6,19 @@ namespace pulperia_mym
 {
     public partial class FormPulperia : Form
     {
-        SqlConnection conexionGlobal;
+        private Connection conn;
 
         public FormPulperia()
         {
             InitializeComponent();
-
+            conn = new Connection();
         }
-
-        public SqlConnection ObtenerConexion()
-        {
-            string server = "DESKTOP-IL9GM8N\\DUENIS"; // tu instancia de SQL Server
-            string database = "Pulperia_MYM";
-
-            // Cadena de conexión con Trusted_Connection para Windows Authentication
-            string connectionString = $"Server={server};Database={database};Trusted_Connection=True;";
-            SqlConnection conexion = new SqlConnection(connectionString);
-            return conexion;
-        }
-
 
         public void btnLogin_Click(object sender, EventArgs e)
         {
-            string server = "DESKTOP-IL9GM8N\\DUENIS";
-            string database = "Pulperia_MYM";
             string userId = txtUser.Text.Trim();
             string password = txtPass.Text;
 
-            // Verificación directa para el usuario admin (solo para prueba)
             if (userId == "admin" && password == "admin1234")
             {
                 pnlLogin.Visible = false;
@@ -45,53 +30,61 @@ namespace pulperia_mym
                 return;
             }
 
-            string connectionString = $"Server={server};Database={database};User Id={userId};Password={password};TrustServerCertificate=True;";
-
-            try
+            if (conn.Connected())
             {
-                using (SqlConnection conexion = new SqlConnection(connectionString))
+                try
                 {
-                    conexion.Open();
-
-                    // Verificación más robusta
-                    string query = "SELECT COUNT(1) FROM Usuario WHERE NombreUsuario = @Usuario AND Contraseña = @Contraseña";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conexion))
+                    using (var sqlConn = conn.GetConnection())
                     {
-                        cmd.Parameters.AddWithValue("@Usuario", userId);
-                        cmd.Parameters.AddWithValue("@Contraseña", password);
-
-                        int existe = (int)cmd.ExecuteScalar();
-
-                        if (existe > 0)
+                        sqlConn.Open();
+                        string query = "SELECT COUNT(1) FROM Usuario WHERE NombreUsuario = @Usuario AND Contraseña = @Contraseña";
+                        using (SqlCommand cmd = new SqlCommand(query, sqlConn))
                         {
-                            pnlLogin.Visible = false;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Credenciales incorrectas", "Error");
-                            txtPass.Text = "";
-                            txtUser.Focus();
+                            cmd.Parameters.AddWithValue("@Usuario", userId);
+                            cmd.Parameters.AddWithValue("@Contraseña", password);
+
+                            int existe = (int)cmd.ExecuteScalar();
+
+                            if (existe > 0)
+                            {
+                                pnlLogin.Visible = false;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Credenciales incorrectas", "Error");
+                                txtPass.Text = "";
+                                txtUser.Focus();
+                            }
                         }
                     }
                 }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show($"Error SQL: {ex.Message}", "Error de base de datos");
+                }
             }
-            catch (SqlException ex)
+            else
             {
-                MessageBox.Show($"Error SQL: {ex.Message}", "Error de base de datos");
+                txtPass.Text = "";
+                txtUser.Focus();
             }
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnMostrar_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conexion = ObtenerConexion())
+            using (var sqlConn = conn.GetConnection())
             {
                 try
                 {
-                    conexion.Open();
+                    sqlConn.Open();
                     string query = "SELECT ID_producto, nombre_producto, precio, stock FROM Producto";
 
-                    SqlDataAdapter da = new SqlDataAdapter(query, conexion);
+                    SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
@@ -102,6 +95,11 @@ namespace pulperia_mym
                     MessageBox.Show("Error al mostrar productos: " + ex.Message);
                 }
             }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
