@@ -47,17 +47,14 @@
             panel1 = new Panel();
             tabProductos = new TabPage();
             panel3 = new Panel();
-            btnMostrar = new Button();
+            btnMostrarProducto = new Button();
             dgvProductos = new DataGridView();
-            Id_Producto = new DataGridViewTextBoxColumn();
-            Nombre_Producto = new DataGridViewTextBoxColumn();
-            Stock_Almacen = new DataGridViewTextBoxColumn();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
-            textBox2 = new TextBox();
-            btnEliminar = new Button();
-            btnModificar = new Button();
-            btnAgregar = new Button();
+            txtStockProducto = new TextBox();
+            txtPrecioProducto = new TextBox();
+            txtNmbProducto = new TextBox();
+            btnEliminarProducto = new Button();
+            btnModificarProducto = new Button();
+            btnAgregarProducto = new Button();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
@@ -228,14 +225,14 @@
             // 
             // panel3
             // 
-            panel3.Controls.Add(btnMostrar);
+            panel3.Controls.Add(btnMostrarProducto);
             panel3.Controls.Add(dgvProductos);
-            panel3.Controls.Add(textBox3);
-            panel3.Controls.Add(textBox4);
-            panel3.Controls.Add(textBox2);
-            panel3.Controls.Add(btnEliminar);
-            panel3.Controls.Add(btnModificar);
-            panel3.Controls.Add(btnAgregar);
+            panel3.Controls.Add(txtStockProducto);
+            panel3.Controls.Add(txtPrecioProducto);
+            panel3.Controls.Add(txtNmbProducto);
+            panel3.Controls.Add(btnEliminarProducto);
+            panel3.Controls.Add(btnModificarProducto);
+            panel3.Controls.Add(btnAgregarProducto);
             panel3.Controls.Add(label4);
             panel3.Controls.Add(label3);
             panel3.Controls.Add(label2);
@@ -245,23 +242,22 @@
             panel3.Size = new Size(879, 551);
             panel3.TabIndex = 2;
             // 
-            // btnMostrar
+            // btnMostrarProducto
             // 
-            btnMostrar.Location = new Point(335, 468);
-            btnMostrar.Margin = new Padding(3, 4, 3, 4);
-            btnMostrar.Name = "btnMostrar";
-            btnMostrar.Size = new Size(86, 31);
-            btnMostrar.TabIndex = 11;
-            btnMostrar.Text = "Mostrar";
-            btnMostrar.UseVisualStyleBackColor = true;
-            btnMostrar.Click += btnMostrar_Click;
+            btnMostrarProducto.Location = new Point(335, 468);
+            btnMostrarProducto.Margin = new Padding(3, 4, 3, 4);
+            btnMostrarProducto.Name = "btnMostrarProducto";
+            btnMostrarProducto.Size = new Size(86, 31);
+            btnMostrarProducto.TabIndex = 11;
+            btnMostrarProducto.Text = "Mostrar";
+            btnMostrarProducto.UseVisualStyleBackColor = true;
+            btnMostrarProducto.Click += btnMostrarProducto_Click;
             // 
             // dgvProductos
             // 
             dgvProductos.AllowUserToAddRows = false;
             dgvProductos.AllowUserToDeleteRows = false;
             dgvProductos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProductos.Columns.AddRange(new DataGridViewColumn[] { Id_Producto, Nombre_Producto, Stock_Almacen });
             dgvProductos.Location = new Point(157, 93);
             dgvProductos.Margin = new Padding(3, 4, 3, 4);
             dgvProductos.Name = "dgvProductos";
@@ -270,88 +266,65 @@
             dgvProductos.Size = new Size(560, 332);
             dgvProductos.TabIndex = 10;
             // 
-            // Id_Producto
+            // txtStockProducto
             // 
-            Id_Producto.HeaderText = "ID";
-            Id_Producto.MinimumWidth = 6;
-            Id_Producto.Name = "Id_Producto";
-            Id_Producto.ReadOnly = true;
-            Id_Producto.Width = 150;
+            txtStockProducto.BackColor = SystemColors.ControlLight;
+            txtStockProducto.Location = new Point(701, 21);
+            txtStockProducto.Margin = new Padding(2, 3, 2, 3);
+            txtStockProducto.Name = "txtStockProducto";
+            txtStockProducto.Size = new Size(85, 27);
+            txtStockProducto.TabIndex = 9;
             // 
-            // Nombre_Producto
+            // txtPrecioProducto
             // 
-            Nombre_Producto.HeaderText = "NombreProducto";
-            Nombre_Producto.MinimumWidth = 6;
-            Nombre_Producto.Name = "Nombre_Producto";
-            Nombre_Producto.ReadOnly = true;
-            Nombre_Producto.Width = 150;
+            txtPrecioProducto.BackColor = SystemColors.ControlLight;
+            txtPrecioProducto.Location = new Point(434, 20);
+            txtPrecioProducto.Margin = new Padding(2, 3, 2, 3);
+            txtPrecioProducto.Name = "txtPrecioProducto";
+            txtPrecioProducto.Size = new Size(85, 27);
+            txtPrecioProducto.TabIndex = 8;
             // 
-            // Stock_Almacen
+            // txtNmbProducto
             // 
-            Stock_Almacen.HeaderText = "Unidades en almacen";
-            Stock_Almacen.MinimumWidth = 6;
-            Stock_Almacen.Name = "Stock_Almacen";
-            Stock_Almacen.ReadOnly = true;
-            Stock_Almacen.Width = 150;
+            txtNmbProducto.BackColor = SystemColors.ControlLight;
+            txtNmbProducto.Location = new Point(144, 20);
+            txtNmbProducto.Margin = new Padding(2, 3, 2, 3);
+            txtNmbProducto.Name = "txtNmbProducto";
+            txtNmbProducto.Size = new Size(215, 27);
+            txtNmbProducto.TabIndex = 6;
             // 
-            // textBox3
+            // btnEliminarProducto
             // 
-            textBox3.BackColor = SystemColors.ControlLight;
-            textBox3.Location = new Point(688, 20);
-            textBox3.Margin = new Padding(2, 3, 2, 3);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(85, 27);
-            textBox3.TabIndex = 9;
+            btnEliminarProducto.Location = new Point(520, 468);
+            btnEliminarProducto.Margin = new Padding(3, 4, 3, 4);
+            btnEliminarProducto.Name = "btnEliminarProducto";
+            btnEliminarProducto.Size = new Size(86, 31);
+            btnEliminarProducto.TabIndex = 5;
+            btnEliminarProducto.Text = "Eliminar";
+            btnEliminarProducto.UseVisualStyleBackColor = true;
+            btnEliminarProducto.Click += btnEliminarProducto_Click;
             // 
-            // textBox4
+            // btnModificarProducto
             // 
-            textBox4.BackColor = SystemColors.ControlLight;
-            textBox4.Location = new Point(434, 20);
-            textBox4.Margin = new Padding(2, 3, 2, 3);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(85, 27);
-            textBox4.TabIndex = 8;
+            btnModificarProducto.Location = new Point(427, 468);
+            btnModificarProducto.Margin = new Padding(3, 4, 3, 4);
+            btnModificarProducto.Name = "btnModificarProducto";
+            btnModificarProducto.Size = new Size(86, 31);
+            btnModificarProducto.TabIndex = 4;
+            btnModificarProducto.Text = "Modificar";
+            btnModificarProducto.UseVisualStyleBackColor = true;
+            btnModificarProducto.Click += btnModificarProducto_Click;
             // 
-            // textBox2
+            // btnAgregarProducto
             // 
-            textBox2.BackColor = SystemColors.ControlLight;
-            textBox2.Location = new Point(144, 20);
-            textBox2.Margin = new Padding(2, 3, 2, 3);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(215, 27);
-            textBox2.TabIndex = 6;
-            // 
-            // btnEliminar
-            // 
-            btnEliminar.Location = new Point(520, 468);
-            btnEliminar.Margin = new Padding(3, 4, 3, 4);
-            btnEliminar.Name = "btnEliminar";
-            btnEliminar.Size = new Size(86, 31);
-            btnEliminar.TabIndex = 5;
-            btnEliminar.Text = "Eliminar";
-            btnEliminar.UseVisualStyleBackColor = true;
-            btnEliminar.Click += btnEliminar_Click;
-            // 
-            // btnModificar
-            // 
-            btnModificar.Location = new Point(427, 468);
-            btnModificar.Margin = new Padding(3, 4, 3, 4);
-            btnModificar.Name = "btnModificar";
-            btnModificar.Size = new Size(86, 31);
-            btnModificar.TabIndex = 4;
-            btnModificar.Text = "Modificar";
-            btnModificar.UseVisualStyleBackColor = true;
-            // 
-            // btnAgregar
-            // 
-            btnAgregar.Location = new Point(242, 468);
-            btnAgregar.Margin = new Padding(3, 4, 3, 4);
-            btnAgregar.Name = "btnAgregar";
-            btnAgregar.Size = new Size(86, 31);
-            btnAgregar.TabIndex = 3;
-            btnAgregar.Text = "Agregar";
-            btnAgregar.UseVisualStyleBackColor = true;
-            btnAgregar.Click += btnAgregar_Click;
+            btnAgregarProducto.Location = new Point(242, 468);
+            btnAgregarProducto.Margin = new Padding(3, 4, 3, 4);
+            btnAgregarProducto.Name = "btnAgregarProducto";
+            btnAgregarProducto.Size = new Size(86, 31);
+            btnAgregarProducto.TabIndex = 3;
+            btnAgregarProducto.Text = "Agregar";
+            btnAgregarProducto.UseVisualStyleBackColor = true;
+            btnAgregarProducto.Click += btnAgregarProducto_Click;
             // 
             // label4
             // 
@@ -552,10 +525,10 @@
             pnlLogin.Controls.Add(txtPass);
             pnlLogin.Controls.Add(txtUser);
             pnlLogin.Controls.Add(lblLoginTitle);
-            pnlLogin.Location = new Point(-1, -13);
+            pnlLogin.Location = new Point(-1, 0);
             pnlLogin.Margin = new Padding(2, 3, 2, 3);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(891, 635);
+            pnlLogin.Size = new Size(895, 603);
             pnlLogin.TabIndex = 1;
             // 
             // lblPass
@@ -710,16 +683,13 @@
         private Label label2;
         private Label label4;
         private Label label3;
-        private TextBox textBox4;
-        private TextBox textBox2;
-        private Button btnEliminar;
-        private Button btnModificar;
-        private Button btnAgregar;
+        private TextBox txtPrecioProducto;
+        private TextBox txtNmbProducto;
+        private Button btnEliminarProducto;
+        private Button btnModificarProducto;
+        private Button btnAgregarProducto;
         private DataGridView dgvProductos;
-        private DataGridViewTextBoxColumn Id_Producto;
-        private DataGridViewTextBoxColumn Nombre_Producto;
-        private DataGridViewTextBoxColumn Stock_Almacen;
-        private TextBox textBox3;
-        private Button btnMostrar;
+        private TextBox txtStockProducto;
+        private Button btnMostrarProducto;
     }
 }
