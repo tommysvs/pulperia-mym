@@ -39,5 +39,10 @@ namespace pulperia_mym
                 return false;
             }
         }
+
+        internal SqlConnection GetConnection()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
