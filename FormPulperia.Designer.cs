@@ -28,25 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPulperia));
             tabControl1 = new TabControl();
             tabInicio = new TabPage();
-            panel2 = new Panel();
+            pnlInicio = new Panel();
             lblInicioDesc = new Label();
-            button1 = new Button();
             textBox1 = new TextBox();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             tabVentas = new TabPage();
-            panel1 = new Panel();
+            pnlVentas = new Panel();
+            lblTituloVentas = new Label();
             tabProductos = new TabPage();
-            panel3 = new Panel();
+            pnlProductos = new Panel();
+            lblTituloProductos = new Label();
             btnMostrarProducto = new Button();
             dgvProductos = new DataGridView();
             txtStockProducto = new TextBox();
@@ -59,15 +60,34 @@
             lblPrecioProducto = new Label();
             lblNmbProducto = new Label();
             tabSolProductos = new TabPage();
-            panel4 = new Panel();
+            pblSoliProd = new Panel();
+            lblTituloSolProd = new Label();
             tabOrdenRepo = new TabPage();
-            panel5 = new Panel();
+            pnlOrdRepo = new Panel();
+            lblTituloOrdRepo = new Label();
             tabRegFactura = new TabPage();
-            panel7 = new Panel();
+            pnlRegFact = new Panel();
+            lblTituloRegistrarFact = new Label();
             tabConfig = new TabPage();
-            panel8 = new Panel();
+            pnlConfig = new Panel();
+            lblNombreConfig = new Label();
+            txtNombreConfig = new TextBox();
+            lblRolConfig = new Label();
+            txtRolConfig = new TextBox();
+            btnEliminarUsuario = new Button();
+            btnCamPassUsuario = new Button();
+            lblTituloConfigUsuarios = new Label();
+            dgvUsuarios = new DataGridView();
+            btnMostrarUsuarios = new Button();
+            btnAgregarUsuario = new Button();
+            txtPasswordConfig = new TextBox();
+            lblPasswordConfig = new Label();
+            txtUsuarioConfig = new TextBox();
+            lblUsuarioConfig = new Label();
+            lblTituloConfig = new Label();
             tabReportes = new TabPage();
-            panel6 = new Panel();
+            pnlReportes = new Panel();
+            lblTituloReportes = new Label();
             btnGenerarGraficos = new Button();
             dgMasvendido = new DataGridView();
             chVentasGastos = new System.Windows.Forms.DataVisualization.Charting.Chart();
@@ -80,33 +100,27 @@
             txtPass = new TextBox();
             txtUser = new TextBox();
             lblLoginTitle = new Label();
-            lblTituloConfig = new Label();
-            lblTituloVentas = new Label();
-            lblTituloProductos = new Label();
-            lblTituloSolProd = new Label();
-            lblTituloOrdRepo = new Label();
-            lblTituloRegistrarFact = new Label();
-            lblTituloReportes = new Label();
             tabControl1.SuspendLayout();
             tabInicio.SuspendLayout();
-            panel2.SuspendLayout();
+            pnlInicio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabVentas.SuspendLayout();
-            panel1.SuspendLayout();
+            pnlVentas.SuspendLayout();
             tabProductos.SuspendLayout();
-            panel3.SuspendLayout();
+            pnlProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             tabSolProductos.SuspendLayout();
-            panel4.SuspendLayout();
+            pblSoliProd.SuspendLayout();
             tabOrdenRepo.SuspendLayout();
-            panel5.SuspendLayout();
+            pnlOrdRepo.SuspendLayout();
             tabRegFactura.SuspendLayout();
-            panel7.SuspendLayout();
+            pnlRegFact.SuspendLayout();
             tabConfig.SuspendLayout();
-            panel8.SuspendLayout();
+            pnlConfig.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             tabReportes.SuspendLayout();
-            panel6.SuspendLayout();
+            pnlReportes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgMasvendido).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chVentasGastos).BeginInit();
             ((System.ComponentModel.ISupportInitialize)chVentasSemanales).BeginInit();
@@ -133,7 +147,7 @@
             // 
             // tabInicio
             // 
-            tabInicio.Controls.Add(panel2);
+            tabInicio.Controls.Add(pnlInicio);
             tabInicio.Location = new Point(4, 34);
             tabInicio.Margin = new Padding(2, 4, 2, 4);
             tabInicio.Name = "tabInicio";
@@ -143,18 +157,17 @@
             tabInicio.Text = "Inicio";
             tabInicio.UseVisualStyleBackColor = true;
             // 
-            // panel2
+            // pnlInicio
             // 
-            panel2.Controls.Add(lblInicioDesc);
-            panel2.Controls.Add(button1);
-            panel2.Controls.Add(textBox1);
-            panel2.Controls.Add(pictureBox2);
-            panel2.Controls.Add(pictureBox1);
-            panel2.Location = new Point(6, 6);
-            panel2.Margin = new Padding(2, 4, 2, 4);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(1099, 685);
-            panel2.TabIndex = 2;
+            pnlInicio.Controls.Add(lblInicioDesc);
+            pnlInicio.Controls.Add(textBox1);
+            pnlInicio.Controls.Add(pictureBox2);
+            pnlInicio.Controls.Add(pictureBox1);
+            pnlInicio.Location = new Point(6, 6);
+            pnlInicio.Margin = new Padding(2, 4, 2, 4);
+            pnlInicio.Name = "pnlInicio";
+            pnlInicio.Size = new Size(1099, 685);
+            pnlInicio.TabIndex = 2;
             // 
             // lblInicioDesc
             // 
@@ -165,16 +178,6 @@
             lblInicioDesc.Size = new Size(149, 25);
             lblInicioDesc.TabIndex = 5;
             lblInicioDesc.Text = "descripcion MYM";
-            // 
-            // button1
-            // 
-            button1.Location = new Point(911, 29);
-            button1.Margin = new Padding(2, 4, 2, 4);
-            button1.Name = "button1";
-            button1.Size = new Size(36, 30);
-            button1.TabIndex = 4;
-            button1.Text = "s";
-            button1.UseVisualStyleBackColor = true;
             // 
             // textBox1
             // 
@@ -205,7 +208,7 @@
             // 
             // tabVentas
             // 
-            tabVentas.Controls.Add(panel1);
+            tabVentas.Controls.Add(pnlVentas);
             tabVentas.Location = new Point(4, 34);
             tabVentas.Margin = new Padding(2, 4, 2, 4);
             tabVentas.Name = "tabVentas";
@@ -215,18 +218,28 @@
             tabVentas.Text = "Ventas";
             tabVentas.UseVisualStyleBackColor = true;
             // 
-            // panel1
+            // pnlVentas
             // 
-            panel1.Controls.Add(lblTituloVentas);
-            panel1.Location = new Point(6, 6);
-            panel1.Margin = new Padding(2, 4, 2, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1099, 689);
-            panel1.TabIndex = 1;
+            pnlVentas.Controls.Add(lblTituloVentas);
+            pnlVentas.Location = new Point(6, 6);
+            pnlVentas.Margin = new Padding(2, 4, 2, 4);
+            pnlVentas.Name = "pnlVentas";
+            pnlVentas.Size = new Size(1099, 689);
+            pnlVentas.TabIndex = 1;
+            // 
+            // lblTituloVentas
+            // 
+            lblTituloVentas.AutoSize = true;
+            lblTituloVentas.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloVentas.Location = new Point(12, 11);
+            lblTituloVentas.Name = "lblTituloVentas";
+            lblTituloVentas.Size = new Size(104, 38);
+            lblTituloVentas.TabIndex = 1;
+            lblTituloVentas.Text = "Ventas";
             // 
             // tabProductos
             // 
-            tabProductos.Controls.Add(panel3);
+            tabProductos.Controls.Add(pnlProductos);
             tabProductos.Location = new Point(4, 34);
             tabProductos.Margin = new Padding(2, 4, 2, 4);
             tabProductos.Name = "tabProductos";
@@ -236,25 +249,35 @@
             tabProductos.Text = "Productos";
             tabProductos.UseVisualStyleBackColor = true;
             // 
-            // panel3
+            // pnlProductos
             // 
-            panel3.Controls.Add(lblTituloProductos);
-            panel3.Controls.Add(btnMostrarProducto);
-            panel3.Controls.Add(dgvProductos);
-            panel3.Controls.Add(txtStockProducto);
-            panel3.Controls.Add(txtPrecioProducto);
-            panel3.Controls.Add(txtNmbProducto);
-            panel3.Controls.Add(btnEliminarProducto);
-            panel3.Controls.Add(btnModificarProducto);
-            panel3.Controls.Add(btnAgregarProducto);
-            panel3.Controls.Add(lblStockProducto);
-            panel3.Controls.Add(lblPrecioProducto);
-            panel3.Controls.Add(lblNmbProducto);
-            panel3.Location = new Point(6, 4);
-            panel3.Margin = new Padding(2, 4, 2, 4);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(1099, 689);
-            panel3.TabIndex = 2;
+            pnlProductos.Controls.Add(lblTituloProductos);
+            pnlProductos.Controls.Add(btnMostrarProducto);
+            pnlProductos.Controls.Add(dgvProductos);
+            pnlProductos.Controls.Add(txtStockProducto);
+            pnlProductos.Controls.Add(txtPrecioProducto);
+            pnlProductos.Controls.Add(txtNmbProducto);
+            pnlProductos.Controls.Add(btnEliminarProducto);
+            pnlProductos.Controls.Add(btnModificarProducto);
+            pnlProductos.Controls.Add(btnAgregarProducto);
+            pnlProductos.Controls.Add(lblStockProducto);
+            pnlProductos.Controls.Add(lblPrecioProducto);
+            pnlProductos.Controls.Add(lblNmbProducto);
+            pnlProductos.Location = new Point(6, 4);
+            pnlProductos.Margin = new Padding(2, 4, 2, 4);
+            pnlProductos.Name = "pnlProductos";
+            pnlProductos.Size = new Size(1099, 689);
+            pnlProductos.TabIndex = 2;
+            // 
+            // lblTituloProductos
+            // 
+            lblTituloProductos.AutoSize = true;
+            lblTituloProductos.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloProductos.Location = new Point(21, 17);
+            lblTituloProductos.Name = "lblTituloProductos";
+            lblTituloProductos.Size = new Size(149, 38);
+            lblTituloProductos.TabIndex = 12;
+            lblTituloProductos.Text = "Productos";
             // 
             // btnMostrarProducto
             // 
@@ -372,7 +395,7 @@
             // 
             // tabSolProductos
             // 
-            tabSolProductos.Controls.Add(panel4);
+            tabSolProductos.Controls.Add(pblSoliProd);
             tabSolProductos.Location = new Point(4, 34);
             tabSolProductos.Margin = new Padding(2, 4, 2, 4);
             tabSolProductos.Name = "tabSolProductos";
@@ -382,18 +405,28 @@
             tabSolProductos.Text = "Solicitud de productos";
             tabSolProductos.UseVisualStyleBackColor = true;
             // 
-            // panel4
+            // pblSoliProd
             // 
-            panel4.Controls.Add(lblTituloSolProd);
-            panel4.Location = new Point(6, 4);
-            panel4.Margin = new Padding(2, 4, 2, 4);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(1099, 689);
-            panel4.TabIndex = 3;
+            pblSoliProd.Controls.Add(lblTituloSolProd);
+            pblSoliProd.Location = new Point(6, 4);
+            pblSoliProd.Margin = new Padding(2, 4, 2, 4);
+            pblSoliProd.Name = "pblSoliProd";
+            pblSoliProd.Size = new Size(1099, 689);
+            pblSoliProd.TabIndex = 3;
+            // 
+            // lblTituloSolProd
+            // 
+            lblTituloSolProd.AutoSize = true;
+            lblTituloSolProd.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloSolProd.Location = new Point(12, 14);
+            lblTituloSolProd.Name = "lblTituloSolProd";
+            lblTituloSolProd.Size = new Size(312, 38);
+            lblTituloSolProd.TabIndex = 13;
+            lblTituloSolProd.Text = "Solicitud de productos";
             // 
             // tabOrdenRepo
             // 
-            tabOrdenRepo.Controls.Add(panel5);
+            tabOrdenRepo.Controls.Add(pnlOrdRepo);
             tabOrdenRepo.Location = new Point(4, 34);
             tabOrdenRepo.Margin = new Padding(2, 4, 2, 4);
             tabOrdenRepo.Name = "tabOrdenRepo";
@@ -403,18 +436,28 @@
             tabOrdenRepo.Text = "Orden de reposición";
             tabOrdenRepo.UseVisualStyleBackColor = true;
             // 
-            // panel5
+            // pnlOrdRepo
             // 
-            panel5.Controls.Add(lblTituloOrdRepo);
-            panel5.Location = new Point(6, 4);
-            panel5.Margin = new Padding(2, 4, 2, 4);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(1099, 689);
-            panel5.TabIndex = 3;
+            pnlOrdRepo.Controls.Add(lblTituloOrdRepo);
+            pnlOrdRepo.Location = new Point(6, 4);
+            pnlOrdRepo.Margin = new Padding(2, 4, 2, 4);
+            pnlOrdRepo.Name = "pnlOrdRepo";
+            pnlOrdRepo.Size = new Size(1099, 689);
+            pnlOrdRepo.TabIndex = 3;
+            // 
+            // lblTituloOrdRepo
+            // 
+            lblTituloOrdRepo.AutoSize = true;
+            lblTituloOrdRepo.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloOrdRepo.Location = new Point(14, 16);
+            lblTituloOrdRepo.Name = "lblTituloOrdRepo";
+            lblTituloOrdRepo.Size = new Size(281, 38);
+            lblTituloOrdRepo.TabIndex = 13;
+            lblTituloOrdRepo.Text = "Orden de reposición";
             // 
             // tabRegFactura
             // 
-            tabRegFactura.Controls.Add(panel7);
+            tabRegFactura.Controls.Add(pnlRegFact);
             tabRegFactura.Location = new Point(4, 34);
             tabRegFactura.Margin = new Padding(2, 4, 2, 4);
             tabRegFactura.Name = "tabRegFactura";
@@ -424,18 +467,28 @@
             tabRegFactura.Text = "Registrar factura";
             tabRegFactura.UseVisualStyleBackColor = true;
             // 
-            // panel7
+            // pnlRegFact
             // 
-            panel7.Controls.Add(lblTituloRegistrarFact);
-            panel7.Location = new Point(6, 4);
-            panel7.Margin = new Padding(2, 4, 2, 4);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(1099, 689);
-            panel7.TabIndex = 3;
+            pnlRegFact.Controls.Add(lblTituloRegistrarFact);
+            pnlRegFact.Location = new Point(6, 4);
+            pnlRegFact.Margin = new Padding(2, 4, 2, 4);
+            pnlRegFact.Name = "pnlRegFact";
+            pnlRegFact.Size = new Size(1099, 689);
+            pnlRegFact.TabIndex = 3;
+            // 
+            // lblTituloRegistrarFact
+            // 
+            lblTituloRegistrarFact.AutoSize = true;
+            lblTituloRegistrarFact.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloRegistrarFact.Location = new Point(15, 14);
+            lblTituloRegistrarFact.Name = "lblTituloRegistrarFact";
+            lblTituloRegistrarFact.Size = new Size(235, 38);
+            lblTituloRegistrarFact.TabIndex = 13;
+            lblTituloRegistrarFact.Text = "Registrar factura";
             // 
             // tabConfig
             // 
-            tabConfig.Controls.Add(panel8);
+            tabConfig.Controls.Add(pnlConfig);
             tabConfig.Location = new Point(4, 34);
             tabConfig.Margin = new Padding(2, 4, 2, 4);
             tabConfig.Name = "tabConfig";
@@ -445,18 +498,164 @@
             tabConfig.Text = "Configuración";
             tabConfig.UseVisualStyleBackColor = true;
             // 
-            // panel8
+            // pnlConfig
             // 
-            panel8.Controls.Add(lblTituloConfig);
-            panel8.Location = new Point(6, 4);
-            panel8.Margin = new Padding(2, 4, 2, 4);
-            panel8.Name = "panel8";
-            panel8.Size = new Size(1099, 689);
-            panel8.TabIndex = 3;
+            pnlConfig.Controls.Add(lblNombreConfig);
+            pnlConfig.Controls.Add(txtNombreConfig);
+            pnlConfig.Controls.Add(lblRolConfig);
+            pnlConfig.Controls.Add(txtRolConfig);
+            pnlConfig.Controls.Add(btnEliminarUsuario);
+            pnlConfig.Controls.Add(btnCamPassUsuario);
+            pnlConfig.Controls.Add(lblTituloConfigUsuarios);
+            pnlConfig.Controls.Add(dgvUsuarios);
+            pnlConfig.Controls.Add(btnMostrarUsuarios);
+            pnlConfig.Controls.Add(btnAgregarUsuario);
+            pnlConfig.Controls.Add(txtPasswordConfig);
+            pnlConfig.Controls.Add(lblPasswordConfig);
+            pnlConfig.Controls.Add(txtUsuarioConfig);
+            pnlConfig.Controls.Add(lblUsuarioConfig);
+            pnlConfig.Controls.Add(lblTituloConfig);
+            pnlConfig.Location = new Point(6, 4);
+            pnlConfig.Margin = new Padding(2, 4, 2, 4);
+            pnlConfig.Name = "pnlConfig";
+            pnlConfig.Size = new Size(1099, 689);
+            pnlConfig.TabIndex = 3;
+            // 
+            // lblNombreConfig
+            // 
+            lblNombreConfig.AutoSize = true;
+            lblNombreConfig.Location = new Point(48, 158);
+            lblNombreConfig.Name = "lblNombreConfig";
+            lblNombreConfig.Size = new Size(78, 25);
+            lblNombreConfig.TabIndex = 14;
+            lblNombreConfig.Text = "Nombre";
+            // 
+            // txtNombreConfig
+            // 
+            txtNombreConfig.Location = new Point(132, 155);
+            txtNombreConfig.Name = "txtNombreConfig";
+            txtNombreConfig.Size = new Size(168, 31);
+            txtNombreConfig.TabIndex = 13;
+            // 
+            // lblRolConfig
+            // 
+            lblRolConfig.AutoSize = true;
+            lblRolConfig.Location = new Point(89, 232);
+            lblRolConfig.Name = "lblRolConfig";
+            lblRolConfig.Size = new Size(37, 25);
+            lblRolConfig.TabIndex = 12;
+            lblRolConfig.Text = "Rol";
+            // 
+            // txtRolConfig
+            // 
+            txtRolConfig.Location = new Point(132, 232);
+            txtRolConfig.Name = "txtRolConfig";
+            txtRolConfig.Size = new Size(168, 31);
+            txtRolConfig.TabIndex = 11;
+            // 
+            // btnEliminarUsuario
+            // 
+            btnEliminarUsuario.Location = new Point(886, 272);
+            btnEliminarUsuario.Name = "btnEliminarUsuario";
+            btnEliminarUsuario.Size = new Size(189, 34);
+            btnEliminarUsuario.TabIndex = 10;
+            btnEliminarUsuario.Text = "Eliminar usuario";
+            btnEliminarUsuario.UseVisualStyleBackColor = true;
+            // 
+            // btnCamPassUsuario
+            // 
+            btnCamPassUsuario.Location = new Point(886, 232);
+            btnCamPassUsuario.Name = "btnCamPassUsuario";
+            btnCamPassUsuario.Size = new Size(189, 34);
+            btnCamPassUsuario.TabIndex = 9;
+            btnCamPassUsuario.Text = "Cambiar contraseña";
+            btnCamPassUsuario.UseVisualStyleBackColor = true;
+            // 
+            // lblTituloConfigUsuarios
+            // 
+            lblTituloConfigUsuarios.AutoSize = true;
+            lblTituloConfigUsuarios.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblTituloConfigUsuarios.Location = new Point(22, 70);
+            lblTituloConfigUsuarios.Name = "lblTituloConfigUsuarios";
+            lblTituloConfigUsuarios.Size = new Size(104, 32);
+            lblTituloConfigUsuarios.TabIndex = 8;
+            lblTituloConfigUsuarios.Text = "Usuarios";
+            // 
+            // dgvUsuarios
+            // 
+            dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvUsuarios.Location = new Point(319, 70);
+            dgvUsuarios.Name = "dgvUsuarios";
+            dgvUsuarios.RowHeadersWidth = 62;
+            dgvUsuarios.Size = new Size(561, 233);
+            dgvUsuarios.TabIndex = 7;
+            // 
+            // btnMostrarUsuarios
+            // 
+            btnMostrarUsuarios.Location = new Point(886, 71);
+            btnMostrarUsuarios.Name = "btnMostrarUsuarios";
+            btnMostrarUsuarios.Size = new Size(189, 34);
+            btnMostrarUsuarios.TabIndex = 6;
+            btnMostrarUsuarios.Text = "Mostrar usuarios";
+            btnMostrarUsuarios.UseVisualStyleBackColor = true;
+            btnMostrarUsuarios.Click += btnMostrarUsuarios_Click;
+            // 
+            // btnAgregarUsuario
+            // 
+            btnAgregarUsuario.Location = new Point(132, 269);
+            btnAgregarUsuario.Name = "btnAgregarUsuario";
+            btnAgregarUsuario.Size = new Size(168, 34);
+            btnAgregarUsuario.TabIndex = 5;
+            btnAgregarUsuario.Text = "Agregar usuario";
+            btnAgregarUsuario.UseVisualStyleBackColor = true;
+            btnAgregarUsuario.Click += btnAgregarUsuario_Click;
+            // 
+            // txtPasswordConfig
+            // 
+            txtPasswordConfig.Location = new Point(132, 195);
+            txtPasswordConfig.Name = "txtPasswordConfig";
+            txtPasswordConfig.Size = new Size(168, 31);
+            txtPasswordConfig.TabIndex = 4;
+            txtPasswordConfig.UseSystemPasswordChar = true;
+            // 
+            // lblPasswordConfig
+            // 
+            lblPasswordConfig.AutoSize = true;
+            lblPasswordConfig.Location = new Point(25, 195);
+            lblPasswordConfig.Name = "lblPasswordConfig";
+            lblPasswordConfig.Size = new Size(101, 25);
+            lblPasswordConfig.TabIndex = 3;
+            lblPasswordConfig.Text = "Contraseña";
+            // 
+            // txtUsuarioConfig
+            // 
+            txtUsuarioConfig.Location = new Point(132, 118);
+            txtUsuarioConfig.Name = "txtUsuarioConfig";
+            txtUsuarioConfig.Size = new Size(168, 31);
+            txtUsuarioConfig.TabIndex = 2;
+            // 
+            // lblUsuarioConfig
+            // 
+            lblUsuarioConfig.AutoSize = true;
+            lblUsuarioConfig.Location = new Point(54, 118);
+            lblUsuarioConfig.Name = "lblUsuarioConfig";
+            lblUsuarioConfig.Size = new Size(72, 25);
+            lblUsuarioConfig.TabIndex = 1;
+            lblUsuarioConfig.Text = "Usuario";
+            // 
+            // lblTituloConfig
+            // 
+            lblTituloConfig.AutoSize = true;
+            lblTituloConfig.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloConfig.Location = new Point(14, 14);
+            lblTituloConfig.Name = "lblTituloConfig";
+            lblTituloConfig.Size = new Size(202, 38);
+            lblTituloConfig.TabIndex = 0;
+            lblTituloConfig.Text = "Configuración";
             // 
             // tabReportes
             // 
-            tabReportes.Controls.Add(panel6);
+            tabReportes.Controls.Add(pnlReportes);
             tabReportes.Location = new Point(4, 34);
             tabReportes.Margin = new Padding(2, 4, 2, 4);
             tabReportes.Name = "tabReportes";
@@ -466,18 +665,28 @@
             tabReportes.Text = "Reportes";
             tabReportes.UseVisualStyleBackColor = true;
             // 
-            // panel6
+            // pnlReportes
             // 
-            panel6.Controls.Add(lblTituloReportes);
-            panel6.Controls.Add(btnGenerarGraficos);
-            panel6.Controls.Add(dgMasvendido);
-            panel6.Controls.Add(chVentasGastos);
-            panel6.Controls.Add(chVentasSemanales);
-            panel6.Location = new Point(2, 6);
-            panel6.Margin = new Padding(2, 4, 2, 4);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(1106, 689);
-            panel6.TabIndex = 2;
+            pnlReportes.Controls.Add(lblTituloReportes);
+            pnlReportes.Controls.Add(btnGenerarGraficos);
+            pnlReportes.Controls.Add(dgMasvendido);
+            pnlReportes.Controls.Add(chVentasGastos);
+            pnlReportes.Controls.Add(chVentasSemanales);
+            pnlReportes.Location = new Point(2, 6);
+            pnlReportes.Margin = new Padding(2, 4, 2, 4);
+            pnlReportes.Name = "pnlReportes";
+            pnlReportes.Size = new Size(1106, 689);
+            pnlReportes.TabIndex = 2;
+            // 
+            // lblTituloReportes
+            // 
+            lblTituloReportes.AutoSize = true;
+            lblTituloReportes.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTituloReportes.Location = new Point(18, 11);
+            lblTituloReportes.Name = "lblTituloReportes";
+            lblTituloReportes.Size = new Size(133, 38);
+            lblTituloReportes.TabIndex = 13;
+            lblTituloReportes.Text = "Reportes";
             // 
             // btnGenerarGraficos
             // 
@@ -504,35 +713,35 @@
             // 
             // chVentasGastos
             // 
-            chartArea3.Name = "ChartArea1";
-            chVentasGastos.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chVentasGastos.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            chVentasGastos.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chVentasGastos.Legends.Add(legend1);
             chVentasGastos.Location = new Point(18, 350);
             chVentasGastos.Margin = new Padding(4, 5, 4, 5);
             chVentasGastos.Name = "chVentasGastos";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chVentasGastos.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chVentasGastos.Series.Add(series1);
             chVentasGastos.Size = new Size(452, 310);
             chVentasGastos.TabIndex = 1;
             chVentasGastos.Text = "Ventas y gastos diarios";
             // 
             // chVentasSemanales
             // 
-            chartArea4.Name = "ChartArea1";
-            chVentasSemanales.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chVentasSemanales.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            chVentasSemanales.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chVentasSemanales.Legends.Add(legend2);
             chVentasSemanales.Location = new Point(18, 71);
             chVentasSemanales.Margin = new Padding(4, 5, 4, 5);
             chVentasSemanales.Name = "chVentasSemanales";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chVentasSemanales.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chVentasSemanales.Series.Add(series2);
             chVentasSemanales.Size = new Size(452, 256);
             chVentasSemanales.TabIndex = 0;
             chVentasSemanales.Text = "Ventas Semanales";
@@ -628,83 +837,13 @@
             lblLoginTitle.TabIndex = 0;
             lblLoginTitle.Text = "Iniciar sesión";
             // 
-            // lblTituloConfig
-            // 
-            lblTituloConfig.AutoSize = true;
-            lblTituloConfig.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloConfig.Location = new Point(14, 14);
-            lblTituloConfig.Name = "lblTituloConfig";
-            lblTituloConfig.Size = new Size(202, 38);
-            lblTituloConfig.TabIndex = 0;
-            lblTituloConfig.Text = "Configuración";
-            // 
-            // lblTituloVentas
-            // 
-            lblTituloVentas.AutoSize = true;
-            lblTituloVentas.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloVentas.Location = new Point(12, 11);
-            lblTituloVentas.Name = "lblTituloVentas";
-            lblTituloVentas.Size = new Size(104, 38);
-            lblTituloVentas.TabIndex = 1;
-            lblTituloVentas.Text = "Ventas";
-            // 
-            // lblTituloProductos
-            // 
-            lblTituloProductos.AutoSize = true;
-            lblTituloProductos.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloProductos.Location = new Point(21, 17);
-            lblTituloProductos.Name = "lblTituloProductos";
-            lblTituloProductos.Size = new Size(149, 38);
-            lblTituloProductos.TabIndex = 12;
-            lblTituloProductos.Text = "Productos";
-            // 
-            // lblTituloSolProd
-            // 
-            lblTituloSolProd.AutoSize = true;
-            lblTituloSolProd.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloSolProd.Location = new Point(12, 14);
-            lblTituloSolProd.Name = "lblTituloSolProd";
-            lblTituloSolProd.Size = new Size(312, 38);
-            lblTituloSolProd.TabIndex = 13;
-            lblTituloSolProd.Text = "Solicitud de productos";
-            // 
-            // lblTituloOrdRepo
-            // 
-            lblTituloOrdRepo.AutoSize = true;
-            lblTituloOrdRepo.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloOrdRepo.Location = new Point(14, 16);
-            lblTituloOrdRepo.Name = "lblTituloOrdRepo";
-            lblTituloOrdRepo.Size = new Size(281, 38);
-            lblTituloOrdRepo.TabIndex = 13;
-            lblTituloOrdRepo.Text = "Orden de reposición";
-            // 
-            // lblTituloRegistrarFact
-            // 
-            lblTituloRegistrarFact.AutoSize = true;
-            lblTituloRegistrarFact.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloRegistrarFact.Location = new Point(15, 14);
-            lblTituloRegistrarFact.Name = "lblTituloRegistrarFact";
-            lblTituloRegistrarFact.Size = new Size(235, 38);
-            lblTituloRegistrarFact.TabIndex = 13;
-            lblTituloRegistrarFact.Text = "Registrar factura";
-            // 
-            // lblTituloReportes
-            // 
-            lblTituloReportes.AutoSize = true;
-            lblTituloReportes.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTituloReportes.Location = new Point(18, 11);
-            lblTituloReportes.Name = "lblTituloReportes";
-            lblTituloReportes.Size = new Size(133, 38);
-            lblTituloReportes.TabIndex = 13;
-            lblTituloReportes.Text = "Reportes";
-            // 
             // FormPulperia
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1116, 749);
-            Controls.Add(tabControl1);
             Controls.Add(pnlLogin);
+            Controls.Add(tabControl1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(2, 4, 2, 4);
             Name = "FormPulperia";
@@ -712,32 +851,33 @@
             Text = "Pulperia MYM";
             tabControl1.ResumeLayout(false);
             tabInicio.ResumeLayout(false);
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
+            pnlInicio.ResumeLayout(false);
+            pnlInicio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabVentas.ResumeLayout(false);
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            pnlVentas.ResumeLayout(false);
+            pnlVentas.PerformLayout();
             tabProductos.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            panel3.PerformLayout();
+            pnlProductos.ResumeLayout(false);
+            pnlProductos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
             tabSolProductos.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
+            pblSoliProd.ResumeLayout(false);
+            pblSoliProd.PerformLayout();
             tabOrdenRepo.ResumeLayout(false);
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
+            pnlOrdRepo.ResumeLayout(false);
+            pnlOrdRepo.PerformLayout();
             tabRegFactura.ResumeLayout(false);
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
+            pnlRegFact.ResumeLayout(false);
+            pnlRegFact.PerformLayout();
             tabConfig.ResumeLayout(false);
-            panel8.ResumeLayout(false);
-            panel8.PerformLayout();
+            pnlConfig.ResumeLayout(false);
+            pnlConfig.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
             tabReportes.ResumeLayout(false);
-            panel6.ResumeLayout(false);
-            panel6.PerformLayout();
+            pnlReportes.ResumeLayout(false);
+            pnlReportes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgMasvendido).EndInit();
             ((System.ComponentModel.ISupportInitialize)chVentasGastos).EndInit();
             ((System.ComponentModel.ISupportInitialize)chVentasSemanales).EndInit();
@@ -751,29 +891,28 @@
 
         private TabControl tabControl1;
         private TabPage tabInicio;
-        private Panel panel2;
+        private Panel pnlInicio;
         private TabPage tabVentas;
-        private Panel panel1;
+        private Panel pnlVentas;
         private TabPage tabProductos;
         private TabPage tabSolProductos;
         private TabPage tabOrdenRepo;
         private TabPage tabReportes;
-        private Panel panel6;
+        private Panel pnlReportes;
         private TabPage tabRegFactura;
         private TabPage tabConfig;
         private TextBox textBox1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Label lblInicioDesc;
-        private Button button1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chVentasSemanales;
         private DataGridView dgMasvendido;
         private System.Windows.Forms.DataVisualization.Charting.Chart chVentasGastos;
-        private Panel panel3;
-        private Panel panel4;
-        private Panel panel5;
-        private Panel panel7;
-        private Panel panel8;
+        private Panel pnlProductos;
+        private Panel pblSoliProd;
+        private Panel pnlOrdRepo;
+        private Panel pnlRegFact;
+        private Panel pnlConfig;
         private Panel pnlLogin;
         private Label lblLoginTitle;
         private TextBox txtPass;
@@ -801,5 +940,19 @@
         private Label lblTituloOrdRepo;
         private Label lblTituloRegistrarFact;
         private Label lblTituloReportes;
+        private Label lblPasswordConfig;
+        private TextBox txtUsuarioConfig;
+        private Label lblUsuarioConfig;
+        private Button btnMostrarUsuarios;
+        private Button btnAgregarUsuario;
+        private TextBox txtPasswordConfig;
+        private Label lblTituloConfigUsuarios;
+        private DataGridView dgvUsuarios;
+        private Button btnCamPassUsuario;
+        private Button btnEliminarUsuario;
+        private TextBox txtRolConfig;
+        private Label lblRolConfig;
+        private Label lblNombreConfig;
+        private TextBox txtNombreConfig;
     }
 }
