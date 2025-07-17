@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPulperia));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPulperia));
             tabControl1 = new TabControl();
             tabInicio = new TabPage();
             pnlInicio = new Panel();
+            label2 = new Label();
+            label1 = new Label();
             lblInicioDesc = new Label();
-            textBox1 = new TextBox();
-            pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             tabVentas = new TabPage();
             pnlVentas = new Panel();
@@ -67,6 +67,27 @@
             lblTituloOrdRepo = new Label();
             tabRegFactura = new TabPage();
             pnlRegFact = new Panel();
+            label6 = new Label();
+            dateVencimiento = new DateTimePicker();
+            groupBox1 = new GroupBox();
+            radioButton2 = new RadioButton();
+            radioButton1 = new RadioButton();
+            label5 = new Label();
+            cbtipofac = new ComboBox();
+            Cantidad = new Label();
+            label4 = new Label();
+            button3 = new Button();
+            button2 = new Button();
+            lbltotal = new Label();
+            button1 = new Button();
+            dgfactura = new DataGridView();
+            IdProducto = new DataGridViewTextBoxColumn();
+            NombreProducto = new DataGridViewTextBoxColumn();
+            Unidades = new DataGridViewTextBoxColumn();
+            PrecioUnitario = new DataGridViewTextBoxColumn();
+            SubTotal = new DataGridViewTextBoxColumn();
+            numericUpDown1 = new NumericUpDown();
+            cbproductos = new ComboBox();
             lblTituloRegistrarFact = new Label();
             tabConfig = new TabPage();
             pnlConfig = new Panel();
@@ -103,7 +124,6 @@
             tabControl1.SuspendLayout();
             tabInicio.SuspendLayout();
             pnlInicio.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabVentas.SuspendLayout();
             pnlVentas.SuspendLayout();
@@ -116,6 +136,9 @@
             pnlOrdRepo.SuspendLayout();
             tabRegFactura.SuspendLayout();
             pnlRegFact.SuspendLayout();
+            groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgfactura).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
             tabConfig.SuspendLayout();
             pnlConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
@@ -159,9 +182,9 @@
             // 
             // pnlInicio
             // 
+            pnlInicio.Controls.Add(label2);
+            pnlInicio.Controls.Add(label1);
             pnlInicio.Controls.Add(lblInicioDesc);
-            pnlInicio.Controls.Add(textBox1);
-            pnlInicio.Controls.Add(pictureBox2);
             pnlInicio.Controls.Add(pictureBox1);
             pnlInicio.Location = new Point(6, 6);
             pnlInicio.Margin = new Padding(2, 4, 2, 4);
@@ -169,40 +192,45 @@
             pnlInicio.Size = new Size(1099, 685);
             pnlInicio.TabIndex = 2;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label2.Location = new Point(409, 11);
+            label2.Name = "label2";
+            label2.Size = new Size(238, 25);
+            label2.TabIndex = 7;
+            label2.Text = "Utiliza los tabs para navegar";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(19, 11);
+            label1.Name = "label1";
+            label1.Size = new Size(61, 25);
+            label1.TabIndex = 6;
+            label1.Text = "Inicio";
+            // 
             // lblInicioDesc
             // 
             lblInicioDesc.AutoSize = true;
-            lblInicioDesc.Location = new Point(158, 26);
+            lblInicioDesc.Location = new Point(187, 105);
             lblInicioDesc.Margin = new Padding(2, 0, 2, 0);
             lblInicioDesc.Name = "lblInicioDesc";
-            lblInicioDesc.Size = new Size(149, 25);
+            lblInicioDesc.Size = new Size(890, 125);
             lblInicioDesc.TabIndex = 5;
-            lblInicioDesc.Text = "descripcion MYM";
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(964, 26);
-            textBox1.Margin = new Padding(2, 4, 2, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(108, 31);
-            textBox1.TabIndex = 3;
-            textBox1.Text = "Buscar";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Location = new Point(29, 165);
-            pictureBox2.Margin = new Padding(2, 4, 2, 4);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1044, 329);
-            pictureBox2.TabIndex = 2;
-            pictureBox2.TabStop = false;
+            lblInicioDesc.Text = resources.GetString("lblInicioDesc.Text");
+            lblInicioDesc.Click += lblInicioDesc_Click;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(29, 26);
+            pictureBox1.Image = Properties.Resources.Logo;
+            pictureBox1.Location = new Point(37, 108);
             pictureBox1.Margin = new Padding(2, 4, 2, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(106, 96);
+            pictureBox1.Size = new Size(131, 122);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 1;
             pictureBox1.TabStop = false;
             // 
@@ -354,14 +382,10 @@
             // 
             // btnAgregarProducto
             // 
-            btnAgregarProducto.Location = new Point(21, 359);
-            btnAgregarProducto.Margin = new Padding(4, 5, 4, 5);
+            btnAgregarProducto.Location = new Point(0, 0);
             btnAgregarProducto.Name = "btnAgregarProducto";
-            btnAgregarProducto.Size = new Size(108, 39);
-            btnAgregarProducto.TabIndex = 3;
-            btnAgregarProducto.Text = "Agregar";
-            btnAgregarProducto.UseVisualStyleBackColor = true;
-            btnAgregarProducto.Click += btnAgregarProducto_Click;
+            btnAgregarProducto.Size = new Size(75, 23);
+            btnAgregarProducto.TabIndex = 13;
             // 
             // lblStockProducto
             // 
@@ -469,12 +493,213 @@
             // 
             // pnlRegFact
             // 
+            pnlRegFact.Controls.Add(label6);
+            pnlRegFact.Controls.Add(dateVencimiento);
+            pnlRegFact.Controls.Add(groupBox1);
+            pnlRegFact.Controls.Add(label5);
+            pnlRegFact.Controls.Add(cbtipofac);
+            pnlRegFact.Controls.Add(Cantidad);
+            pnlRegFact.Controls.Add(label4);
+            pnlRegFact.Controls.Add(button3);
+            pnlRegFact.Controls.Add(button2);
+            pnlRegFact.Controls.Add(lbltotal);
+            pnlRegFact.Controls.Add(button1);
+            pnlRegFact.Controls.Add(dgfactura);
+            pnlRegFact.Controls.Add(numericUpDown1);
+            pnlRegFact.Controls.Add(cbproductos);
             pnlRegFact.Controls.Add(lblTituloRegistrarFact);
             pnlRegFact.Location = new Point(6, 4);
             pnlRegFact.Margin = new Padding(2, 4, 2, 4);
             pnlRegFact.Name = "pnlRegFact";
             pnlRegFact.Size = new Size(1099, 689);
             pnlRegFact.TabIndex = 3;
+            pnlRegFact.Paint += pnlRegFact_Paint;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(25, 472);
+            label6.Name = "label6";
+            label6.Size = new Size(172, 25);
+            label6.TabIndex = 29;
+            label6.Text = "Vencimiento Credito";
+            // 
+            // dateVencimiento
+            // 
+            dateVencimiento.Location = new Point(26, 522);
+            dateVencimiento.Name = "dateVencimiento";
+            dateVencimiento.Size = new Size(299, 31);
+            dateVencimiento.TabIndex = 28;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(radioButton2);
+            groupBox1.Controls.Add(radioButton1);
+            groupBox1.Location = new Point(36, 276);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(214, 134);
+            groupBox1.TabIndex = 27;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Credito";
+            // 
+            // radioButton2
+            // 
+            radioButton2.AutoSize = true;
+            radioButton2.Location = new Point(36, 84);
+            radioButton2.Name = "radioButton2";
+            radioButton2.Size = new Size(61, 29);
+            radioButton2.TabIndex = 26;
+            radioButton2.TabStop = true;
+            radioButton2.Text = "No";
+            radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            radioButton1.AutoSize = true;
+            radioButton1.Location = new Point(36, 24);
+            radioButton1.Name = "radioButton1";
+            radioButton1.Size = new Size(51, 29);
+            radioButton1.TabIndex = 25;
+            radioButton1.TabStop = true;
+            radioButton1.Text = "Si";
+            radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(26, 204);
+            label5.Name = "label5";
+            label5.Size = new Size(106, 25);
+            label5.TabIndex = 24;
+            label5.Text = "Tipo factura";
+            // 
+            // cbtipofac
+            // 
+            cbtipofac.FormattingEnabled = true;
+            cbtipofac.Location = new Point(138, 201);
+            cbtipofac.Name = "cbtipofac";
+            cbtipofac.Size = new Size(156, 33);
+            cbtipofac.TabIndex = 23;
+            cbtipofac.SelectedIndexChanged += cbtipofac_SelectedIndexChanged;
+            // 
+            // Cantidad
+            // 
+            Cantidad.AutoSize = true;
+            Cantidad.Location = new Point(23, 152);
+            Cantidad.Name = "Cantidad";
+            Cantidad.Size = new Size(83, 25);
+            Cantidad.TabIndex = 22;
+            Cantidad.Text = "Cantidad";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(23, 92);
+            label4.Name = "label4";
+            label4.Size = new Size(85, 25);
+            label4.TabIndex = 21;
+            label4.Text = "Producto";
+            // 
+            // button3
+            // 
+            button3.Location = new Point(682, 440);
+            button3.Name = "button3";
+            button3.Size = new Size(176, 60);
+            button3.TabIndex = 20;
+            button3.Text = "Eliminar";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(499, 440);
+            button2.Name = "button2";
+            button2.Size = new Size(168, 61);
+            button2.TabIndex = 19;
+            button2.Text = "Agregar";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // lbltotal
+            // 
+            lbltotal.AutoSize = true;
+            lbltotal.Location = new Point(359, 458);
+            lbltotal.Name = "lbltotal";
+            lbltotal.Size = new Size(58, 25);
+            lbltotal.TabIndex = 18;
+            lbltotal.Text = "Total: ";
+            // 
+            // button1
+            // 
+            button1.Location = new Point(877, 440);
+            button1.Name = "button1";
+            button1.Size = new Size(158, 60);
+            button1.TabIndex = 17;
+            button1.Text = "Guardar";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // dgfactura
+            // 
+            dgfactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgfactura.Columns.AddRange(new DataGridViewColumn[] { IdProducto, NombreProducto, Unidades, PrecioUnitario, SubTotal });
+            dgfactura.Location = new Point(306, 39);
+            dgfactura.Name = "dgfactura";
+            dgfactura.RowHeadersWidth = 62;
+            dgfactura.Size = new Size(774, 371);
+            dgfactura.TabIndex = 16;
+            // 
+            // IdProducto
+            // 
+            IdProducto.HeaderText = "IdProducto";
+            IdProducto.MinimumWidth = 8;
+            IdProducto.Name = "IdProducto";
+            IdProducto.Width = 150;
+            // 
+            // NombreProducto
+            // 
+            NombreProducto.HeaderText = "NombreProducto";
+            NombreProducto.MinimumWidth = 8;
+            NombreProducto.Name = "NombreProducto";
+            NombreProducto.Width = 150;
+            // 
+            // Unidades
+            // 
+            Unidades.HeaderText = "Unidades";
+            Unidades.MinimumWidth = 8;
+            Unidades.Name = "Unidades";
+            Unidades.Width = 150;
+            // 
+            // PrecioUnitario
+            // 
+            PrecioUnitario.HeaderText = "PrecioUnitario";
+            PrecioUnitario.MinimumWidth = 8;
+            PrecioUnitario.Name = "PrecioUnitario";
+            PrecioUnitario.Width = 150;
+            // 
+            // SubTotal
+            // 
+            SubTotal.HeaderText = "SubTotal";
+            SubTotal.MinimumWidth = 8;
+            SubTotal.Name = "SubTotal";
+            SubTotal.Width = 150;
+            // 
+            // numericUpDown1
+            // 
+            numericUpDown1.Location = new Point(138, 150);
+            numericUpDown1.Name = "numericUpDown1";
+            numericUpDown1.Size = new Size(162, 31);
+            numericUpDown1.TabIndex = 15;
+            numericUpDown1.ValueChanged += numericUpDown1_ValueChanged;
+            // 
+            // cbproductos
+            // 
+            cbproductos.FormattingEnabled = true;
+            cbproductos.Location = new Point(136, 89);
+            cbproductos.Name = "cbproductos";
+            cbproductos.Size = new Size(158, 33);
+            cbproductos.TabIndex = 14;
+            cbproductos.SelectedIndexChanged += cbproductos_SelectedIndexChanged;
             // 
             // lblTituloRegistrarFact
             // 
@@ -842,8 +1067,8 @@
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1116, 749);
-            Controls.Add(pnlLogin);
             Controls.Add(tabControl1);
+            Controls.Add(pnlLogin);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(2, 4, 2, 4);
             Name = "FormPulperia";
@@ -853,7 +1078,6 @@
             tabInicio.ResumeLayout(false);
             pnlInicio.ResumeLayout(false);
             pnlInicio.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabVentas.ResumeLayout(false);
             pnlVentas.ResumeLayout(false);
@@ -871,6 +1095,10 @@
             tabRegFactura.ResumeLayout(false);
             pnlRegFact.ResumeLayout(false);
             pnlRegFact.PerformLayout();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgfactura).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
             tabConfig.ResumeLayout(false);
             pnlConfig.ResumeLayout(false);
             pnlConfig.PerformLayout();
@@ -901,8 +1129,6 @@
         private Panel pnlReportes;
         private TabPage tabRegFactura;
         private TabPage tabConfig;
-        private TextBox textBox1;
-        private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Label lblInicioDesc;
         private System.Windows.Forms.DataVisualization.Charting.Chart chVentasSemanales;
@@ -954,5 +1180,28 @@
         private Label lblRolConfig;
         private Label lblNombreConfig;
         private TextBox txtNombreConfig;
+        private Label label1;
+        private Label label2;
+        private DataGridView dgfactura;
+        private NumericUpDown numericUpDown1;
+        private ComboBox cbproductos;
+        private Label Cantidad;
+        private Label label4;
+        private Button button3;
+        private Button button2;
+        private Label lbltotal;
+        private Button button1;
+        private Label label5;
+        private ComboBox cbtipofac;
+        private Label label6;
+        private DateTimePicker dateVencimiento;
+        private GroupBox groupBox1;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
+        private DataGridViewTextBoxColumn IdProducto;
+        private DataGridViewTextBoxColumn NombreProducto;
+        private DataGridViewTextBoxColumn Unidades;
+        private DataGridViewTextBoxColumn PrecioUnitario;
+        private DataGridViewTextBoxColumn SubTotal;
     }
 }

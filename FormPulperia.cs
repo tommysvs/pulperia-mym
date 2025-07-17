@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+ï»¿using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 
@@ -38,11 +38,11 @@ namespace pulperia_mym
                     using (var sqlConn = conn.GetConnection())
                     {
                         sqlConn.Open();
-                        string query = "SELECT COUNT(1) FROM Usuario WHERE codigo_usuario = @Usuario AND contrasena = @Contraseña";
+                        string query = "SELECT COUNT(1) FROM Usuario WHERE codigo_usuario = @Usuario AND contrasena = @ContraseÃ±a";
                         using (SqlCommand cmd = new SqlCommand(query, sqlConn))
                         {
                             cmd.Parameters.AddWithValue("@Usuario", codigoUsuario);
-                            cmd.Parameters.AddWithValue("@Contraseña", password);
+                            cmd.Parameters.AddWithValue("@ContraseÃ±a", password);
 
                             int existe = (int)cmd.ExecuteScalar();
 
@@ -96,7 +96,7 @@ namespace pulperia_mym
 
                         if (filasAfectadas > 0)
                         {
-                            MessageBox.Show("Producto agregado correctamente.", "Éxito");
+                            MessageBox.Show("Producto agregado correctamente.", "Ã‰xito");
                             txtNmbProducto.Clear();
                             txtPrecioProducto.Clear();
                             txtStockProducto.Clear();
@@ -129,7 +129,7 @@ namespace pulperia_mym
 
                     dgvProductos.DataSource = dt;
 
-                    dgvProductos.Columns["ID_producto"].HeaderText = "Código";
+                    dgvProductos.Columns["ID_producto"].HeaderText = "CÃ³digo";
                     dgvProductos.Columns["nombre_producto"].HeaderText = "Producto";
                     dgvProductos.Columns["precio"].HeaderText = "Precio";
                     dgvProductos.Columns["stock"].HeaderText = "Stock";
@@ -156,7 +156,7 @@ namespace pulperia_mym
 
             int idProducto = Convert.ToInt32(dgvProductos.SelectedRows[0].Cells["ID_producto"].Value);
 
-            var confirm = MessageBox.Show("¿Estás seguro de eliminar este producto?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var confirm = MessageBox.Show("Â¿EstÃ¡s seguro de eliminar este producto?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (confirm != DialogResult.Yes)
                 return;
 
@@ -174,7 +174,7 @@ namespace pulperia_mym
 
                         if (filasAfectadas > 0)
                         {
-                            MessageBox.Show("Producto eliminado correctamente.", "Éxito");
+                            MessageBox.Show("Producto eliminado correctamente.", "Ã‰xito");
                         }
                         else
                         {
@@ -230,7 +230,7 @@ namespace pulperia_mym
 
                         if (filasAfectadas > 0)
                         {
-                            MessageBox.Show("Usuario agregado correctamente.", "Éxito");
+                            MessageBox.Show("Usuario agregado correctamente.", "Ã‰xito");
                             txtUsuarioConfig.Clear();
                             txtNombreConfig.Clear();
                             txtStockProducto.Clear();
@@ -273,6 +273,208 @@ namespace pulperia_mym
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error al mostrar usuarios: " + ex.Message);
+                }
+            }
+        }
+
+        private void lblInicioDesc_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+
+        //FACTURA
+        private void pnlRegFact_Paint(object sender, PaintEventArgs e)
+        {
+            dateVencimiento.Enabled = false;
+
+        }
+
+        private void CargarProductos()
+        {
+            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            {
+                string query = "SELECT IdProducto, Nombre FROM Producto";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbproductos.DataSource = dt;
+                cbproductos.DisplayMember = "Nombre";
+                cbproductos.ValueMember = "IdProducto";
+            }
+        }
+
+        private void CargarTiposFactura()
+        {
+            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            {
+                string query = "SELECT ID_tipo, NombreTipo FROM Tipo";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbtipofac.DataSource = dt;
+                cbtipofac.DisplayMember = "NombreTipo";
+                cbtipofac.ValueMember = "ID_tipo";
+            }
+        }
+        private void FormPulperia_Load(object sender, EventArgs e)
+        {
+            CargarProductos();
+            CargarTiposFactura();
+            dateVencimiento.Enabled = false;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (cbproductos.SelectedValue == null || numericUpDown1.Value < 1)
+            {
+                MessageBox.Show("Seleccione un producto y una cantidad vÃ¡lida.");
+                return;
+            }
+
+            int id = (int)cbproductos.SelectedValue;
+            string nombre = cbproductos.Text;
+            int cantidad = (int)numericUpDown1.Value;
+            decimal precio = ObtenerPrecio(id);
+            decimal subtotal = cantidad * precio;
+
+            dgfactura.Rows.Add(id, nombre, cantidad, precio, subtotal);
+            CalcularTotal();
+        }
+
+        private void CalcularTotal()
+        {
+            decimal total = 0;
+            foreach (DataGridViewRow row in dgfactura.Rows)
+            {
+                total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
+            }
+            lbltotal.Text = $"Total: L. {total:N2}";
+        }
+        private decimal ObtenerPrecio(int productoId)
+        {
+            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            {
+                string query = "SELECT Precio FROM Producto WHERE IdProducto = @id";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@id", productoId);
+                conn.Open();
+                return (decimal)cmd.ExecuteScalar();
+            }
+        }
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            dateVencimiento.Enabled = radioButton1.Checked;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            dateVencimiento.Enabled = !radioButton2.Checked;
+        }
+
+
+
+        private void cbtipofac_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection("TU_CONEXION"))
+            {
+                string query = "SELECT ID_tipo, NombreTipo FROM Tipo";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbtipofac.DataSource = dt;
+                cbtipofac.DisplayMember = "NombreTipo"; // O el campo que tengas
+                cbtipofac.ValueMember = "ID_tipo";
+            }
+        }
+
+        private void cbproductos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            {
+                string query = "SELECT IdProducto, Nombre FROM Producto";
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbproductos.DataSource = dt;
+                cbproductos.DisplayMember = "Nombre";
+                cbproductos.ValueMember = "IdProducto";
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (dgfactura.CurrentRow != null)
+            {
+                dgfactura.Rows.Remove(dgfactura.CurrentRow);
+                CalcularTotal();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (cbtipofac.SelectedValue == null || dgfactura.Rows.Count == 0)
+            {
+                MessageBox.Show("Debe seleccionar tipo de factura y agregar al menos un producto.");
+                return;
+            }
+
+            decimal total = 0;
+            foreach (DataGridViewRow row in dgfactura.Rows)
+                total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
+
+            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            {
+                conn.Open();
+                SqlTransaction trans = conn.BeginTransaction();
+
+                try
+                {
+                    // Insertar factura
+                    SqlCommand cmdFactura = new SqlCommand(@"
+                INSERT INTO Factura (codigo_interno, fecha, ID_tipo, credito, fecha_vencimiento_credito, total, total_pagado)
+                OUTPUT INSERTED.ID_factura
+                VALUES (@codigo, GETDATE(), @tipo, @credito, @vencimiento, @total, @pagado)", conn, trans);
+
+                    cmdFactura.Parameters.AddWithValue("@codigo", Guid.NewGuid().ToString().Substring(0, 8));
+                    cmdFactura.Parameters.AddWithValue("@tipo", cbtipofac.SelectedValue);
+                    cmdFactura.Parameters.AddWithValue("@credito", radioButton1.Checked);
+                    cmdFactura.Parameters.AddWithValue("@vencimiento", radioButton1.Checked ? dateVencimiento.Value : DBNull.Value);
+                    cmdFactura.Parameters.AddWithValue("@total", total);
+                    cmdFactura.Parameters.AddWithValue("@pagado", total); // o 0 si luego quieres control de pagos
+
+                    int idFactura = (int)cmdFactura.ExecuteScalar();
+
+                    // Insertar detalle
+                    foreach (DataGridViewRow row in dgfactura.Rows)
+                    {
+                        SqlCommand detalleCmd = new SqlCommand(@"
+                    INSERT INTO DetalleFactura (IdFactura, ProductoId, Cantidad, PrecioUnitario)
+                    VALUES (@factura, @producto, @cantidad, @precio)", conn, trans);
+
+                        detalleCmd.Parameters.AddWithValue("@factura", idFactura);
+                        detalleCmd.Parameters.AddWithValue("@producto", row.Cells["IdProducto"].Value);
+                        detalleCmd.Parameters.AddWithValue("@cantidad", row.Cells["Cantidad"].Value);
+                        detalleCmd.Parameters.AddWithValue("@precio", row.Cells["PrecioUnitario"].Value);
+                        detalleCmd.ExecuteNonQuery();
+                    }
+
+                    trans.Commit();
+                    MessageBox.Show("Factura registrada con Ã©xito âœ…");
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    MessageBox.Show("Error al guardar factura: " + ex.Message);
                 }
             }
         }
