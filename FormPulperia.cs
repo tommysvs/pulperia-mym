@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace pulperia_mym
 {
@@ -478,5 +479,60 @@ namespace pulperia_mym
                 }
             }
         }
+
+        #region Reportes
+        private void btnGenerarGraficos_Click(object sender, EventArgs e)
+        {
+            string conexion = "Data Source=DESKTOP-IL9GM8N\\DUENIS;Initial Catalog=Pulperia_MYM;Integrated Security=True;TrustServerCertificate=True;";
+
+            string consulta = @"
+        SELECT 
+            codigo_interno AS Producto,
+            COUNT(*) AS CantidadVendida,
+            SUM(total) AS TotalVenta
+        FROM Factura
+        WHERE codigo_interno IS NOT NULL
+        GROUP BY codigo_interno
+        ORDER BY CantidadVendida DESC;";
+
+            using (SqlConnection con = new SqlConnection(conexion))
+            {
+                SqlCommand cmd = new SqlCommand(consulta, con);
+                con.Open();
+
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
+
+                // Mostrar en el DataGridView
+                dgvMasvendido.DataSource = dt;
+
+                // Limpiar gráficos
+                chVentasGastos.Series.Clear();
+                chVentasSemanales.Series.Clear();
+
+                // Crear series
+                Series pieSeries = new Series("Ventas Pie");
+                pieSeries.ChartType = SeriesChartType.Pie;
+
+                Series barSeries = new Series("Ventas Barra");
+                barSeries.ChartType = SeriesChartType.Column;
+
+                foreach (DataRow row in dt.Rows)
+                {
+                    string producto = row["Producto"].ToString();
+                    int cantidad = Convert.ToInt32(row["CantidadVendida"]);
+                    decimal total = Convert.ToDecimal(row["TotalVenta"]);
+
+                    pieSeries.Points.AddXY(producto, cantidad);
+                    barSeries.Points.AddXY(producto, total);
+                }
+
+                chVentasGastos.Series.Add(pieSeries);
+                chVentasSemanales.Series.Add(barSeries);
+            }
+        }
+        #endregion
+
     }
 }
