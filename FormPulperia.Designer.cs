@@ -29,17 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPulperia));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea17 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend17 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series17 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea18 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend18 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series18 = new System.Windows.Forms.DataVisualization.Charting.Series();
             tabControl1 = new TabControl();
             tabInicio = new TabPage();
             pnlInicio = new Panel();
             label2 = new Label();
-            label1 = new Label();
             lblInicioDesc = new Label();
             pictureBox1 = new PictureBox();
             tabVentas = new TabPage();
@@ -47,6 +46,7 @@
             lblTituloVentas = new Label();
             tabProductos = new TabPage();
             pnlProductos = new Panel();
+            btnAgregarProducto = new Button();
             lblTituloProductos = new Label();
             btnMostrarProducto = new Button();
             dgvProductos = new DataGridView();
@@ -55,12 +55,12 @@
             txtNmbProducto = new TextBox();
             btnEliminarProducto = new Button();
             btnModificarProducto = new Button();
-            btnAgregarProducto = new Button();
             lblStockProducto = new Label();
             lblPrecioProducto = new Label();
             lblNmbProducto = new Label();
             tabSolProductos = new TabPage();
             pblSoliProd = new Panel();
+            dgvSolicitud = new DataGridView();
             txtCantidadProducto = new TextBox();
             txtDescProducto = new TextBox();
             txtNombreProducto = new TextBox();
@@ -81,7 +81,7 @@
             label4 = new Label();
             btnAgregarFact = new Button();
             lbltotal = new Label();
-            button1 = new Button();
+            btnGuardarFact = new Button();
             dgfactura = new DataGridView();
             IdProducto = new DataGridViewTextBoxColumn();
             NombreProducto = new DataGridViewTextBoxColumn();
@@ -123,7 +123,7 @@
             txtPass = new TextBox();
             txtUser = new TextBox();
             lblLoginTitle = new Label();
-            dgvSolicitud = new DataGridView();
+            lblAgregarProductos = new Label();
             tabControl1.SuspendLayout();
             tabInicio.SuspendLayout();
             pnlInicio.SuspendLayout();
@@ -135,6 +135,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             tabSolProductos.SuspendLayout();
             pblSoliProd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvSolicitud).BeginInit();
             tabOrdenRepo.SuspendLayout();
             pnlOrdRepo.SuspendLayout();
             tabRegFactura.SuspendLayout();
@@ -152,7 +153,6 @@
             ((System.ComponentModel.ISupportInitialize)chVentasSemanales).BeginInit();
             pnlLogin.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvSolicitud).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -187,7 +187,6 @@
             // pnlInicio
             // 
             pnlInicio.Controls.Add(label2);
-            pnlInicio.Controls.Add(label1);
             pnlInicio.Controls.Add(lblInicioDesc);
             pnlInicio.Controls.Add(pictureBox1);
             pnlInicio.Location = new Point(6, 7);
@@ -206,30 +205,21 @@
             label2.TabIndex = 7;
             label2.Text = "Utiliza los tabs para navegar";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
-            label1.Location = new Point(19, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(89, 38);
-            label1.TabIndex = 6;
-            label1.Text = "Inicio";
-            // 
             // lblInicioDesc
             // 
             lblInicioDesc.AutoSize = true;
-            lblInicioDesc.Location = new Point(166, 85);
+            lblInicioDesc.Location = new Point(114, 320);
             lblInicioDesc.Margin = new Padding(1, 0, 1, 0);
             lblInicioDesc.Name = "lblInicioDesc";
             lblInicioDesc.Size = new Size(890, 125);
             lblInicioDesc.TabIndex = 5;
             lblInicioDesc.Text = resources.GetString("lblInicioDesc.Text");
+            lblInicioDesc.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.Logo;
-            pictureBox1.Location = new Point(19, 85);
+            pictureBox1.Location = new Point(488, 171);
             pictureBox1.Margin = new Padding(1, 3, 1, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(131, 122);
@@ -282,6 +272,8 @@
             // 
             // pnlProductos
             // 
+            pnlProductos.Controls.Add(lblAgregarProductos);
+            pnlProductos.Controls.Add(btnAgregarProducto);
             pnlProductos.Controls.Add(lblTituloProductos);
             pnlProductos.Controls.Add(btnMostrarProducto);
             pnlProductos.Controls.Add(dgvProductos);
@@ -290,7 +282,6 @@
             pnlProductos.Controls.Add(txtNmbProducto);
             pnlProductos.Controls.Add(btnEliminarProducto);
             pnlProductos.Controls.Add(btnModificarProducto);
-            pnlProductos.Controls.Add(btnAgregarProducto);
             pnlProductos.Controls.Add(lblStockProducto);
             pnlProductos.Controls.Add(lblPrecioProducto);
             pnlProductos.Controls.Add(lblNmbProducto);
@@ -299,6 +290,17 @@
             pnlProductos.Name = "pnlProductos";
             pnlProductos.Size = new Size(1099, 688);
             pnlProductos.TabIndex = 2;
+            // 
+            // btnAgregarProducto
+            // 
+            btnAgregarProducto.Location = new Point(25, 411);
+            btnAgregarProducto.Margin = new Padding(4, 5, 4, 5);
+            btnAgregarProducto.Name = "btnAgregarProducto";
+            btnAgregarProducto.Size = new Size(135, 38);
+            btnAgregarProducto.TabIndex = 14;
+            btnAgregarProducto.Text = "Agregar";
+            btnAgregarProducto.UseVisualStyleBackColor = true;
+            btnAgregarProducto.Click += btnAgregarProducto_Click;
             // 
             // lblTituloProductos
             // 
@@ -336,8 +338,8 @@
             // 
             // txtStockProducto
             // 
-            txtStockProducto.BackColor = SystemColors.ControlLight;
-            txtStockProducto.Location = new Point(21, 303);
+            txtStockProducto.BackColor = SystemColors.Window;
+            txtStockProducto.Location = new Point(25, 355);
             txtStockProducto.Margin = new Padding(1, 3, 1, 3);
             txtStockProducto.Name = "txtStockProducto";
             txtStockProducto.Size = new Size(105, 31);
@@ -345,8 +347,8 @@
             // 
             // txtPrecioProducto
             // 
-            txtPrecioProducto.BackColor = SystemColors.ControlLight;
-            txtPrecioProducto.Location = new Point(21, 207);
+            txtPrecioProducto.BackColor = SystemColors.Window;
+            txtPrecioProducto.Location = new Point(25, 264);
             txtPrecioProducto.Margin = new Padding(1, 3, 1, 3);
             txtPrecioProducto.Name = "txtPrecioProducto";
             txtPrecioProducto.Size = new Size(105, 31);
@@ -354,8 +356,8 @@
             // 
             // txtNmbProducto
             // 
-            txtNmbProducto.BackColor = SystemColors.ControlLight;
-            txtNmbProducto.Location = new Point(21, 118);
+            txtNmbProducto.BackColor = SystemColors.Window;
+            txtNmbProducto.Location = new Point(25, 180);
             txtNmbProducto.Margin = new Padding(1, 3, 1, 3);
             txtNmbProducto.Name = "txtNmbProducto";
             txtNmbProducto.Size = new Size(268, 31);
@@ -383,17 +385,10 @@
             btnModificarProducto.UseVisualStyleBackColor = true;
             btnModificarProducto.Click += btnModificarProducto_Click;
             // 
-            // btnAgregarProducto
-            // 
-            btnAgregarProducto.Location = new Point(0, 0);
-            btnAgregarProducto.Name = "btnAgregarProducto";
-            btnAgregarProducto.Size = new Size(74, 23);
-            btnAgregarProducto.TabIndex = 13;
-            // 
             // lblStockProducto
             // 
             lblStockProducto.AutoSize = true;
-            lblStockProducto.Location = new Point(21, 273);
+            lblStockProducto.Location = new Point(25, 327);
             lblStockProducto.Margin = new Padding(4, 0, 4, 0);
             lblStockProducto.Name = "lblStockProducto";
             lblStockProducto.Size = new Size(184, 25);
@@ -403,7 +398,7 @@
             // lblPrecioProducto
             // 
             lblPrecioProducto.AutoSize = true;
-            lblPrecioProducto.Location = new Point(21, 178);
+            lblPrecioProducto.Location = new Point(25, 236);
             lblPrecioProducto.Margin = new Padding(4, 0, 4, 0);
             lblPrecioProducto.Name = "lblPrecioProducto";
             lblPrecioProducto.Size = new Size(64, 25);
@@ -413,7 +408,7 @@
             // lblNmbProducto
             // 
             lblNmbProducto.AutoSize = true;
-            lblNmbProducto.Location = new Point(21, 90);
+            lblNmbProducto.Location = new Point(25, 152);
             lblNmbProducto.Margin = new Padding(4, 0, 4, 0);
             lblNmbProducto.Name = "lblNmbProducto";
             lblNmbProducto.Size = new Size(160, 25);
@@ -444,6 +439,15 @@
             pblSoliProd.Name = "pblSoliProd";
             pblSoliProd.Size = new Size(1099, 688);
             pblSoliProd.TabIndex = 3;
+            // 
+            // dgvSolicitud
+            // 
+            dgvSolicitud.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvSolicitud.Location = new Point(446, 140);
+            dgvSolicitud.Name = "dgvSolicitud";
+            dgvSolicitud.RowHeadersWidth = 62;
+            dgvSolicitud.Size = new Size(577, 421);
+            dgvSolicitud.TabIndex = 17;
             // 
             // txtCantidadProducto
             // 
@@ -530,7 +534,7 @@
             pnlRegFact.Controls.Add(label4);
             pnlRegFact.Controls.Add(btnAgregarFact);
             pnlRegFact.Controls.Add(lbltotal);
-            pnlRegFact.Controls.Add(button1);
+            pnlRegFact.Controls.Add(btnGuardarFact);
             pnlRegFact.Controls.Add(dgfactura);
             pnlRegFact.Controls.Add(nudCantidadFactura);
             pnlRegFact.Controls.Add(cbProductosFactura);
@@ -545,7 +549,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(26, 472);
+            label6.Location = new Point(27, 425);
             label6.Name = "label6";
             label6.Size = new Size(172, 25);
             label6.TabIndex = 29;
@@ -553,16 +557,16 @@
             // 
             // dateVencimiento
             // 
-            dateVencimiento.Location = new Point(26, 522);
+            dateVencimiento.Location = new Point(27, 470);
             dateVencimiento.Name = "dateVencimiento";
-            dateVencimiento.Size = new Size(298, 31);
+            dateVencimiento.Size = new Size(223, 31);
             dateVencimiento.TabIndex = 28;
             // 
             // grpbCredito
             // 
             grpbCredito.Controls.Add(rdbCreditoNo);
             grpbCredito.Controls.Add(rdbCreditoSi);
-            grpbCredito.Location = new Point(36, 277);
+            grpbCredito.Location = new Point(27, 265);
             grpbCredito.Name = "grpbCredito";
             grpbCredito.Size = new Size(214, 133);
             grpbCredito.TabIndex = 27;
@@ -594,7 +598,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(26, 203);
+            label5.Location = new Point(24, 204);
             label5.Name = "label5";
             label5.Size = new Size(106, 25);
             label5.TabIndex = 24;
@@ -603,7 +607,7 @@
             // cbTipoFactura
             // 
             cbTipoFactura.FormattingEnabled = true;
-            cbTipoFactura.Location = new Point(139, 202);
+            cbTipoFactura.Location = new Point(132, 201);
             cbTipoFactura.Name = "cbTipoFactura";
             cbTipoFactura.Size = new Size(155, 33);
             cbTipoFactura.TabIndex = 23;
@@ -612,7 +616,7 @@
             // Cantidad
             // 
             Cantidad.AutoSize = true;
-            Cantidad.Location = new Point(23, 152);
+            Cantidad.Location = new Point(27, 150);
             Cantidad.Name = "Cantidad";
             Cantidad.Size = new Size(83, 25);
             Cantidad.TabIndex = 22;
@@ -621,7 +625,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(23, 92);
+            label4.Location = new Point(24, 96);
             label4.Name = "label4";
             label4.Size = new Size(85, 25);
             label4.TabIndex = 21;
@@ -629,9 +633,9 @@
             // 
             // btnAgregarFact
             // 
-            btnAgregarFact.Location = new Point(499, 440);
+            btnAgregarFact.Location = new Point(27, 531);
             btnAgregarFact.Name = "btnAgregarFact";
-            btnAgregarFact.Size = new Size(169, 62);
+            btnAgregarFact.Size = new Size(169, 45);
             btnAgregarFact.TabIndex = 19;
             btnAgregarFact.Text = "Agregar";
             btnAgregarFact.UseVisualStyleBackColor = true;
@@ -640,30 +644,30 @@
             // lbltotal
             // 
             lbltotal.AutoSize = true;
-            lbltotal.Location = new Point(359, 458);
+            lbltotal.Location = new Point(321, 574);
             lbltotal.Name = "lbltotal";
             lbltotal.Size = new Size(58, 25);
             lbltotal.TabIndex = 18;
             lbltotal.Text = "Total: ";
             // 
-            // button1
+            // btnGuardarFact
             // 
-            button1.Location = new Point(877, 440);
-            button1.Name = "button1";
-            button1.Size = new Size(159, 60);
-            button1.TabIndex = 17;
-            button1.Text = "Guardar";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += btnGuardarFact_Click;
+            btnGuardarFact.Location = new Point(911, 618);
+            btnGuardarFact.Name = "btnGuardarFact";
+            btnGuardarFact.Size = new Size(159, 45);
+            btnGuardarFact.TabIndex = 17;
+            btnGuardarFact.Text = "Guardar";
+            btnGuardarFact.UseVisualStyleBackColor = true;
+            btnGuardarFact.Click += btnGuardarFact_Click;
             // 
             // dgfactura
             // 
             dgfactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgfactura.Columns.AddRange(new DataGridViewColumn[] { IdProducto, NombreProducto, Unidades, PrecioUnitario, SubTotal });
-            dgfactura.Location = new Point(306, 38);
+            dgfactura.Location = new Point(321, 96);
             dgfactura.Name = "dgfactura";
             dgfactura.RowHeadersWidth = 62;
-            dgfactura.Size = new Size(774, 372);
+            dgfactura.Size = new Size(749, 440);
             dgfactura.TabIndex = 16;
             // 
             // IdProducto
@@ -703,17 +707,17 @@
             // 
             // nudCantidadFactura
             // 
-            nudCantidadFactura.Location = new Point(139, 150);
+            nudCantidadFactura.Location = new Point(132, 148);
             nudCantidadFactura.Name = "nudCantidadFactura";
-            nudCantidadFactura.Size = new Size(161, 31);
+            nudCantidadFactura.Size = new Size(155, 31);
             nudCantidadFactura.TabIndex = 15;
             // 
             // cbProductosFactura
             // 
             cbProductosFactura.FormattingEnabled = true;
-            cbProductosFactura.Location = new Point(136, 88);
+            cbProductosFactura.Location = new Point(132, 96);
             cbProductosFactura.Name = "cbProductosFactura";
-            cbProductosFactura.Size = new Size(158, 33);
+            cbProductosFactura.Size = new Size(152, 33);
             cbProductosFactura.TabIndex = 14;
             cbProductosFactura.SelectedIndexChanged += cbProductosFactura_SelectedIndexChanged;
             // 
@@ -957,35 +961,35 @@
             // 
             // chVentasGastos
             // 
-            chartArea3.Name = "ChartArea1";
-            chVentasGastos.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chVentasGastos.Legends.Add(legend3);
+            chartArea17.Name = "ChartArea1";
+            chVentasGastos.ChartAreas.Add(chartArea17);
+            legend17.Name = "Legend1";
+            chVentasGastos.Legends.Add(legend17);
             chVentasGastos.Location = new Point(19, 350);
             chVentasGastos.Margin = new Padding(4, 5, 4, 5);
             chVentasGastos.Name = "chVentasGastos";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chVentasGastos.Series.Add(series3);
+            series17.ChartArea = "ChartArea1";
+            series17.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series17.Legend = "Legend1";
+            series17.Name = "Series1";
+            chVentasGastos.Series.Add(series17);
             chVentasGastos.Size = new Size(451, 310);
             chVentasGastos.TabIndex = 1;
             chVentasGastos.Text = "Ventas y gastos diarios";
             // 
             // chVentasSemanales
             // 
-            chartArea4.Name = "ChartArea1";
-            chVentasSemanales.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chVentasSemanales.Legends.Add(legend4);
+            chartArea18.Name = "ChartArea1";
+            chVentasSemanales.ChartAreas.Add(chartArea18);
+            legend18.Name = "Legend1";
+            chVentasSemanales.Legends.Add(legend18);
             chVentasSemanales.Location = new Point(19, 72);
             chVentasSemanales.Margin = new Padding(4, 5, 4, 5);
             chVentasSemanales.Name = "chVentasSemanales";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chVentasSemanales.Series.Add(series4);
+            series18.ChartArea = "ChartArea1";
+            series18.Legend = "Legend1";
+            series18.Name = "Series1";
+            chVentasSemanales.Series.Add(series18);
             chVentasSemanales.Size = new Size(451, 257);
             chVentasSemanales.TabIndex = 0;
             chVentasSemanales.Text = "Ventas Semanales";
@@ -1081,14 +1085,15 @@
             lblLoginTitle.TabIndex = 0;
             lblLoginTitle.Text = "Iniciar sesión";
             // 
-            // dgvSolicitud
+            // lblAgregarProductos
             // 
-            dgvSolicitud.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvSolicitud.Location = new Point(446, 140);
-            dgvSolicitud.Name = "dgvSolicitud";
-            dgvSolicitud.RowHeadersWidth = 62;
-            dgvSolicitud.Size = new Size(577, 421);
-            dgvSolicitud.TabIndex = 17;
+            lblAgregarProductos.AutoSize = true;
+            lblAgregarProductos.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblAgregarProductos.Location = new Point(21, 90);
+            lblAgregarProductos.Name = "lblAgregarProductos";
+            lblAgregarProductos.Size = new Size(210, 30);
+            lblAgregarProductos.TabIndex = 15;
+            lblAgregarProductos.Text = "Agregar productos";
             // 
             // FormPulperia
             // 
@@ -1117,6 +1122,7 @@
             tabSolProductos.ResumeLayout(false);
             pblSoliProd.ResumeLayout(false);
             pblSoliProd.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvSolicitud).EndInit();
             tabOrdenRepo.ResumeLayout(false);
             pnlOrdRepo.ResumeLayout(false);
             pnlOrdRepo.PerformLayout();
@@ -1140,7 +1146,6 @@
             pnlLogin.ResumeLayout(false);
             pnlLogin.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvSolicitud).EndInit();
             ResumeLayout(false);
         }
 
@@ -1184,7 +1189,6 @@
         private TextBox txtNmbProducto;
         private Button btnEliminarProducto;
         private Button btnModificarProducto;
-        private Button btnAgregarProducto;
         private DataGridView dgvProductos;
         private TextBox txtStockProducto;
         private Button btnMostrarProducto;
@@ -1209,7 +1213,6 @@
         private Label lblRolConfig;
         private Label lblNombreConfig;
         private TextBox txtNombreConfig;
-        private Label label1;
         private Label label2;
         private DataGridView dgfactura;
         private NumericUpDown nudCantidadFactura;
@@ -1218,7 +1221,7 @@
         private Label label4;
         private Button btnAgregarFact;
         private Label lbltotal;
-        private Button button1;
+        private Button btnGuardarFact;
         private Label label5;
         private ComboBox cbTipoFactura;
         private Label label6;
@@ -1235,5 +1238,7 @@
         private TextBox txtDescProducto;
         private TextBox txtNombreProducto;
         private DataGridView dgvSolicitud;
+        private Button btnAgregarProducto;
+        private Label lblAgregarProductos;
     }
 }

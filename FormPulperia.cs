@@ -408,7 +408,7 @@ namespace pulperia_mym
             }
         }
 
-        private void btnEnviarSoli_Click_1(object sender, EventArgs e)
+        private void btnEnviarSoli_Click(object sender, EventArgs e)
         {
             string nombreProducto = txtNombreProducto.Text.Trim();
             string cantidadTexto = txtCantidadProducto.Text.Trim();
@@ -551,12 +551,101 @@ namespace pulperia_mym
 
         private void btnCamPassUsuario_Click(object sender, EventArgs e)
         {
+            if (dgvUsuarios.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un usuario para cambiar la contraseña.", "Aviso");
+                return;
+            }
 
+            string codigoUsuario = dgvUsuarios.SelectedRows[0].Cells["codigo_usuario"].Value.ToString();
+            string nuevaContrasena = Microsoft.VisualBasic.Interaction.InputBox(
+                "Ingrese la nueva contraseña para el usuario seleccionado:",
+                "Cambiar contraseña",
+                ""
+            );
+
+            if (string.IsNullOrWhiteSpace(nuevaContrasena))
+            {
+                MessageBox.Show("Debe ingresar una contraseña válida.", "Advertencia");
+                return;
+            }
+
+            using (var sqlConn = conn.GetConnection())
+            {
+                try
+                {
+                    sqlConn.Open();
+                    string query = "UPDATE Usuario SET contrasena = @Contrasena WHERE codigo_usuario = @Codigo";
+                    using (SqlCommand cmd = new SqlCommand(query, sqlConn))
+                    {
+                        cmd.Parameters.AddWithValue("@Contrasena", nuevaContrasena);
+                        cmd.Parameters.AddWithValue("@Codigo", codigoUsuario);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            MessageBox.Show("Contraseña actualizada correctamente.", "Éxito");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo actualizar la contraseña.", "Error");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al cambiar la contraseña: " + ex.Message);
+                }
+            }
         }
 
         private void btnInactivarUsuario_Click(object sender, EventArgs e)
         {
+            if (dgvUsuarios.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Seleccione un usuario para inactivar.", "Aviso");
+                return;
+            }
 
+            string codigoUsuario = dgvUsuarios.SelectedRows[0].Cells["codigo_usuario"].Value.ToString();
+
+            var confirm = MessageBox.Show(
+                "¿Está seguro que desea inactivar este usuario?",
+                "Confirmar inactivación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+            if (confirm != DialogResult.Yes)
+                return;
+
+            using (var sqlConn = conn.GetConnection())
+            {
+                try
+                {
+                    sqlConn.Open();
+                    string query = "UPDATE Usuario SET activo = 0 WHERE codigo_usuario = @Codigo";
+                    using (SqlCommand cmd = new SqlCommand(query, sqlConn))
+                    {
+                        cmd.Parameters.AddWithValue("@Codigo", codigoUsuario);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            MessageBox.Show("Usuario inactivado correctamente.", "Éxito");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo inactivar el usuario.", "Error");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al inactivar usuario: " + ex.Message);
+                }
+            }
         }
         #endregion
 
