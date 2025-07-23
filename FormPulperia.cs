@@ -483,83 +483,56 @@ namespace pulperia_mym
         #region Reportes
         private void btnGenerarGraficos_Click(object sender, EventArgs e)
         {
-            Connection conexion = new Connection();
+            string conexion = "Data Source=DESKTOP-IL9GM8N\\DUENIS;Initial Catalog=Pulperia_MYM;Integrated Security=True;TrustServerCertificate=True;";
 
-            using (SqlConnection con = conexion.GetConnection())
+            string consulta = @"
+        SELECT 
+            codigo_interno AS Producto,
+            COUNT(*) AS CantidadVendida,
+            SUM(total) AS TotalVenta
+        FROM Factura
+        WHERE codigo_interno IS NOT NULL
+        GROUP BY codigo_interno
+        ORDER BY CantidadVendida DESC;";
+
+            using (SqlConnection con = new SqlConnection(conexion))
             {
+                SqlCommand cmd = new SqlCommand(consulta, con);
                 con.Open();
 
-                // =======================
-                // 1. GRÁFICO DE PIE: GASTOS DIARIOS (suma costo*cantidad por día)
-                // =======================
-                SqlCommand cmdGastosDiarios = new SqlCommand(@"
-            SELECT CAST(c.fecha AS DATE) AS Dia, SUM(cd.costo * ISNULL(cd.cantidad,0)) AS Gastos
-            FROM Compra c
-            INNER JOIN Compra_detalle cd ON c.ID_compra = cd.ID_compra
-            GROUP BY CAST(c.fecha AS DATE)
-            ORDER BY Dia", con);
+                DataTable dt = new DataTable();
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dt);
 
-                DataTable dtGastos = new DataTable();
-                dtGastos.Load(cmdGastosDiarios.ExecuteReader());
+                // Mostrar en el DataGridView
+                dgvMasvendido.DataSource = dt;
 
+                // Limpiar gráficos
                 chVentasGastos.Series.Clear();
-                chVentasGastos.Series.Add("GastosDiarios");
-                chVentasGastos.Series["GastosDiarios"].ChartType = SeriesChartType.Pie;
-                chVentasGastos.Series["GastosDiarios"].IsValueShownAsLabel = true;
-
-                foreach (DataRow row in dtGastos.Rows)
-                {
-                    string dia = Convert.ToDateTime(row["Dia"]).ToString("dd/MM");
-                    decimal gasto = Convert.ToDecimal(row["Gastos"]);
-                    chVentasGastos.Series["GastosDiarios"].Points.AddXY(dia, gasto);
-                }
-
-                // =======================
-                // 2. GRÁFICO DE BARRAS: VENTAS POR DÍA DE LA SEMANA (cantidad total de productos comprados en la última semana)
-                // =======================
-                SqlCommand cmdVentasPorDia = new SqlCommand(@"
-            SELECT DATENAME(WEEKDAY, c.fecha) AS Dia, SUM(ISNULL(cd.cantidad,0)) AS Cantidad
-            FROM Compra c
-            INNER JOIN Compra_detalle cd ON c.ID_compra = cd.ID_compra
-            WHERE c.fecha >= DATEADD(day, -7, GETDATE())
-            GROUP BY DATENAME(WEEKDAY, c.fecha), DATEPART(WEEKDAY, c.fecha)
-            ORDER BY DATEPART(WEEKDAY, c.fecha)", con);
-
-                SqlDataReader reader = cmdVentasPorDia.ExecuteReader();
-
                 chVentasSemanales.Series.Clear();
-                chVentasSemanales.Series.Add("VentasPorDia");
-                chVentasSemanales.Series["VentasPorDia"].ChartType = SeriesChartType.Column;
-                chVentasSemanales.Series["VentasPorDia"].IsValueShownAsLabel = true;
 
-                while (reader.Read())
+                // Crear series
+                Series pieSeries = new Series("Ventas Pie");
+                pieSeries.ChartType = SeriesChartType.Pie;
+
+                Series barSeries = new Series("Ventas Barra");
+                barSeries.ChartType = SeriesChartType.Column;
+
+                foreach (DataRow row in dt.Rows)
                 {
-                    chVentasSemanales.Series["VentasPorDia"].Points.AddXY(reader["Dia"].ToString(), reader["Cantidad"]);
+                    string producto = row["Producto"].ToString();
+                    int cantidad = Convert.ToInt32(row["CantidadVendida"]);
+                    decimal total = Convert.ToDecimal(row["TotalVenta"]);
+
+                    pieSeries.Points.AddXY(producto, cantidad);
+                    barSeries.Points.AddXY(producto, total);
                 }
 
-                reader.Close();
-
-                // =======================
-                // 3. DGV: PRODUCTOS MÁS VENDIDOS (sumatoria cantidad desde compra_detalle)
-                // =======================
-                string consultaTopProd = @"
-            SELECT p.nombre_producto AS Producto,
-                   SUM(ISNULL(cd.cantidad, 0)) AS VecesVendido,
-                   SUM(ISNULL(cd.cantidad, 0) * ISNULL(cd.costo,0)) AS TotalVendido
-            FROM Compra_detalle cd
-            INNER JOIN Producto p ON cd.ID_producto = p.ID_producto
-            GROUP BY p.nombre_producto
-            ORDER BY VecesVendido DESC";
-
-                SqlCommand cmdTopProd = new SqlCommand(consultaTopProd, con);
-                DataTable dtTopProd = new DataTable();
-                dtTopProd.Load(cmdTopProd.ExecuteReader());
-
-                dgvMasvendido.DataSource = dtTopProd;
-
-                con.Close();
+                chVentasGastos.Series.Add(pieSeries);
+                chVentasSemanales.Series.Add(barSeries);
             }
         }
         #endregion
+
     }
 }
