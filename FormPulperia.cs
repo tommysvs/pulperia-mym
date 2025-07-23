@@ -325,7 +325,59 @@ namespace pulperia_mym
 
         private void btnModificarProducto_Click(object sender, EventArgs e)
         {
+            if (dgvProductos.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Selecciona un producto para modificar.", "Aviso");
+                return;
+            }
 
+            int idProducto = Convert.ToInt32(dgvProductos.SelectedRows[0].Cells["ID_producto"].Value);
+            string nuevoNombre = txtNmbProducto.Text.Trim();
+            string nuevoPrecio = txtPrecioProducto.Text.Trim();
+            string nuevoStock = txtStockProducto.Text.Trim();
+
+            if (string.IsNullOrEmpty(nuevoNombre) || string.IsNullOrEmpty(nuevoPrecio) || string.IsNullOrEmpty(nuevoStock))
+            {
+                MessageBox.Show("Completa todos los campos antes de modificar.", "Advertencia");
+                return;
+            }
+
+            using (var sqlConn = conn.GetConnection())
+            {
+                try
+                {
+                    sqlConn.Open();
+                    string query = @"UPDATE Producto 
+                     SET nombre_producto = @Nombre, precio = @Precio, stock = @Stock 
+                     WHERE ID_producto = @ID";
+
+                    using (SqlCommand cmd = new SqlCommand(query, sqlConn))
+                    {
+                        cmd.Parameters.AddWithValue("@Nombre", nuevoNombre);
+                        cmd.Parameters.AddWithValue("@Precio", nuevoPrecio);
+                        cmd.Parameters.AddWithValue("@Stock", nuevoStock);
+                        cmd.Parameters.AddWithValue("@ID", idProducto);
+
+                        int filasAfectadas = cmd.ExecuteNonQuery();
+
+                        if (filasAfectadas > 0)
+                        {
+                            MessageBox.Show("Producto modificado correctamente.", "Éxito");
+                            txtNmbProducto.Clear();
+                            txtPrecioProducto.Clear();
+                            txtStockProducto.Clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("No se pudo modificar el producto.", "Error");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al modificar producto: " + ex.Message);
+                }
+            }
         }
 
         private void btnEliminarProducto_Click(object sender, EventArgs e)
