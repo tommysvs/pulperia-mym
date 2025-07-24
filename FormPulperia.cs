@@ -780,5 +780,20 @@ namespace pulperia_mym
             }
             #endregion
         }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cbCliente.SelectedIndex = 0;
+            cbProductosFactura.SelectedIndex = 0;
+            txtPrecio.Clear();
+            nudCantidadFactura.Value = 0;
+            txtDescuento.Clear();
+            cbTipoFactura.SelectedIndex = 0;
+        }
+
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
