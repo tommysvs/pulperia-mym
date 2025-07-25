@@ -33,8 +33,7 @@ namespace pulperia_mym
             CargarClientes();
             CargarProductos();
             CargarTiposFactura();
-            dateVencimiento.Enabled = false;
-
+            LimpiarSeccionFactura();
         }
 
         private void FormPulperia_Load(object sender, EventArgs e)
@@ -75,6 +74,61 @@ namespace pulperia_mym
                     SetHandCursorForMaterialButtons(control);
                 }
             }
+        }
+        #endregion
+
+        #region Eventos
+        private void txtDescuento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if (e.KeyChar == '.' && (sender as TextBox).Text.Contains("."))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtDescuento_TextChanged(object sender, EventArgs e)
+        {
+            if (decimal.TryParse(txtDescuento.Text, out decimal value))
+            {
+                if (value < 0 || value > 100)
+                {
+                    MessageBox.Show("El descuento debe ser un porcentaje entre 0 y 100.");
+                    txtDescuento.Text = "";
+                }
+            }
+            else if (!string.IsNullOrEmpty(txtDescuento.Text))
+            {
+                MessageBox.Show("Ingrese solo números para el descuento.");
+                txtDescuento.Text = "";
+            }
+        }
+
+        private void txtCantidadFactura_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void LimpiarSeccionFactura()
+        {
+            dgvFactura.Rows.Clear();
+
+            txtCantidadFactura.Clear();
+            txtPrecio.Clear();
+            txtDescuento.Text = "0";
+            cbCliente.SelectedIndex = -1;
+            cbProductosFactura.SelectedIndex = -1;
+
+            lblSubtotal.Text = "Subtotal: L. 0.00";
+            lblImpuesto.Text = "Impuesto (15%): L. 0.00";
+            lblTotal.Text = "Total: L. 0.00";
         }
         #endregion
 
@@ -153,7 +207,7 @@ namespace pulperia_mym
         {
             using (var sqlConn = conn.GetConnection())
             {
-                string query = "SELECT ID_cliente, nombre_completo FROM Cliente";
+                string query = "SELECT ID_cliente, nombre_completo FROM Cliente WHERE activo = 1";
                 SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -168,7 +222,7 @@ namespace pulperia_mym
         {
             using (var sqlConn = conn.GetConnection())
             {
-                string query = "SELECT ID_producto, nombre_producto FROM Producto";
+                string query = "SELECT ID_producto, nombre_producto, precio FROM Producto WHERE activo = 1";
                 SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
@@ -194,71 +248,26 @@ namespace pulperia_mym
             }
         }
 
-        private void CalcularTotal()
-        {
-            decimal total = 0;
-            foreach (DataGridViewRow row in dgfactura.Rows)
-            {
-                total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
-            }
-            lblTotal.Text = $"Total: L. {total:N2}";
-        }
-
-        private decimal ObtenerPrecio(int productoId)
-        {
-            using (var sqlConn = conn.GetConnection())
-            {
-                string query = "SELECT Precio FROM Producto WHERE IdProducto = @id";
-                SqlCommand cmd = new SqlCommand(query, sqlConn);
-                cmd.Parameters.AddWithValue("@id", productoId);
-                sqlConn.Open();
-                return (decimal)cmd.ExecuteScalar();
-            }
-        }
-
-        private void rdbCreditoSi_CheckedChanged(object sender, EventArgs e)
-        {
-            dateVencimiento.Enabled = rdbCreditoSi.Checked;
-        }
-
-        private void rdbCreditoNo_CheckedChanged(object sender, EventArgs e)
-        {
-            dateVencimiento.Enabled = !rdbCreditoNo.Checked;
-        }
-
-        private void cbTipoFactura_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            using (var sqlConn = conn.GetConnection())
-            {
-                string query = "SELECT ID_tipo, NombreTipo FROM Tipo";
-                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                cbTipoFactura.DataSource = dt;
-                cbTipoFactura.DisplayMember = "NombreTipo";
-                cbTipoFactura.ValueMember = "ID_tipo";
-            }
-        }
-
         private void cbProductosFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (var sqlConn = conn.GetConnection())
+            if (cbProductosFactura.SelectedItem is DataRowView row)
             {
-                string query = "SELECT IdProducto, Nombre FROM Producto";
-                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                cbProductosFactura.DataSource = dt;
-                cbProductosFactura.DisplayMember = "Nombre";
-                cbProductosFactura.ValueMember = "IdProducto";
+                txtPrecio.Text = row["precio"].ToString();
+            }
+            else
+            {
+                txtPrecio.Text = "";
             }
         }
 
-        private void btnAgregarFact_Click(object sender, EventArgs e)
+        private void btnAgregarProdFact_Click(object sender, EventArgs e)
         {
-            int cantidadFactura = int.Parse(nudCantidadFactura.Text);
+            int cantidadFactura;
+            if (!int.TryParse(txtCantidadFactura.Text, out cantidadFactura) || cantidadFactura < 1)
+            {
+                MessageBox.Show("Ingrese una cantidad válida (número entero mayor a 0).");
+                return;
+            }
 
             if (cbProductosFactura.SelectedValue == null || cantidadFactura < 1)
             {
@@ -266,86 +275,109 @@ namespace pulperia_mym
                 return;
             }
 
-            int id = (int)cbProductosFactura.SelectedValue;
-            string nombre = cbProductosFactura.Text;
+            string producto = cbProductosFactura.Text;
             int cantidad = cantidadFactura;
-            decimal precio = ObtenerPrecio(id);
+            decimal precio = Convert.ToDecimal(txtPrecio.Text);
+            decimal descuento = string.IsNullOrEmpty(txtDescuento.Text) ? 0 : Convert.ToDecimal(txtDescuento.Text);
             decimal subtotal = cantidad * precio;
+            decimal impuesto = subtotal * 0.15m;
+            decimal total = 0;
 
-            dgfactura.Rows.Add(id, nombre, cantidad, precio, subtotal);
-            CalcularTotal();
+            dgvFactura.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvFactura.Rows.Add(producto, cantidad, precio, descuento, subtotal, impuesto);
+
+            foreach (DataGridViewRow row in dgvFactura.Rows)
+            {
+                total += Convert.ToDecimal(row.Cells["subtotal"].Value);
+            }
+
+            lblSubtotal.Text = $"Subtotal: L. {total:N2}";
+            lblImpuesto.Text = $"Impuesto (15%): L. {total * 0.15m:N2}";
+            lblTotal.Text = $"Total: L. {total:N2}";
         }
 
         private void btnGuardarFact_Click(object sender, EventArgs e)
         {
-            if (cbTipoFactura.SelectedValue == null || dgfactura.Rows.Count == 0)
+            if (cbTipoFactura.SelectedValue == null || cbCliente.SelectedValue == null || dgvFactura.Rows.Count == 0)
             {
-                MessageBox.Show("Debe seleccionar tipo de factura y agregar al menos un producto.");
+                MessageBox.Show("Debe seleccionar cliente, tipo de factura y agregar al menos un producto.");
                 return;
             }
 
             decimal total = 0;
-            foreach (DataGridViewRow row in dgfactura.Rows)
-                total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
+            foreach (DataGridViewRow row in dgvFactura.Rows)
+            {
+                if (row.Cells["subtotal"].Value != null)
+                    total += Convert.ToDecimal(row.Cells["subtotal"].Value);
+            }
 
             using (var sqlConn = conn.GetConnection())
             {
                 sqlConn.Open();
                 SqlTransaction trans = sqlConn.BeginTransaction();
 
+                bool esCredito = false;
+                if (cbTipoFactura.SelectedItem is DataRowView tipoRow)
+                    esCredito = tipoRow["descripcion"].ToString().Equals("Crédito", StringComparison.OrdinalIgnoreCase);
+
                 try
                 {
-                    SqlCommand cmdFactura = new SqlCommand(@"
-                        INSERT INTO Factura (codigo_interno, fecha, ID_tipo, credito, fecha_vencimiento_credito, total, total_pagado)
-                        OUTPUT INSERTED.ID_factura
-                        VALUES (@codigo, GETDATE(), @tipo, @credito, @vencimiento, @total, @pagado)", sqlConn, trans);
+                    SqlCommand cmdVenta = new SqlCommand(@"
+                        INSERT INTO Venta (codigo_interno, fecha, ID_tipo, ID_cliente, ID_usuario, credito, fecha_vencimiento_credito, total, total_pagado)
+                        OUTPUT INSERTED.ID_venta
+                        VALUES (@codigo, GETDATE(), @tipo, @cliente, @usuario, @credito, @vencimiento, @total, @pagado)", sqlConn, trans);
 
-                    cmdFactura.Parameters.AddWithValue("@codigo", Guid.NewGuid().ToString().Substring(0, 8));
-                    cmdFactura.Parameters.AddWithValue("@tipo", cbTipoFactura.SelectedValue);
-                    cmdFactura.Parameters.AddWithValue("@credito", rdbCreditoSi.Checked);
-                    cmdFactura.Parameters.AddWithValue("@vencimiento", rdbCreditoSi.Checked ? dateVencimiento.Value : DBNull.Value);
-                    cmdFactura.Parameters.AddWithValue("@total", total);
-                    cmdFactura.Parameters.AddWithValue("@pagado", total);
+                    cmdVenta.Parameters.AddWithValue("@codigo", Guid.NewGuid().ToString().Substring(0, 8));
+                    cmdVenta.Parameters.AddWithValue("@tipo", cbTipoFactura.SelectedValue);
+                    cmdVenta.Parameters.AddWithValue("@cliente", cbCliente.SelectedValue);
+                    cmdVenta.Parameters.AddWithValue("@usuario", 2); 
+                    cmdVenta.Parameters.AddWithValue("@credito", esCredito);
+                    cmdVenta.Parameters.AddWithValue("@vencimiento", esCredito ? dateVencimiento.Value : DBNull.Value);
+                    cmdVenta.Parameters.AddWithValue("@total", total);
+                    cmdVenta.Parameters.AddWithValue("@pagado", total);
 
-                    int idFactura = (int)cmdFactura.ExecuteScalar();
+                    int idVenta = (int)cmdVenta.ExecuteScalar();
 
-                    foreach (DataGridViewRow row in dgfactura.Rows)
+                    foreach (DataGridViewRow row in dgvFactura.Rows)
                     {
-                        SqlCommand detalleCmd = new SqlCommand(@"
-                    INSERT INTO DetalleFactura (IdFactura, ProductoId, Cantidad, PrecioUnitario)
-                    VALUES (@factura, @producto, @cantidad, @precio)", sqlConn, trans);
+                        if (row.IsNewRow) continue;
 
-                        detalleCmd.Parameters.AddWithValue("@factura", idFactura);
-                        detalleCmd.Parameters.AddWithValue("@producto", row.Cells["IdProducto"].Value);
-                        detalleCmd.Parameters.AddWithValue("@cantidad", row.Cells["Cantidad"].Value);
-                        detalleCmd.Parameters.AddWithValue("@precio", row.Cells["PrecioUnitario"].Value);
+                        int idProducto = 0;
+                        using (var buscarConn = conn.GetConnection())
+                        {
+                            buscarConn.Open();
+                            var buscarCmd = new SqlCommand("SELECT ID_producto FROM Producto WHERE nombre_producto = @nombre", buscarConn);
+                            buscarCmd.Parameters.AddWithValue("@nombre", row.Cells[0].Value.ToString());
+                            var result = buscarCmd.ExecuteScalar();
+                            idProducto = result != null ? Convert.ToInt32(result) : 0;
+                        }
+
+                        SqlCommand detalleCmd = new SqlCommand(@"
+                            INSERT INTO Venta_detalle (ID_venta, ID_producto, cantidad, cantidad_dec, ID_unidad, precio_unitario, descuento)
+                            VALUES (@venta, @producto, @cantidad, @cantidad_dec, @id_unidad, @precio, @descuento)", sqlConn, trans);
+
+                        detalleCmd.Parameters.AddWithValue("@venta", idVenta);
+                        detalleCmd.Parameters.AddWithValue("@producto", idProducto);
+                        detalleCmd.Parameters.AddWithValue("@cantidad", Convert.ToInt32(row.Cells[1].Value));
+                        detalleCmd.Parameters.AddWithValue("@cantidad_dec", 0);
+                        detalleCmd.Parameters.AddWithValue("@id_unidad", 1);
+                        detalleCmd.Parameters.AddWithValue("@precio", Convert.ToDecimal(row.Cells[2].Value));
+                        detalleCmd.Parameters.AddWithValue("@descuento", Convert.ToDecimal(row.Cells[3].Value));
+
                         detalleCmd.ExecuteNonQuery();
                     }
 
                     trans.Commit();
-                    MessageBox.Show("Factura registrada con éxito ✅");
+                    MessageBox.Show("Venta registrada con éxito.");
+
+                    LimpiarSeccionFactura();
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    MessageBox.Show("Error al guardar factura: " + ex.Message);
+                    MessageBox.Show("Error al guardar venta: " + ex.Message);
                 }
             }
-        }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            cbCliente.SelectedIndex = 0;
-            cbProductosFactura.SelectedIndex = 0;
-            txtPrecio.Clear();
-            nudCantidadFactura.Clear();
-            txtDescuento.Clear();
-            cbTipoFactura.SelectedIndex = 0;
-        }
-
-        private void btnCalcular_Click(object sender, EventArgs e)
-        {
-            CalcularTotal();
         }
         #endregion
 

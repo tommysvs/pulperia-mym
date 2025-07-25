@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPulperia));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
             pbLogoInicio = new PictureBox();
             pnlLogin = new Panel();
             btnSalir = new MaterialSkin.Controls.MaterialButton();
@@ -62,7 +62,7 @@
             materialLabel12 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel11 = new MaterialSkin.Controls.MaterialLabel();
             txtDescuento = new MaterialSkin.Controls.MaterialTextBox();
-            nudCantidadFactura = new MaterialSkin.Controls.MaterialTextBox();
+            txtCantidadFactura = new MaterialSkin.Controls.MaterialTextBox();
             txtPrecio = new MaterialSkin.Controls.MaterialTextBox();
             materialLabel10 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel9 = new MaterialSkin.Controls.MaterialLabel();
@@ -70,22 +70,18 @@
             materialLabel7 = new MaterialSkin.Controls.MaterialLabel();
             cbProductosFactura = new MaterialSkin.Controls.MaterialComboBox();
             cbCliente = new MaterialSkin.Controls.MaterialComboBox();
-            btnAgregarFact = new MaterialSkin.Controls.MaterialButton();
+            btnAgregarProdFact = new MaterialSkin.Controls.MaterialButton();
             btnGuardarFact = new MaterialSkin.Controls.MaterialButton();
-            btnLimpiar = new MaterialSkin.Controls.MaterialButton();
-            btnCalcular = new MaterialSkin.Controls.MaterialButton();
             materialLabel6 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel5 = new MaterialSkin.Controls.MaterialLabel();
-            dgfactura = new DataGridView();
-            IdProducto = new DataGridViewTextBoxColumn();
-            NombreProducto = new DataGridViewTextBoxColumn();
-            Unidades = new DataGridViewTextBoxColumn();
-            PrecioUnitario = new DataGridViewTextBoxColumn();
-            SubTotal = new DataGridViewTextBoxColumn();
+            dgvFactura = new DataGridView();
+            Producto = new DataGridViewTextBoxColumn();
+            Cantidad = new DataGridViewTextBoxColumn();
+            Precio = new DataGridViewTextBoxColumn();
+            Descuento = new DataGridViewTextBoxColumn();
+            Subtotal = new DataGridViewTextBoxColumn();
+            Impuesto = new DataGridViewTextBoxColumn();
             lblTotalFact = new Label();
-            grpbCredito = new GroupBox();
-            rdbCreditoNo = new MaterialSkin.Controls.MaterialRadioButton();
-            rdbCreditoSi = new MaterialSkin.Controls.MaterialRadioButton();
             dateVencimiento = new DateTimePicker();
             tbProductos = new TabPage();
             btnModificarProducto = new MaterialSkin.Controls.MaterialButton();
@@ -118,8 +114,6 @@
             materialLabel23 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel16 = new MaterialSkin.Controls.MaterialLabel();
             dgvSolicitud = new DataGridView();
-            tbOrdRepo = new TabPage();
-            materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
             tbConfig = new TabPage();
             materialLabel31 = new MaterialSkin.Controls.MaterialLabel();
             txtRolConfig = new MaterialSkin.Controls.MaterialTextBox();
@@ -152,13 +146,11 @@
             tbInicio.SuspendLayout();
             materialCard1.SuspendLayout();
             tbVentas.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgfactura).BeginInit();
-            grpbCredito.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvFactura).BeginInit();
             tbProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
             tbSoliProd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSolicitud).BeginInit();
-            tbOrdRepo.SuspendLayout();
             tbConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
             tbReportes.SuspendLayout();
@@ -330,7 +322,6 @@
             tabMenu.Controls.Add(tbVentas);
             tabMenu.Controls.Add(tbProductos);
             tabMenu.Controls.Add(tbSoliProd);
-            tabMenu.Controls.Add(tbOrdRepo);
             tabMenu.Controls.Add(tbConfig);
             tabMenu.Controls.Add(tbReportes);
             tabMenu.Depth = 0;
@@ -428,7 +419,7 @@
             tbVentas.Controls.Add(materialLabel12);
             tbVentas.Controls.Add(materialLabel11);
             tbVentas.Controls.Add(txtDescuento);
-            tbVentas.Controls.Add(nudCantidadFactura);
+            tbVentas.Controls.Add(txtCantidadFactura);
             tbVentas.Controls.Add(txtPrecio);
             tbVentas.Controls.Add(materialLabel10);
             tbVentas.Controls.Add(materialLabel9);
@@ -436,15 +427,12 @@
             tbVentas.Controls.Add(materialLabel7);
             tbVentas.Controls.Add(cbProductosFactura);
             tbVentas.Controls.Add(cbCliente);
-            tbVentas.Controls.Add(btnAgregarFact);
+            tbVentas.Controls.Add(btnAgregarProdFact);
             tbVentas.Controls.Add(btnGuardarFact);
-            tbVentas.Controls.Add(btnLimpiar);
-            tbVentas.Controls.Add(btnCalcular);
             tbVentas.Controls.Add(materialLabel6);
             tbVentas.Controls.Add(materialLabel5);
-            tbVentas.Controls.Add(dgfactura);
+            tbVentas.Controls.Add(dgvFactura);
             tbVentas.Controls.Add(lblTotalFact);
-            tbVentas.Controls.Add(grpbCredito);
             tbVentas.Controls.Add(dateVencimiento);
             tbVentas.Location = new Point(4, 34);
             tbVentas.Name = "tbVentas";
@@ -521,7 +509,7 @@
             materialLabel13.Depth = 0;
             materialLabel13.Font = new Font("Roboto Medium", 20F, FontStyle.Bold, GraphicsUnit.Pixel);
             materialLabel13.FontType = MaterialSkin.MaterialSkinManager.fontType.H6;
-            materialLabel13.Location = new Point(190, 617);
+            materialLabel13.Location = new Point(25, 602);
             materialLabel13.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel13.Name = "materialLabel13";
             materialLabel13.Size = new Size(207, 24);
@@ -592,29 +580,33 @@
             txtDescuento.TabIndex = 55;
             txtDescuento.Text = "";
             txtDescuento.TrailingIcon = null;
+            txtDescuento.TextChanged += txtDescuento_TextChanged;
+            txtDescuento.KeyPress += txtDescuento_KeyPress;
             // 
-            // nudCantidadFactura
+            // txtCantidadFactura
             // 
-            nudCantidadFactura.AnimateReadOnly = false;
-            nudCantidadFactura.BorderStyle = BorderStyle.None;
-            nudCantidadFactura.Depth = 0;
-            nudCantidadFactura.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            nudCantidadFactura.LeadingIcon = null;
-            nudCantidadFactura.Location = new Point(140, 382);
-            nudCantidadFactura.MaxLength = 50;
-            nudCantidadFactura.MouseState = MaterialSkin.MouseState.OUT;
-            nudCantidadFactura.Multiline = false;
-            nudCantidadFactura.Name = "nudCantidadFactura";
-            nudCantidadFactura.Size = new Size(246, 50);
-            nudCantidadFactura.TabIndex = 54;
-            nudCantidadFactura.Text = "";
-            nudCantidadFactura.TrailingIcon = null;
+            txtCantidadFactura.AnimateReadOnly = false;
+            txtCantidadFactura.BorderStyle = BorderStyle.None;
+            txtCantidadFactura.Depth = 0;
+            txtCantidadFactura.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtCantidadFactura.LeadingIcon = null;
+            txtCantidadFactura.Location = new Point(140, 382);
+            txtCantidadFactura.MaxLength = 50;
+            txtCantidadFactura.MouseState = MaterialSkin.MouseState.OUT;
+            txtCantidadFactura.Multiline = false;
+            txtCantidadFactura.Name = "txtCantidadFactura";
+            txtCantidadFactura.Size = new Size(246, 50);
+            txtCantidadFactura.TabIndex = 54;
+            txtCantidadFactura.Text = "";
+            txtCantidadFactura.TrailingIcon = null;
+            txtCantidadFactura.KeyPress += txtCantidadFactura_KeyPress;
             // 
             // txtPrecio
             // 
             txtPrecio.AnimateReadOnly = false;
             txtPrecio.BorderStyle = BorderStyle.None;
             txtPrecio.Depth = 0;
+            txtPrecio.Enabled = false;
             txtPrecio.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtPrecio.LeadingIcon = null;
             txtPrecio.Location = new Point(140, 311);
@@ -700,6 +692,7 @@
             cbProductosFactura.Size = new Size(243, 49);
             cbProductosFactura.StartIndex = 0;
             cbProductosFactura.TabIndex = 48;
+            cbProductosFactura.SelectedIndexChanged += cbProductosFactura_SelectedIndexChanged;
             // 
             // cbCliente
             // 
@@ -723,24 +716,24 @@
             cbCliente.StartIndex = 0;
             cbCliente.TabIndex = 47;
             // 
-            // btnAgregarFact
+            // btnAgregarProdFact
             // 
-            btnAgregarFact.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnAgregarFact.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnAgregarFact.Depth = 0;
-            btnAgregarFact.HighEmphasis = true;
-            btnAgregarFact.Icon = null;
-            btnAgregarFact.Location = new Point(190, 732);
-            btnAgregarFact.Margin = new Padding(4, 6, 4, 6);
-            btnAgregarFact.MouseState = MaterialSkin.MouseState.HOVER;
-            btnAgregarFact.Name = "btnAgregarFact";
-            btnAgregarFact.NoAccentTextColor = Color.Empty;
-            btnAgregarFact.Size = new Size(156, 36);
-            btnAgregarFact.TabIndex = 46;
-            btnAgregarFact.Text = "Agregar factura";
-            btnAgregarFact.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnAgregarFact.UseAccentColor = false;
-            btnAgregarFact.Click += btnAgregarFact_Click;
+            btnAgregarProdFact.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            btnAgregarProdFact.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            btnAgregarProdFact.Depth = 0;
+            btnAgregarProdFact.HighEmphasis = true;
+            btnAgregarProdFact.Icon = null;
+            btnAgregarProdFact.Location = new Point(24, 733);
+            btnAgregarProdFact.Margin = new Padding(4, 6, 4, 6);
+            btnAgregarProdFact.MouseState = MaterialSkin.MouseState.HOVER;
+            btnAgregarProdFact.Name = "btnAgregarProdFact";
+            btnAgregarProdFact.NoAccentTextColor = Color.Empty;
+            btnAgregarProdFact.Size = new Size(168, 36);
+            btnAgregarProdFact.TabIndex = 46;
+            btnAgregarProdFact.Text = "Agregar producto";
+            btnAgregarProdFact.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            btnAgregarProdFact.UseAccentColor = false;
+            btnAgregarProdFact.Click += btnAgregarProdFact_Click;
             // 
             // btnGuardarFact
             // 
@@ -760,44 +753,6 @@
             btnGuardarFact.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnGuardarFact.UseAccentColor = false;
             btnGuardarFact.Click += btnGuardarFact_Click;
-            // 
-            // btnLimpiar
-            // 
-            btnLimpiar.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnLimpiar.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnLimpiar.Depth = 0;
-            btnLimpiar.HighEmphasis = true;
-            btnLimpiar.Icon = null;
-            btnLimpiar.Location = new Point(1292, 574);
-            btnLimpiar.Margin = new Padding(4, 6, 4, 6);
-            btnLimpiar.MouseState = MaterialSkin.MouseState.HOVER;
-            btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.NoAccentTextColor = Color.Empty;
-            btnLimpiar.Size = new Size(79, 36);
-            btnLimpiar.TabIndex = 44;
-            btnLimpiar.Text = "Limpiar";
-            btnLimpiar.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnLimpiar.UseAccentColor = false;
-            btnLimpiar.Click += btnLimpiar_Click;
-            // 
-            // btnCalcular
-            // 
-            btnCalcular.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnCalcular.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnCalcular.Depth = 0;
-            btnCalcular.HighEmphasis = true;
-            btnCalcular.Icon = null;
-            btnCalcular.Location = new Point(506, 574);
-            btnCalcular.Margin = new Padding(4, 6, 4, 6);
-            btnCalcular.MouseState = MaterialSkin.MouseState.HOVER;
-            btnCalcular.Name = "btnCalcular";
-            btnCalcular.NoAccentTextColor = Color.Empty;
-            btnCalcular.Size = new Size(95, 36);
-            btnCalcular.TabIndex = 0;
-            btnCalcular.Text = "Calcular";
-            btnCalcular.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnCalcular.UseAccentColor = false;
-            btnCalcular.Click += btnCalcular_Click;
             // 
             // materialLabel6
             // 
@@ -825,51 +780,64 @@
             materialLabel5.TabIndex = 42;
             materialLabel5.Text = "Ventas";
             // 
-            // dgfactura
+            // dgvFactura
             // 
-            dgfactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgfactura.Columns.AddRange(new DataGridViewColumn[] { IdProducto, NombreProducto, Unidades, PrecioUnitario, SubTotal });
-            dgfactura.Location = new Point(506, 86);
-            dgfactura.Margin = new Padding(2, 4, 2, 4);
-            dgfactura.Name = "dgfactura";
-            dgfactura.RowHeadersWidth = 62;
-            dgfactura.Size = new Size(865, 478);
-            dgfactura.TabIndex = 16;
+            dgvFactura.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvFactura.Columns.AddRange(new DataGridViewColumn[] { Producto, Cantidad, Precio, Descuento, Subtotal, Impuesto });
+            dgvFactura.Location = new Point(506, 86);
+            dgvFactura.Margin = new Padding(2, 4, 2, 4);
+            dgvFactura.Name = "dgvFactura";
+            dgvFactura.RowHeadersWidth = 62;
+            dgvFactura.Size = new Size(865, 478);
+            dgvFactura.TabIndex = 16;
             // 
-            // IdProducto
+            // Producto
             // 
-            IdProducto.HeaderText = "IdProducto";
-            IdProducto.MinimumWidth = 8;
-            IdProducto.Name = "IdProducto";
-            IdProducto.Width = 150;
+            Producto.HeaderText = "Producto";
+            Producto.MinimumWidth = 8;
+            Producto.Name = "Producto";
+            Producto.ReadOnly = true;
+            Producto.Width = 150;
             // 
-            // NombreProducto
+            // Cantidad
             // 
-            NombreProducto.HeaderText = "NombreProducto";
-            NombreProducto.MinimumWidth = 8;
-            NombreProducto.Name = "NombreProducto";
-            NombreProducto.Width = 150;
+            Cantidad.HeaderText = "Cantidad";
+            Cantidad.MinimumWidth = 8;
+            Cantidad.Name = "Cantidad";
+            Cantidad.ReadOnly = true;
+            Cantidad.Width = 150;
             // 
-            // Unidades
+            // Precio
             // 
-            Unidades.HeaderText = "Unidades";
-            Unidades.MinimumWidth = 8;
-            Unidades.Name = "Unidades";
-            Unidades.Width = 150;
+            Precio.HeaderText = "Precio";
+            Precio.MinimumWidth = 8;
+            Precio.Name = "Precio";
+            Precio.ReadOnly = true;
+            Precio.Width = 150;
             // 
-            // PrecioUnitario
+            // Descuento
             // 
-            PrecioUnitario.HeaderText = "PrecioUnitario";
-            PrecioUnitario.MinimumWidth = 8;
-            PrecioUnitario.Name = "PrecioUnitario";
-            PrecioUnitario.Width = 150;
+            Descuento.HeaderText = "Descuento";
+            Descuento.MinimumWidth = 8;
+            Descuento.Name = "Descuento";
+            Descuento.ReadOnly = true;
+            Descuento.Width = 150;
             // 
-            // SubTotal
+            // Subtotal
             // 
-            SubTotal.HeaderText = "SubTotal";
-            SubTotal.MinimumWidth = 8;
-            SubTotal.Name = "SubTotal";
-            SubTotal.Width = 150;
+            Subtotal.HeaderText = "Subtotal";
+            Subtotal.MinimumWidth = 8;
+            Subtotal.Name = "Subtotal";
+            Subtotal.ReadOnly = true;
+            Subtotal.Width = 150;
+            // 
+            // Impuesto
+            // 
+            Impuesto.HeaderText = "Impuesto";
+            Impuesto.MinimumWidth = 8;
+            Impuesto.Name = "Impuesto";
+            Impuesto.ReadOnly = true;
+            Impuesto.Width = 150;
             // 
             // lblTotalFact
             // 
@@ -880,57 +848,14 @@
             lblTotalFact.Size = new Size(0, 25);
             lblTotalFact.TabIndex = 31;
             // 
-            // grpbCredito
-            // 
-            grpbCredito.Controls.Add(rdbCreditoNo);
-            grpbCredito.Controls.Add(rdbCreditoSi);
-            grpbCredito.Location = new Point(24, 617);
-            grpbCredito.Margin = new Padding(2, 4, 2, 4);
-            grpbCredito.Name = "grpbCredito";
-            grpbCredito.Padding = new Padding(2, 4, 2, 4);
-            grpbCredito.Size = new Size(122, 152);
-            grpbCredito.TabIndex = 27;
-            grpbCredito.TabStop = false;
-            grpbCredito.Text = "Credito";
-            // 
-            // rdbCreditoNo
-            // 
-            rdbCreditoNo.AutoSize = true;
-            rdbCreditoNo.Depth = 0;
-            rdbCreditoNo.Location = new Point(21, 97);
-            rdbCreditoNo.Margin = new Padding(0);
-            rdbCreditoNo.MouseLocation = new Point(-1, -1);
-            rdbCreditoNo.MouseState = MaterialSkin.MouseState.HOVER;
-            rdbCreditoNo.Name = "rdbCreditoNo";
-            rdbCreditoNo.Ripple = true;
-            rdbCreditoNo.Size = new Size(55, 37);
-            rdbCreditoNo.TabIndex = 28;
-            rdbCreditoNo.TabStop = true;
-            rdbCreditoNo.Text = "No";
-            rdbCreditoNo.UseVisualStyleBackColor = true;
-            // 
-            // rdbCreditoSi
-            // 
-            rdbCreditoSi.AutoSize = true;
-            rdbCreditoSi.Depth = 0;
-            rdbCreditoSi.Location = new Point(20, 43);
-            rdbCreditoSi.Margin = new Padding(0);
-            rdbCreditoSi.MouseLocation = new Point(-1, -1);
-            rdbCreditoSi.MouseState = MaterialSkin.MouseState.HOVER;
-            rdbCreditoSi.Name = "rdbCreditoSi";
-            rdbCreditoSi.Ripple = true;
-            rdbCreditoSi.Size = new Size(49, 37);
-            rdbCreditoSi.TabIndex = 27;
-            rdbCreditoSi.TabStop = true;
-            rdbCreditoSi.Text = "Si";
-            rdbCreditoSi.UseVisualStyleBackColor = true;
-            // 
             // dateVencimiento
             // 
-            dateVencimiento.Location = new Point(190, 660);
+            dateVencimiento.Location = new Point(24, 630);
             dateVencimiento.Margin = new Padding(2, 4, 2, 4);
+            dateVencimiento.MaximumSize = new Size(250, 50);
+            dateVencimiento.MinimumSize = new Size(250, 50);
             dateVencimiento.Name = "dateVencimiento";
-            dateVencimiento.Size = new Size(207, 31);
+            dateVencimiento.Size = new Size(250, 50);
             dateVencimiento.TabIndex = 28;
             // 
             // tbProductos
@@ -989,7 +914,7 @@
             btnEliminarProducto.MouseState = MaterialSkin.MouseState.HOVER;
             btnEliminarProducto.Name = "btnEliminarProducto";
             btnEliminarProducto.NoAccentTextColor = Color.Empty;
-            btnEliminarProducto.Size = new Size(169, 36);
+            btnEliminarProducto.Size = new Size(177, 36);
             btnEliminarProducto.TabIndex = 75;
             btnEliminarProducto.Text = "Inactivar producto";
             btnEliminarProducto.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -1279,9 +1204,9 @@
             materialLabel26.Location = new Point(25, 121);
             materialLabel26.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel26.Name = "materialLabel26";
-            materialLabel26.Size = new Size(179, 29);
+            materialLabel26.Size = new Size(183, 29);
             materialLabel26.TabIndex = 65;
-            materialLabel26.Text = "Registrar factura";
+            materialLabel26.Text = "Agregar solicitud";
             // 
             // btnEnviarSoli
             // 
@@ -1413,29 +1338,6 @@
             dgvSolicitud.Size = new Size(853, 596);
             dgvSolicitud.TabIndex = 17;
             // 
-            // tbOrdRepo
-            // 
-            tbOrdRepo.Controls.Add(materialLabel18);
-            tbOrdRepo.Location = new Point(4, 34);
-            tbOrdRepo.Name = "tbOrdRepo";
-            tbOrdRepo.Size = new Size(1398, 805);
-            tbOrdRepo.TabIndex = 4;
-            tbOrdRepo.Text = "Orden de reposición";
-            tbOrdRepo.UseVisualStyleBackColor = true;
-            // 
-            // materialLabel18
-            // 
-            materialLabel18.AutoSize = true;
-            materialLabel18.Depth = 0;
-            materialLabel18.Font = new Font("Roboto", 34F, FontStyle.Bold, GraphicsUnit.Pixel);
-            materialLabel18.FontType = MaterialSkin.MaterialSkinManager.fontType.H4;
-            materialLabel18.Location = new Point(24, 22);
-            materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel18.Name = "materialLabel18";
-            materialLabel18.Size = new Size(303, 41);
-            materialLabel18.TabIndex = 44;
-            materialLabel18.Text = "Orden de reposición";
-            // 
             // tbConfig
             // 
             tbConfig.Controls.Add(materialLabel31);
@@ -1498,7 +1400,7 @@
             btnCamPassUsuario.Depth = 0;
             btnCamPassUsuario.HighEmphasis = true;
             btnCamPassUsuario.Icon = null;
-            btnCamPassUsuario.Location = new Point(1179, 48);
+            btnCamPassUsuario.Location = new Point(1179, 701);
             btnCamPassUsuario.Margin = new Padding(4, 6, 4, 6);
             btnCamPassUsuario.MouseState = MaterialSkin.MouseState.HOVER;
             btnCamPassUsuario.Name = "btnCamPassUsuario";
@@ -1518,7 +1420,7 @@
             btnInactivarUsuario.Depth = 0;
             btnInactivarUsuario.HighEmphasis = true;
             btnInactivarUsuario.Icon = null;
-            btnInactivarUsuario.Location = new Point(1179, 611);
+            btnInactivarUsuario.Location = new Point(1179, 749);
             btnInactivarUsuario.Margin = new Padding(4, 6, 4, 6);
             btnInactivarUsuario.MouseState = MaterialSkin.MouseState.HOVER;
             btnInactivarUsuario.Name = "btnInactivarUsuario";
@@ -1713,7 +1615,7 @@
             dgvUsuarios.Margin = new Padding(2, 4, 2, 4);
             dgvUsuarios.Name = "dgvUsuarios";
             dgvUsuarios.RowHeadersWidth = 62;
-            dgvUsuarios.Size = new Size(741, 599);
+            dgvUsuarios.Size = new Size(741, 691);
             dgvUsuarios.TabIndex = 7;
             // 
             // tbReportes
@@ -1778,35 +1680,35 @@
             // 
             // chVentasSemanales
             // 
-            chartArea1.Name = "ChartArea1";
-            chVentasSemanales.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            chVentasSemanales.Legends.Add(legend1);
+            chartArea9.Name = "ChartArea1";
+            chVentasSemanales.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            chVentasSemanales.Legends.Add(legend9);
             chVentasSemanales.Location = new Point(24, 174);
             chVentasSemanales.Margin = new Padding(4, 5, 4, 5);
             chVentasSemanales.Name = "chVentasSemanales";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            chVentasSemanales.Series.Add(series1);
+            series9.ChartArea = "ChartArea1";
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            chVentasSemanales.Series.Add(series9);
             chVentasSemanales.Size = new Size(595, 256);
             chVentasSemanales.TabIndex = 0;
             chVentasSemanales.Text = "Ventas Semanales";
             // 
             // chVentasGastos
             // 
-            chartArea2.Name = "ChartArea1";
-            chVentasGastos.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            chVentasGastos.Legends.Add(legend2);
+            chartArea10.Name = "ChartArea1";
+            chVentasGastos.ChartAreas.Add(chartArea10);
+            legend10.Name = "Legend1";
+            chVentasGastos.Legends.Add(legend10);
             chVentasGastos.Location = new Point(24, 471);
             chVentasGastos.Margin = new Padding(4, 5, 4, 5);
             chVentasGastos.Name = "chVentasGastos";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            chVentasGastos.Series.Add(series2);
+            series10.ChartArea = "ChartArea1";
+            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series10.Legend = "Legend1";
+            series10.Name = "Series1";
+            chVentasGastos.Series.Add(series10);
             chVentasGastos.Size = new Size(595, 310);
             chVentasGastos.TabIndex = 1;
             chVentasGastos.Text = "Ventas y gastos diarios";
@@ -1849,17 +1751,13 @@
             materialCard1.ResumeLayout(false);
             tbVentas.ResumeLayout(false);
             tbVentas.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgfactura).EndInit();
-            grpbCredito.ResumeLayout(false);
-            grpbCredito.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvFactura).EndInit();
             tbProductos.ResumeLayout(false);
             tbProductos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
             tbSoliProd.ResumeLayout(false);
             tbSoliProd.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSolicitud).EndInit();
-            tbOrdRepo.ResumeLayout(false);
-            tbOrdRepo.PerformLayout();
             tbConfig.ResumeLayout(false);
             tbConfig.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).EndInit();
@@ -1881,18 +1779,11 @@
         private TabPage tbVentas;
         private TabPage tbProductos;
         private TabPage tbSoliProd;
-        private TabPage tbOrdRepo;
         private TabPage tbConfig;
         private TabPage tbReportes;
         private Label lblTotalFact;
         private DateTimePicker dateVencimiento;
-        private GroupBox grpbCredito;
-        private DataGridView dgfactura;
-        private DataGridViewTextBoxColumn IdProducto;
-        private DataGridViewTextBoxColumn NombreProducto;
-        private DataGridViewTextBoxColumn Unidades;
-        private DataGridViewTextBoxColumn PrecioUnitario;
-        private DataGridViewTextBoxColumn SubTotal;
+        private DataGridView dgvFactura;
         private DataGridView dgvProductos;
         private DataGridView dgvSolicitud;
         private DataGridView dgvUsuarios;
@@ -1910,10 +1801,8 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel4;
         private MaterialSkin.Controls.MaterialLabel materialLabel5;
         private MaterialSkin.Controls.MaterialLabel materialLabel6;
-        private MaterialSkin.Controls.MaterialButton btnCalcular;
-        private MaterialSkin.Controls.MaterialButton btnAgregarFact;
+        private MaterialSkin.Controls.MaterialButton btnAgregarProdFact;
         private MaterialSkin.Controls.MaterialButton btnGuardarFact;
-        private MaterialSkin.Controls.MaterialButton btnLimpiar;
         private MaterialSkin.Controls.MaterialComboBox cbProductosFactura;
         private MaterialSkin.Controls.MaterialComboBox cbCliente;
         private MaterialSkin.Controls.MaterialLabel materialLabel8;
@@ -1921,13 +1810,11 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel10;
         private MaterialSkin.Controls.MaterialLabel materialLabel9;
         private MaterialSkin.Controls.MaterialTextBox txtPrecio;
-        private MaterialSkin.Controls.MaterialTextBox nudCantidadFactura;
+        private MaterialSkin.Controls.MaterialTextBox txtCantidadFactura;
         private MaterialSkin.Controls.MaterialTextBox txtDescuento;
         private MaterialSkin.Controls.MaterialLabel materialLabel11;
         private MaterialSkin.Controls.MaterialLabel materialLabel12;
         private MaterialSkin.Controls.MaterialComboBox cbTipoFactura;
-        private MaterialSkin.Controls.MaterialRadioButton rdbCreditoSi;
-        private MaterialSkin.Controls.MaterialRadioButton rdbCreditoNo;
         private MaterialSkin.Controls.MaterialLabel materialLabel13;
         private MaterialSkin.Controls.MaterialDivider materialDivider2;
         private MaterialSkin.Controls.MaterialLabel lblTotal;
@@ -1938,7 +1825,6 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel15;
         private MaterialSkin.Controls.MaterialLabel materialLabel16;
         private MaterialSkin.Controls.MaterialLabel materialLabel17;
-        private MaterialSkin.Controls.MaterialLabel materialLabel18;
         private MaterialSkin.Controls.MaterialLabel materialLabel19;
         private MaterialSkin.Controls.MaterialDivider materialDivider4;
         private MaterialSkin.Controls.MaterialLabel materialLabel22;
@@ -1982,5 +1868,11 @@
         private MaterialSkin.Controls.MaterialLabel materialLabel29;
         private MaterialSkin.Controls.MaterialLabel materialLabel28;
         private MaterialSkin.Controls.MaterialButton btnSalir;
+        private DataGridViewTextBoxColumn Producto;
+        private DataGridViewTextBoxColumn Cantidad;
+        private DataGridViewTextBoxColumn Precio;
+        private DataGridViewTextBoxColumn Descuento;
+        private DataGridViewTextBoxColumn Subtotal;
+        private DataGridViewTextBoxColumn Impuesto;
     }
 }
