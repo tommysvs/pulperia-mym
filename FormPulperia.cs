@@ -1,11 +1,13 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace pulperia_mym
 {
-    public partial class FormPulperia : Form
+    public partial class FormPulperia : MaterialForm
     {
         private Connection conn;
 
@@ -13,6 +15,17 @@ namespace pulperia_mym
         {
             InitializeComponent();
             conn = new Connection();
+
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(
+                Primary.Blue600, Primary.Blue700,
+                Primary.Blue200, Accent.LightBlue200,
+                TextShade.WHITE
+            );
+
+            matTabGeneral.Paint += matTabGeneral_Paint;
         }
 
         private void FormPulperia_Load(object sender, EventArgs e)
@@ -21,6 +34,26 @@ namespace pulperia_mym
             CargarTiposFactura();
             dateVencimiento.Enabled = false;
         }
+
+        #region Front End
+        private void matTabGeneral_Paint(object sender, PaintEventArgs e)
+        {
+            var tabControl = sender as TabControl;
+            if (tabControl == null) return;
+
+            int tabHeight = tabControl.ItemSize.Height;
+            using (var pen = new Pen(Color.LightBlue, 2))
+            {
+                e.Graphics.DrawLine(
+                    pen,
+                    0,
+                    tabHeight + 1,
+                    tabControl.Width,
+                    tabHeight + 1
+                );
+            }
+        }
+        #endregion
 
         #region Login
         public void btnLogin_Click(object sender, EventArgs e)
@@ -123,7 +156,7 @@ namespace pulperia_mym
             {
                 total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
             }
-            lbltotal.Text = $"Total: L. {total:N2}";
+            lblTotal.Text = $"Total: L. {total:N2}";
         }
 
         private decimal ObtenerPrecio(int productoId)
@@ -180,7 +213,9 @@ namespace pulperia_mym
 
         private void btnAgregarFact_Click(object sender, EventArgs e)
         {
-            if (cbProductosFactura.SelectedValue == null || nudCantidadFactura.Value < 1)
+            int cantidadFactura = int.Parse(nudCantidadFactura.Text);
+
+            if (cbProductosFactura.SelectedValue == null || cantidadFactura < 1)
             {
                 MessageBox.Show("Seleccione un producto y una cantidad válida.");
                 return;
@@ -188,7 +223,7 @@ namespace pulperia_mym
 
             int id = (int)cbProductosFactura.SelectedValue;
             string nombre = cbProductosFactura.Text;
-            int cantidad = (int)nudCantidadFactura.Value;
+            int cantidad = cantidadFactura;
             decimal precio = ObtenerPrecio(id);
             decimal subtotal = cantidad * precio;
 
@@ -251,6 +286,21 @@ namespace pulperia_mym
                     MessageBox.Show("Error al guardar factura: " + ex.Message);
                 }
             }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            cbCliente.SelectedIndex = 0;
+            cbProductosFactura.SelectedIndex = 0;
+            txtPrecio.Clear();
+            nudCantidadFactura.Clear();
+            txtDescuento.Clear();
+            cbTipoFactura.SelectedIndex = 0;
+        }
+
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+
         }
         #endregion
 
@@ -778,22 +828,7 @@ namespace pulperia_mym
 
                 con.Close();
             }
-            #endregion
         }
-
-        private void btnLimpiar_Click(object sender, EventArgs e)
-        {
-            cbCliente.SelectedIndex = 0;
-            cbProductosFactura.SelectedIndex = 0;
-            txtPrecio.Clear();
-            nudCantidadFactura.Value = 0;
-            txtDescuento.Clear();
-            cbTipoFactura.SelectedIndex = 0;
-        }
-
-        private void btnCalcular_Click(object sender, EventArgs e)
-        {
-
-        }
+        #endregion
     }
 }

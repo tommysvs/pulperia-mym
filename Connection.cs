@@ -6,7 +6,7 @@ namespace pulperia_mym
 {
     public class Connection
     {
-        private const string server = @"DESKTOP-ANSMD3B";
+        private const string server = @"TOMMY-MSI\SQLEXPRESS";
         private const string database = "Pulperia_MYM";
 
         public Connection() { }
