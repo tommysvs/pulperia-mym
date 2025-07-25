@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPulperia));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             pbLogoInicio = new PictureBox();
             pnlLogin = new Panel();
             btnSalir = new MaterialSkin.Controls.MaterialButton();
@@ -99,18 +99,21 @@
             materialLabel19 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel15 = new MaterialSkin.Controls.MaterialLabel();
             dgvProductos = new DataGridView();
-            tbSoliProd = new TabPage();
+            tbCompras = new TabPage();
+            cbProductoCompra = new MaterialSkin.Controls.MaterialComboBox();
+            materialLabel32 = new MaterialSkin.Controls.MaterialLabel();
+            dateCompra = new DateTimePicker();
+            txtCosto = new MaterialSkin.Controls.MaterialTextBox();
+            materialLabel24 = new MaterialSkin.Controls.MaterialLabel();
+            cbProveedor = new MaterialSkin.Controls.MaterialComboBox();
+            materialLabel18 = new MaterialSkin.Controls.MaterialLabel();
             materialDivider9 = new MaterialSkin.Controls.MaterialDivider();
-            btnCancelarSoli = new MaterialSkin.Controls.MaterialButton();
             btnMostrarSolicitud = new MaterialSkin.Controls.MaterialButton();
             materialDivider6 = new MaterialSkin.Controls.MaterialDivider();
             materialLabel26 = new MaterialSkin.Controls.MaterialLabel();
             btnEnviarSoli = new MaterialSkin.Controls.MaterialButton();
             txtCantidadProducto = new MaterialSkin.Controls.MaterialTextBox();
-            txtDescProducto = new MaterialSkin.Controls.MaterialTextBox();
-            txtNombreProducto = new MaterialSkin.Controls.MaterialTextBox();
             materialLabel25 = new MaterialSkin.Controls.MaterialLabel();
-            materialLabel24 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel23 = new MaterialSkin.Controls.MaterialLabel();
             materialLabel16 = new MaterialSkin.Controls.MaterialLabel();
             dgvSolicitud = new DataGridView();
@@ -149,7 +152,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvFactura).BeginInit();
             tbProductos.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).BeginInit();
-            tbSoliProd.SuspendLayout();
+            tbCompras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSolicitud).BeginInit();
             tbConfig.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvUsuarios).BeginInit();
@@ -184,7 +187,7 @@
             pnlLogin.Location = new Point(0, 68);
             pnlLogin.Margin = new Padding(1, 4, 1, 4);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(74, 50);
+            pnlLogin.Size = new Size(1406, 911);
             pnlLogin.TabIndex = 1;
             // 
             // btnSalir
@@ -321,7 +324,7 @@
             tabMenu.Controls.Add(tbInicio);
             tabMenu.Controls.Add(tbVentas);
             tabMenu.Controls.Add(tbProductos);
-            tabMenu.Controls.Add(tbSoliProd);
+            tabMenu.Controls.Add(tbCompras);
             tabMenu.Controls.Add(tbConfig);
             tabMenu.Controls.Add(tbReportes);
             tabMenu.Depth = 0;
@@ -965,9 +968,9 @@
             btnAgregarProducto.MouseState = MaterialSkin.MouseState.HOVER;
             btnAgregarProducto.Name = "btnAgregarProducto";
             btnAgregarProducto.NoAccentTextColor = Color.Empty;
-            btnAgregarProducto.Size = new Size(168, 36);
+            btnAgregarProducto.Size = new Size(152, 36);
             btnAgregarProducto.TabIndex = 72;
-            btnAgregarProducto.Text = "Agregar producto";
+            btnAgregarProducto.Text = "Agregar compra";
             btnAgregarProducto.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnAgregarProducto.UseAccentColor = false;
             btnAgregarProducto.UseVisualStyleBackColor = true;
@@ -981,9 +984,9 @@
             materialLabel22.Location = new Point(24, 403);
             materialLabel22.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel22.Name = "materialLabel22";
-            materialLabel22.Size = new Size(153, 19);
+            materialLabel22.Size = new Size(65, 19);
             materialLabel22.TabIndex = 71;
-            materialLabel22.Text = "Unidades en almacén";
+            materialLabel22.Text = "Cantidad";
             // 
             // materialLabel21
             // 
@@ -993,9 +996,9 @@
             materialLabel21.Location = new Point(25, 305);
             materialLabel21.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel21.Name = "materialLabel21";
-            materialLabel21.Size = new Size(45, 19);
+            materialLabel21.Size = new Size(42, 19);
             materialLabel21.TabIndex = 70;
-            materialLabel21.Text = "Precio";
+            materialLabel21.Text = "Costo";
             // 
             // materialLabel20
             // 
@@ -1110,28 +1113,137 @@
             dgvProductos.Size = new Size(900, 550);
             dgvProductos.TabIndex = 10;
             // 
-            // tbSoliProd
+            // tbCompras
             // 
-            tbSoliProd.Controls.Add(materialDivider9);
-            tbSoliProd.Controls.Add(btnCancelarSoli);
-            tbSoliProd.Controls.Add(btnMostrarSolicitud);
-            tbSoliProd.Controls.Add(materialDivider6);
-            tbSoliProd.Controls.Add(materialLabel26);
-            tbSoliProd.Controls.Add(btnEnviarSoli);
-            tbSoliProd.Controls.Add(txtCantidadProducto);
-            tbSoliProd.Controls.Add(txtDescProducto);
-            tbSoliProd.Controls.Add(txtNombreProducto);
-            tbSoliProd.Controls.Add(materialLabel25);
-            tbSoliProd.Controls.Add(materialLabel24);
-            tbSoliProd.Controls.Add(materialLabel23);
-            tbSoliProd.Controls.Add(materialLabel16);
-            tbSoliProd.Controls.Add(dgvSolicitud);
-            tbSoliProd.Location = new Point(4, 34);
-            tbSoliProd.Name = "tbSoliProd";
-            tbSoliProd.Size = new Size(1398, 805);
-            tbSoliProd.TabIndex = 3;
-            tbSoliProd.Text = "Solicitud de productos";
-            tbSoliProd.UseVisualStyleBackColor = true;
+            tbCompras.Controls.Add(cbProductoCompra);
+            tbCompras.Controls.Add(materialLabel32);
+            tbCompras.Controls.Add(dateCompra);
+            tbCompras.Controls.Add(txtCosto);
+            tbCompras.Controls.Add(materialLabel24);
+            tbCompras.Controls.Add(cbProveedor);
+            tbCompras.Controls.Add(materialLabel18);
+            tbCompras.Controls.Add(materialDivider9);
+            tbCompras.Controls.Add(btnMostrarSolicitud);
+            tbCompras.Controls.Add(materialDivider6);
+            tbCompras.Controls.Add(materialLabel26);
+            tbCompras.Controls.Add(btnEnviarSoli);
+            tbCompras.Controls.Add(txtCantidadProducto);
+            tbCompras.Controls.Add(materialLabel25);
+            tbCompras.Controls.Add(materialLabel23);
+            tbCompras.Controls.Add(materialLabel16);
+            tbCompras.Controls.Add(dgvSolicitud);
+            tbCompras.Location = new Point(4, 34);
+            tbCompras.Name = "tbCompras";
+            tbCompras.Size = new Size(1398, 805);
+            tbCompras.TabIndex = 3;
+            tbCompras.Text = "Compras";
+            tbCompras.UseVisualStyleBackColor = true;
+            // 
+            // cbProductoCompra
+            // 
+            cbProductoCompra.AutoResize = false;
+            cbProductoCompra.BackColor = Color.FromArgb(255, 255, 255);
+            cbProductoCompra.Depth = 0;
+            cbProductoCompra.DrawMode = DrawMode.OwnerDrawVariable;
+            cbProductoCompra.DropDownHeight = 174;
+            cbProductoCompra.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbProductoCompra.DropDownWidth = 121;
+            cbProductoCompra.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            cbProductoCompra.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            cbProductoCompra.FormattingEnabled = true;
+            cbProductoCompra.IntegralHeight = false;
+            cbProductoCompra.ItemHeight = 43;
+            cbProductoCompra.Location = new Point(26, 300);
+            cbProductoCompra.MaxDropDownItems = 4;
+            cbProductoCompra.MouseState = MaterialSkin.MouseState.OUT;
+            cbProductoCompra.Name = "cbProductoCompra";
+            cbProductoCompra.Size = new Size(323, 49);
+            cbProductoCompra.StartIndex = 0;
+            cbProductoCompra.TabIndex = 81;
+            // 
+            // materialLabel32
+            // 
+            materialLabel32.AutoSize = true;
+            materialLabel32.Depth = 0;
+            materialLabel32.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel32.Location = new Point(26, 558);
+            materialLabel32.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel32.Name = "materialLabel32";
+            materialLabel32.Size = new Size(123, 19);
+            materialLabel32.TabIndex = 80;
+            materialLabel32.Text = "Fecha de compra";
+            // 
+            // dateCompra
+            // 
+            dateCompra.Location = new Point(26, 580);
+            dateCompra.MaximumSize = new Size(250, 50);
+            dateCompra.MinimumSize = new Size(250, 50);
+            dateCompra.Name = "dateCompra";
+            dateCompra.Size = new Size(250, 50);
+            dateCompra.TabIndex = 79;
+            // 
+            // txtCosto
+            // 
+            txtCosto.AnimateReadOnly = false;
+            txtCosto.BorderStyle = BorderStyle.None;
+            txtCosto.Depth = 0;
+            txtCosto.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
+            txtCosto.LeadingIcon = null;
+            txtCosto.Location = new Point(26, 489);
+            txtCosto.MaxLength = 50;
+            txtCosto.MouseState = MaterialSkin.MouseState.OUT;
+            txtCosto.Multiline = false;
+            txtCosto.Name = "txtCosto";
+            txtCosto.Size = new Size(324, 50);
+            txtCosto.TabIndex = 78;
+            txtCosto.Text = "";
+            txtCosto.TrailingIcon = null;
+            // 
+            // materialLabel24
+            // 
+            materialLabel24.AutoSize = true;
+            materialLabel24.Depth = 0;
+            materialLabel24.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel24.Location = new Point(25, 467);
+            materialLabel24.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel24.Name = "materialLabel24";
+            materialLabel24.Size = new Size(42, 19);
+            materialLabel24.TabIndex = 77;
+            materialLabel24.Text = "Costo";
+            // 
+            // cbProveedor
+            // 
+            cbProveedor.AutoResize = false;
+            cbProveedor.BackColor = Color.FromArgb(255, 255, 255);
+            cbProveedor.Depth = 0;
+            cbProveedor.DrawMode = DrawMode.OwnerDrawVariable;
+            cbProveedor.DropDownHeight = 174;
+            cbProveedor.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbProveedor.DropDownWidth = 121;
+            cbProveedor.Font = new Font("Microsoft Sans Serif", 14F, FontStyle.Bold, GraphicsUnit.Pixel);
+            cbProveedor.ForeColor = Color.FromArgb(222, 0, 0, 0);
+            cbProveedor.FormattingEnabled = true;
+            cbProveedor.IntegralHeight = false;
+            cbProveedor.ItemHeight = 43;
+            cbProveedor.Location = new Point(26, 211);
+            cbProveedor.MaxDropDownItems = 4;
+            cbProveedor.MouseState = MaterialSkin.MouseState.OUT;
+            cbProveedor.Name = "cbProveedor";
+            cbProveedor.Size = new Size(323, 49);
+            cbProveedor.StartIndex = 0;
+            cbProveedor.TabIndex = 76;
+            // 
+            // materialLabel18
+            // 
+            materialLabel18.AutoSize = true;
+            materialLabel18.Depth = 0;
+            materialLabel18.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
+            materialLabel18.Location = new Point(26, 189);
+            materialLabel18.MouseState = MaterialSkin.MouseState.HOVER;
+            materialLabel18.Name = "materialLabel18";
+            materialLabel18.Size = new Size(72, 19);
+            materialLabel18.TabIndex = 75;
+            materialLabel18.Text = "Proveedor";
             // 
             // materialDivider9
             // 
@@ -1143,26 +1255,6 @@
             materialDivider9.Size = new Size(2, 741);
             materialDivider9.TabIndex = 74;
             materialDivider9.Text = "materialDivider9";
-            // 
-            // btnCancelarSoli
-            // 
-            btnCancelarSoli.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnCancelarSoli.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            btnCancelarSoli.Depth = 0;
-            btnCancelarSoli.HighEmphasis = true;
-            btnCancelarSoli.Icon = null;
-            btnCancelarSoli.Location = new Point(1166, 705);
-            btnCancelarSoli.Margin = new Padding(4, 6, 4, 6);
-            btnCancelarSoli.MouseState = MaterialSkin.MouseState.HOVER;
-            btnCancelarSoli.Name = "btnCancelarSoli";
-            btnCancelarSoli.NoAccentTextColor = Color.Empty;
-            btnCancelarSoli.Size = new Size(173, 36);
-            btnCancelarSoli.TabIndex = 68;
-            btnCancelarSoli.Text = "Cancelar solicitud";
-            btnCancelarSoli.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            btnCancelarSoli.UseAccentColor = false;
-            btnCancelarSoli.UseVisualStyleBackColor = true;
-            btnCancelarSoli.Click += btnCancelarSoli_Click;
             // 
             // btnMostrarSolicitud
             // 
@@ -1176,13 +1268,13 @@
             btnMostrarSolicitud.MouseState = MaterialSkin.MouseState.HOVER;
             btnMostrarSolicitud.Name = "btnMostrarSolicitud";
             btnMostrarSolicitud.NoAccentTextColor = Color.Empty;
-            btnMostrarSolicitud.Size = new Size(184, 36);
+            btnMostrarSolicitud.Size = new Size(163, 36);
             btnMostrarSolicitud.TabIndex = 67;
-            btnMostrarSolicitud.Text = "Mostrar solicitudes";
+            btnMostrarSolicitud.Text = "Mostrar compras";
             btnMostrarSolicitud.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnMostrarSolicitud.UseAccentColor = false;
             btnMostrarSolicitud.UseVisualStyleBackColor = true;
-            btnMostrarSolicitud.Click += btnMostrarSolicitud_Click;
+            btnMostrarSolicitud.Click += btnMostrarCompras_Click;
             // 
             // materialDivider6
             // 
@@ -1204,9 +1296,9 @@
             materialLabel26.Location = new Point(25, 121);
             materialLabel26.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel26.Name = "materialLabel26";
-            materialLabel26.Size = new Size(183, 29);
+            materialLabel26.Size = new Size(173, 29);
             materialLabel26.TabIndex = 65;
-            materialLabel26.Text = "Agregar solicitud";
+            materialLabel26.Text = "Agregar compra";
             // 
             // btnEnviarSoli
             // 
@@ -1215,18 +1307,18 @@
             btnEnviarSoli.Depth = 0;
             btnEnviarSoli.HighEmphasis = true;
             btnEnviarSoli.Icon = null;
-            btnEnviarSoli.Location = new Point(29, 473);
+            btnEnviarSoli.Location = new Point(26, 675);
             btnEnviarSoli.Margin = new Padding(4, 6, 4, 6);
             btnEnviarSoli.MouseState = MaterialSkin.MouseState.HOVER;
             btnEnviarSoli.Name = "btnEnviarSoli";
             btnEnviarSoli.NoAccentTextColor = Color.Empty;
-            btnEnviarSoli.Size = new Size(150, 36);
+            btnEnviarSoli.Size = new Size(152, 36);
             btnEnviarSoli.TabIndex = 50;
-            btnEnviarSoli.Text = "Enviar solicitud";
+            btnEnviarSoli.Text = "Agregar compra";
             btnEnviarSoli.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnEnviarSoli.UseAccentColor = false;
             btnEnviarSoli.UseVisualStyleBackColor = true;
-            btnEnviarSoli.Click += btnEnviarSoli_Click;
+            btnEnviarSoli.Click += btnAgregarCompra_Click;
             // 
             // txtCantidadProducto
             // 
@@ -1235,7 +1327,7 @@
             txtCantidadProducto.Depth = 0;
             txtCantidadProducto.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
             txtCantidadProducto.LeadingIcon = null;
-            txtCantidadProducto.Location = new Point(29, 311);
+            txtCantidadProducto.Location = new Point(26, 395);
             txtCantidadProducto.MaxLength = 50;
             txtCantidadProducto.MouseState = MaterialSkin.MouseState.OUT;
             txtCantidadProducto.Multiline = false;
@@ -1245,75 +1337,29 @@
             txtCantidadProducto.Text = "";
             txtCantidadProducto.TrailingIcon = null;
             // 
-            // txtDescProducto
-            // 
-            txtDescProducto.AnimateReadOnly = false;
-            txtDescProducto.BorderStyle = BorderStyle.None;
-            txtDescProducto.Depth = 0;
-            txtDescProducto.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtDescProducto.LeadingIcon = null;
-            txtDescProducto.Location = new Point(29, 405);
-            txtDescProducto.MaxLength = 50;
-            txtDescProducto.MouseState = MaterialSkin.MouseState.OUT;
-            txtDescProducto.Multiline = false;
-            txtDescProducto.Name = "txtDescProducto";
-            txtDescProducto.Size = new Size(324, 50);
-            txtDescProducto.TabIndex = 49;
-            txtDescProducto.Text = "";
-            txtDescProducto.TrailingIcon = null;
-            // 
-            // txtNombreProducto
-            // 
-            txtNombreProducto.AnimateReadOnly = false;
-            txtNombreProducto.BorderStyle = BorderStyle.None;
-            txtNombreProducto.Depth = 0;
-            txtNombreProducto.Font = new Font("Roboto", 16F, FontStyle.Regular, GraphicsUnit.Pixel);
-            txtNombreProducto.LeadingIcon = null;
-            txtNombreProducto.Location = new Point(28, 216);
-            txtNombreProducto.MaxLength = 50;
-            txtNombreProducto.MouseState = MaterialSkin.MouseState.OUT;
-            txtNombreProducto.Multiline = false;
-            txtNombreProducto.Name = "txtNombreProducto";
-            txtNombreProducto.Size = new Size(325, 50);
-            txtNombreProducto.TabIndex = 47;
-            txtNombreProducto.Text = "";
-            txtNombreProducto.TrailingIcon = null;
-            // 
             // materialLabel25
             // 
             materialLabel25.AutoSize = true;
             materialLabel25.Depth = 0;
             materialLabel25.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel25.Location = new Point(29, 289);
+            materialLabel25.Location = new Point(26, 373);
             materialLabel25.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel25.Name = "materialLabel25";
             materialLabel25.Size = new Size(65, 19);
             materialLabel25.TabIndex = 46;
             materialLabel25.Text = "Cantidad";
             // 
-            // materialLabel24
-            // 
-            materialLabel24.AutoSize = true;
-            materialLabel24.Depth = 0;
-            materialLabel24.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel24.Location = new Point(29, 383);
-            materialLabel24.MouseState = MaterialSkin.MouseState.HOVER;
-            materialLabel24.Name = "materialLabel24";
-            materialLabel24.Size = new Size(84, 19);
-            materialLabel24.TabIndex = 45;
-            materialLabel24.Text = "Descripcion";
-            // 
             // materialLabel23
             // 
             materialLabel23.AutoSize = true;
             materialLabel23.Depth = 0;
             materialLabel23.Font = new Font("Roboto", 14F, FontStyle.Regular, GraphicsUnit.Pixel);
-            materialLabel23.Location = new Point(29, 194);
+            materialLabel23.Location = new Point(26, 278);
             materialLabel23.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel23.Name = "materialLabel23";
-            materialLabel23.Size = new Size(149, 19);
+            materialLabel23.Size = new Size(65, 19);
             materialLabel23.TabIndex = 44;
-            materialLabel23.Text = "Nombre del producto";
+            materialLabel23.Text = "Producto";
             // 
             // materialLabel16
             // 
@@ -1324,9 +1370,9 @@
             materialLabel16.Location = new Point(24, 22);
             materialLabel16.MouseState = MaterialSkin.MouseState.HOVER;
             materialLabel16.Name = "materialLabel16";
-            materialLabel16.Size = new Size(338, 41);
+            materialLabel16.Size = new Size(140, 41);
             materialLabel16.TabIndex = 43;
-            materialLabel16.Text = "Solicitud de productos";
+            materialLabel16.Text = "Compras";
             // 
             // dgvSolicitud
             // 
@@ -1680,35 +1726,35 @@
             // 
             // chVentasSemanales
             // 
-            chartArea9.Name = "ChartArea1";
-            chVentasSemanales.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            chVentasSemanales.Legends.Add(legend9);
+            chartArea3.Name = "ChartArea1";
+            chVentasSemanales.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            chVentasSemanales.Legends.Add(legend3);
             chVentasSemanales.Location = new Point(24, 174);
             chVentasSemanales.Margin = new Padding(4, 5, 4, 5);
             chVentasSemanales.Name = "chVentasSemanales";
-            series9.ChartArea = "ChartArea1";
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            chVentasSemanales.Series.Add(series9);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            chVentasSemanales.Series.Add(series3);
             chVentasSemanales.Size = new Size(595, 256);
             chVentasSemanales.TabIndex = 0;
             chVentasSemanales.Text = "Ventas Semanales";
             // 
             // chVentasGastos
             // 
-            chartArea10.Name = "ChartArea1";
-            chVentasGastos.ChartAreas.Add(chartArea10);
-            legend10.Name = "Legend1";
-            chVentasGastos.Legends.Add(legend10);
+            chartArea4.Name = "ChartArea1";
+            chVentasGastos.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            chVentasGastos.Legends.Add(legend4);
             chVentasGastos.Location = new Point(24, 471);
             chVentasGastos.Margin = new Padding(4, 5, 4, 5);
             chVentasGastos.Name = "chVentasGastos";
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series10.Legend = "Legend1";
-            series10.Name = "Series1";
-            chVentasGastos.Series.Add(series10);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            chVentasGastos.Series.Add(series4);
             chVentasGastos.Size = new Size(595, 310);
             chVentasGastos.TabIndex = 1;
             chVentasGastos.Text = "Ventas y gastos diarios";
@@ -1755,8 +1801,8 @@
             tbProductos.ResumeLayout(false);
             tbProductos.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductos).EndInit();
-            tbSoliProd.ResumeLayout(false);
-            tbSoliProd.PerformLayout();
+            tbCompras.ResumeLayout(false);
+            tbCompras.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvSolicitud).EndInit();
             tbConfig.ResumeLayout(false);
             tbConfig.PerformLayout();
@@ -1778,7 +1824,7 @@
         private TabPage tbInicio;
         private TabPage tbVentas;
         private TabPage tbProductos;
-        private TabPage tbSoliProd;
+        private TabPage tbCompras;
         private TabPage tbConfig;
         private TabPage tbReportes;
         private Label lblTotalFact;
@@ -1839,15 +1885,11 @@
         private MaterialSkin.Controls.MaterialButton btnEliminarProducto;
         private MaterialSkin.Controls.MaterialButton btnMostrarProducto;
         private MaterialSkin.Controls.MaterialTextBox txtCantidadProducto;
-        private MaterialSkin.Controls.MaterialTextBox txtDescProducto;
-        private MaterialSkin.Controls.MaterialTextBox txtNombreProducto;
         private MaterialSkin.Controls.MaterialLabel materialLabel25;
-        private MaterialSkin.Controls.MaterialLabel materialLabel24;
         private MaterialSkin.Controls.MaterialLabel materialLabel23;
         private MaterialSkin.Controls.MaterialButton btnEnviarSoli;
         private MaterialSkin.Controls.MaterialDivider materialDivider6;
         private MaterialSkin.Controls.MaterialLabel materialLabel26;
-        private MaterialSkin.Controls.MaterialButton btnCancelarSoli;
         private MaterialSkin.Controls.MaterialButton btnMostrarSolicitud;
         private MaterialSkin.Controls.MaterialButton btnCerrarSesion;
         private MaterialSkin.Controls.MaterialButton btnGenerarGraficos;
@@ -1874,5 +1916,12 @@
         private DataGridViewTextBoxColumn Descuento;
         private DataGridViewTextBoxColumn Subtotal;
         private DataGridViewTextBoxColumn Impuesto;
+        private MaterialSkin.Controls.MaterialComboBox cbProveedor;
+        private MaterialSkin.Controls.MaterialLabel materialLabel18;
+        private MaterialSkin.Controls.MaterialTextBox txtCosto;
+        private MaterialSkin.Controls.MaterialLabel materialLabel24;
+        private MaterialSkin.Controls.MaterialComboBox cbProductoCompra;
+        private MaterialSkin.Controls.MaterialLabel materialLabel32;
+        private DateTimePicker dateCompra;
     }
 }

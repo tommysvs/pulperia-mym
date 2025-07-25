@@ -34,6 +34,8 @@ namespace pulperia_mym
             CargarProductos();
             CargarTiposFactura();
             LimpiarSeccionFactura();
+
+            CargarProveedores();
         }
 
         private void FormPulperia_Load(object sender, EventArgs e)
@@ -224,12 +226,19 @@ namespace pulperia_mym
             {
                 string query = "SELECT ID_producto, nombre_producto, precio FROM Producto WHERE activo = 1";
                 SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                DataTable dtF = new DataTable();
+                da.Fill(dtF);
 
-                cbProductosFactura.DataSource = dt;
+                DataTable dtC = new DataTable();
+                da.Fill(dtC);
+
+                cbProductosFactura.DataSource = dtF;
                 cbProductosFactura.DisplayMember = "nombre_producto";
                 cbProductosFactura.ValueMember = "ID_producto";
+
+                cbProductoCompra.DataSource = dtC;
+                cbProductoCompra.DisplayMember = "nombre_producto";
+                cbProductoCompra.ValueMember = "ID_producto";
             }
         }
 
@@ -575,22 +584,30 @@ namespace pulperia_mym
         }
         #endregion
 
-        #region Solicitud de productos
-        private void btnCancelarSoli_Click(object sender, EventArgs e)
+        #region Compras
+        private void CargarProveedores()
         {
-            txtNombreProducto.Clear();
-            txtCantidadProducto.Clear();
-            txtDescProducto.Clear();
+            using (var sqlConn = conn.GetConnection())
+            {
+                string query = "SELECT ID_proveedor, nombre FROM Proveedor WHERE activo = 1";
+                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbProveedor.DataSource = dt;
+                cbProveedor.DisplayMember = "nombre";
+                cbProveedor.ValueMember = "ID_proveedor";
+            }
         }
 
-        private void btnMostrarSolicitud_Click(object sender, EventArgs e)
+        private void btnMostrarCompras_Click(object sender, EventArgs e)
         {
             using (var sqlConn = conn.GetConnection())
             {
                 try
                 {
                     sqlConn.Open();
-                    string query = "SELECT ID_solicitud, nombre_producto, cantidad, descripcion, fecha_solicitud FROM SolicitudProducto ORDER BY fecha_solicitud DESC";
+                    string query = "SELECT codigo_interno, pr.nombre, fecha, prd.nombre_producto, cd.cantidad, cd.costo FROM Compra c INNER JOIN Compra_detalle cd ON c.ID_compra = cd.ID_compra LEFT JOIN Proveedor pr ON c.ID_proveedor = pr.ID_proveedor LEFT JOIN Producto prd ON cd.ID_producto = prd.ID_producto";
 
                     SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                     DataTable dt = new DataTable();
@@ -598,11 +615,12 @@ namespace pulperia_mym
 
                     dgvSolicitud.DataSource = dt;
 
-                    dgvSolicitud.Columns["ID_solicitud"].HeaderText = "Código";
+                    dgvSolicitud.Columns["codigo_interno"].HeaderText = "Código";
+                    dgvSolicitud.Columns["nombre"].HeaderText = "Proveedor";
+                    dgvSolicitud.Columns["fecha"].HeaderText = "Fecha";
                     dgvSolicitud.Columns["nombre_producto"].HeaderText = "Producto";
                     dgvSolicitud.Columns["cantidad"].HeaderText = "Cantidad";
-                    dgvSolicitud.Columns["descripcion"].HeaderText = "Descripción";
-                    dgvSolicitud.Columns["fecha_solicitud"].HeaderText = "Fecha";
+                    dgvSolicitud.Columns["costo"].HeaderText = "Costo";
 
                     dgvSolicitud.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
@@ -612,57 +630,87 @@ namespace pulperia_mym
                 }
             }
         }
-
-        private void btnEnviarSoli_Click(object sender, EventArgs e)
+        private void btnAgregarCompra_Click(object sender, EventArgs e)
         {
-            string nombreProducto = txtNombreProducto.Text.Trim();
-            string cantidadTexto = txtCantidadProducto.Text.Trim();
-            string descripcion = txtDescProducto.Text.Trim();
-
-            if (string.IsNullOrEmpty(nombreProducto) || string.IsNullOrEmpty(cantidadTexto))
+            if (cbProveedor.SelectedValue == null || cbProductoCompra.SelectedValue == null)
             {
-                MessageBox.Show("Por favor complete todos los campos requeridos.", "Advertencia");
+                MessageBox.Show("Seleccione proveedor y producto.", "Error");
                 return;
             }
 
-            if (!int.TryParse(cantidadTexto, out int cantidad))
+            if (!int.TryParse(txtCantidadProducto.Text.Trim(), out int cantidad) || cantidad < 1)
             {
-                MessageBox.Show("La cantidad debe ser un número entero.", "Error");
+                MessageBox.Show("La cantidad debe ser un número entero mayor a 0.", "Error");
                 return;
             }
+
+            if (!decimal.TryParse(txtCosto.Text.Trim(), out decimal costo) || costo < 0)
+            {
+                MessageBox.Show("El costo debe ser un número válido.", "Error");
+                return;
+            }
+
+            DateTime fechaCompra = dateCompra.Value;
+            string codigoInterno = "CMP-001";
 
             using (var sqlConn = conn.GetConnection())
             {
+                sqlConn.Open();
+                SqlTransaction trans = sqlConn.BeginTransaction();
+
                 try
                 {
-                    sqlConn.Open();
-                    string query = "INSERT INTO SolicitudProducto (nombre_producto, cantidad, descripcion, fecha_solicitud) VALUES (@Nombre, @Cantidad, @Descripcion, GETDATE())";
+                    SqlCommand cmdMax = new SqlCommand(
+                        "SELECT MAX(codigo_interno) FROM Compra WHERE codigo_interno LIKE 'CMP-%'", sqlConn, trans);
+                    object result = cmdMax.ExecuteScalar();
 
-                    using (SqlCommand cmd = new SqlCommand(query, sqlConn))
+                    if (result != DBNull.Value && result != null)
                     {
-                        cmd.Parameters.AddWithValue("@Nombre", nombreProducto);
-                        cmd.Parameters.AddWithValue("@Cantidad", cantidad);
-                        cmd.Parameters.AddWithValue("@Descripcion", descripcion);
-
-                        int filasAfectadas = cmd.ExecuteNonQuery();
-
-                        if (filasAfectadas > 0)
+                        string lastCode = result.ToString();
+                        if (lastCode.Length == 7 && int.TryParse(lastCode.Substring(4, 3), out int lastNum))
                         {
-                            MessageBox.Show("Solicitud enviada correctamente.", "Éxito");
-                            txtNombreProducto.Clear();
-                            txtCantidadProducto.Clear();
-                            txtDescProducto.Clear();
-
-                        }
-                        else
-                        {
-                            MessageBox.Show("No se pudo enviar la solicitud.", "Error");
+                            codigoInterno = $"CMP-{(lastNum + 1).ToString("D3")}";
                         }
                     }
+
+                    SqlCommand cmdCompra = new SqlCommand(@"
+                        INSERT INTO Compra (codigo_interno, fecha, ID_tipo, ID_proveedor, ID_usuario)
+                        OUTPUT INSERTED.ID_compra
+                        VALUES (@codigo, @fecha, @tipo, @proveedor, @usuario)", sqlConn, trans);
+
+                    cmdCompra.Parameters.AddWithValue("@codigo", codigoInterno);
+                    cmdCompra.Parameters.AddWithValue("@fecha", fechaCompra);
+                    cmdCompra.Parameters.AddWithValue("@tipo", 1);
+                    cmdCompra.Parameters.AddWithValue("@proveedor", cbProveedor.SelectedValue);
+                    cmdCompra.Parameters.AddWithValue("@usuario", 2);
+
+                    int idCompra = (int)cmdCompra.ExecuteScalar();
+
+                    SqlCommand cmdDetalle = new SqlCommand(@"
+                        INSERT INTO Compra_detalle (ID_compra, ID_producto, cantidad, cantidad_dec, ID_unidad, costo)
+                        VALUES (@compra, @producto, @cantidad, @cantidad_dec, @id_unidad, @costo)", sqlConn, trans);
+
+                    cmdDetalle.Parameters.AddWithValue("@compra", idCompra);
+                    cmdDetalle.Parameters.AddWithValue("@producto", cbProductoCompra.SelectedValue);
+                    cmdDetalle.Parameters.AddWithValue("@cantidad", cantidad);
+                    cmdDetalle.Parameters.AddWithValue("@cantidad_dec", 0);
+                    cmdDetalle.Parameters.AddWithValue("@id_unidad", 1);
+                    cmdDetalle.Parameters.AddWithValue("@costo", costo);
+
+                    cmdDetalle.ExecuteNonQuery();
+
+                    trans.Commit();
+                    MessageBox.Show("Compra registrada con éxito.", "Éxito");
+
+                    txtCantidadProducto.Clear();
+                    txtCosto.Clear();
+
+                    btnMostrarCompras_Click(null, null);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al enviar solicitud: " + ex.Message);
+                    trans.Rollback();
+                    MessageBox.Show("Error al registrar la compra: " + ex.Message, "Error");
                 }
             }
         }
