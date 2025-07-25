@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPulperia));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             pbLogoInicio = new PictureBox();
             pnlLogin = new Panel();
             btnSalir = new MaterialSkin.Controls.MaterialButton();
@@ -192,7 +192,7 @@
             pnlLogin.Location = new Point(0, 68);
             pnlLogin.Margin = new Padding(1, 4, 1, 4);
             pnlLogin.Name = "pnlLogin";
-            pnlLogin.Size = new Size(1406, 910);
+            pnlLogin.Size = new Size(74, 50);
             pnlLogin.TabIndex = 1;
             // 
             // btnSalir
@@ -964,7 +964,7 @@
             btnModificarProducto.Depth = 0;
             btnModificarProducto.HighEmphasis = true;
             btnModificarProducto.Icon = null;
-            btnModificarProducto.Location = new Point(653, 682);
+            btnModificarProducto.Location = new Point(460, 682);
             btnModificarProducto.Margin = new Padding(4, 6, 4, 6);
             btnModificarProducto.MouseState = MaterialSkin.MouseState.HOVER;
             btnModificarProducto.Name = "btnModificarProducto";
@@ -991,7 +991,7 @@
             btnEliminarProducto.NoAccentTextColor = Color.Empty;
             btnEliminarProducto.Size = new Size(169, 36);
             btnEliminarProducto.TabIndex = 75;
-            btnEliminarProducto.Text = "Eliminar producto";
+            btnEliminarProducto.Text = "Inactivar producto";
             btnEliminarProducto.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnEliminarProducto.UseAccentColor = false;
             btnEliminarProducto.UseVisualStyleBackColor = true;
@@ -1004,7 +1004,7 @@
             btnMostrarProducto.Depth = 0;
             btnMostrarProducto.HighEmphasis = true;
             btnMostrarProducto.Icon = null;
-            btnMostrarProducto.Location = new Point(461, 682);
+            btnMostrarProducto.Location = new Point(461, 74);
             btnMostrarProducto.Margin = new Padding(4, 6, 4, 6);
             btnMostrarProducto.MouseState = MaterialSkin.MouseState.HOVER;
             btnMostrarProducto.Name = "btnMostrarProducto";
@@ -1246,14 +1246,14 @@
             btnMostrarSolicitud.Depth = 0;
             btnMostrarSolicitud.HighEmphasis = true;
             btnMostrarSolicitud.Icon = null;
-            btnMostrarSolicitud.Location = new Point(486, 705);
+            btnMostrarSolicitud.Location = new Point(486, 53);
             btnMostrarSolicitud.Margin = new Padding(4, 6, 4, 6);
             btnMostrarSolicitud.MouseState = MaterialSkin.MouseState.HOVER;
             btnMostrarSolicitud.Name = "btnMostrarSolicitud";
             btnMostrarSolicitud.NoAccentTextColor = Color.Empty;
-            btnMostrarSolicitud.Size = new Size(167, 36);
+            btnMostrarSolicitud.Size = new Size(184, 36);
             btnMostrarSolicitud.TabIndex = 67;
-            btnMostrarSolicitud.Text = "Mostrar solicitud";
+            btnMostrarSolicitud.Text = "Mostrar solicitudes";
             btnMostrarSolicitud.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnMostrarSolicitud.UseAccentColor = false;
             btnMostrarSolicitud.UseVisualStyleBackColor = true;
@@ -1316,7 +1316,7 @@
             txtCantidadProducto.Multiline = false;
             txtCantidadProducto.Name = "txtCantidadProducto";
             txtCantidadProducto.Size = new Size(324, 50);
-            txtCantidadProducto.TabIndex = 49;
+            txtCantidadProducto.TabIndex = 48;
             txtCantidadProducto.Text = "";
             txtCantidadProducto.TrailingIcon = null;
             // 
@@ -1333,7 +1333,7 @@
             txtDescProducto.Multiline = false;
             txtDescProducto.Name = "txtDescProducto";
             txtDescProducto.Size = new Size(324, 50);
-            txtDescProducto.TabIndex = 48;
+            txtDescProducto.TabIndex = 49;
             txtDescProducto.Text = "";
             txtDescProducto.TrailingIcon = null;
             // 
@@ -1487,7 +1487,7 @@
             txtRolConfig.Multiline = false;
             txtRolConfig.Name = "txtRolConfig";
             txtRolConfig.Size = new Size(289, 50);
-            txtRolConfig.TabIndex = 78;
+            txtRolConfig.TabIndex = 74;
             txtRolConfig.Text = "";
             txtRolConfig.TrailingIcon = null;
             // 
@@ -1524,7 +1524,7 @@
             btnInactivarUsuario.Name = "btnInactivarUsuario";
             btnInactivarUsuario.NoAccentTextColor = Color.Empty;
             btnInactivarUsuario.Size = new Size(162, 36);
-            btnInactivarUsuario.TabIndex = 76;
+            btnInactivarUsuario.TabIndex = 78;
             btnInactivarUsuario.Text = "Inactivar usuario";
             btnInactivarUsuario.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnInactivarUsuario.UseAccentColor = false;
@@ -1538,13 +1538,13 @@
             btnMostrarUsuarios.Depth = 0;
             btnMostrarUsuarios.HighEmphasis = true;
             btnMostrarUsuarios.Icon = null;
-            btnMostrarUsuarios.Location = new Point(410, 657);
+            btnMostrarUsuarios.Location = new Point(410, 48);
             btnMostrarUsuarios.Margin = new Padding(4, 6, 4, 6);
             btnMostrarUsuarios.MouseState = MaterialSkin.MouseState.HOVER;
             btnMostrarUsuarios.Name = "btnMostrarUsuarios";
             btnMostrarUsuarios.NoAccentTextColor = Color.Empty;
             btnMostrarUsuarios.Size = new Size(164, 36);
-            btnMostrarUsuarios.TabIndex = 75;
+            btnMostrarUsuarios.TabIndex = 76;
             btnMostrarUsuarios.Text = "Mostrar usuarios";
             btnMostrarUsuarios.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnMostrarUsuarios.UseAccentColor = false;
@@ -1558,13 +1558,13 @@
             btnAgregarUsuario.Depth = 0;
             btnAgregarUsuario.HighEmphasis = true;
             btnAgregarUsuario.Icon = null;
-            btnAgregarUsuario.Location = new Point(24, 567);
+            btnAgregarUsuario.Location = new Point(24, 562);
             btnAgregarUsuario.Margin = new Padding(4, 6, 4, 6);
             btnAgregarUsuario.MouseState = MaterialSkin.MouseState.HOVER;
             btnAgregarUsuario.Name = "btnAgregarUsuario";
             btnAgregarUsuario.NoAccentTextColor = Color.Empty;
             btnAgregarUsuario.Size = new Size(153, 36);
-            btnAgregarUsuario.TabIndex = 74;
+            btnAgregarUsuario.TabIndex = 75;
             btnAgregarUsuario.Text = "Agregar usuario";
             btnAgregarUsuario.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
             btnAgregarUsuario.UseAccentColor = false;
@@ -1709,7 +1709,7 @@
             // dgvUsuarios
             // 
             dgvUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvUsuarios.Location = new Point(410, 48);
+            dgvUsuarios.Location = new Point(410, 94);
             dgvUsuarios.Margin = new Padding(2, 4, 2, 4);
             dgvUsuarios.Name = "dgvUsuarios";
             dgvUsuarios.RowHeadersWidth = 62;
@@ -1778,35 +1778,35 @@
             // 
             // chVentasSemanales
             // 
-            chartArea3.Name = "ChartArea1";
-            chVentasSemanales.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            chVentasSemanales.Legends.Add(legend3);
+            chartArea1.Name = "ChartArea1";
+            chVentasSemanales.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            chVentasSemanales.Legends.Add(legend1);
             chVentasSemanales.Location = new Point(24, 174);
             chVentasSemanales.Margin = new Padding(4, 5, 4, 5);
             chVentasSemanales.Name = "chVentasSemanales";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            chVentasSemanales.Series.Add(series3);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            chVentasSemanales.Series.Add(series1);
             chVentasSemanales.Size = new Size(595, 256);
             chVentasSemanales.TabIndex = 0;
             chVentasSemanales.Text = "Ventas Semanales";
             // 
             // chVentasGastos
             // 
-            chartArea4.Name = "ChartArea1";
-            chVentasGastos.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            chVentasGastos.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            chVentasGastos.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            chVentasGastos.Legends.Add(legend2);
             chVentasGastos.Location = new Point(24, 471);
             chVentasGastos.Margin = new Padding(4, 5, 4, 5);
             chVentasGastos.Name = "chVentasGastos";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            chVentasGastos.Series.Add(series4);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            chVentasGastos.Series.Add(series2);
             chVentasGastos.Size = new Size(595, 310);
             chVentasGastos.TabIndex = 1;
             chVentasGastos.Text = "Ventas y gastos diarios";

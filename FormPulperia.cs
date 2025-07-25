@@ -28,13 +28,18 @@ namespace pulperia_mym
             tabMenu.Paint += matTabGeneral_Paint;
 
             SetHandCursorForMaterialButtons(this);
+
+            CargarClientes();
+            CargarClientes();
+            CargarProductos();
+            CargarTiposFactura();
+            dateVencimiento.Enabled = false;
+
         }
 
         private void FormPulperia_Load(object sender, EventArgs e)
         {
-            CargarProductos();
-            CargarTiposFactura();
-            dateVencimiento.Enabled = false;
+            
         }
 
         #region MaterialSkin
@@ -144,37 +149,47 @@ namespace pulperia_mym
         #endregion
 
         #region Ventas
-        private void pnlRegFact_Paint(object sender, PaintEventArgs e)
+        private void CargarClientes()
         {
-            dateVencimiento.Enabled = false;
+            using (var sqlConn = conn.GetConnection())
+            {
+                string query = "SELECT ID_cliente, nombre_completo FROM Cliente";
+                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbCliente.DataSource = dt;
+                cbCliente.DisplayMember = "nombre_completo";
+                cbCliente.ValueMember = "ID_cliente";
+            }
         }
 
         private void CargarProductos()
         {
-            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            using (var sqlConn = conn.GetConnection())
             {
-                string query = "SELECT IdProducto, Nombre FROM Producto";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                string query = "SELECT ID_producto, nombre_producto FROM Producto";
+                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 cbProductosFactura.DataSource = dt;
-                cbProductosFactura.DisplayMember = "Nombre";
-                cbProductosFactura.ValueMember = "IdProducto";
+                cbProductosFactura.DisplayMember = "nombre_producto";
+                cbProductosFactura.ValueMember = "ID_producto";
             }
         }
 
         private void CargarTiposFactura()
         {
-            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            using (var sqlConn = conn.GetConnection())
             {
-                string query = "SELECT ID_tipo, NombreTipo FROM Tipo";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                string query = "SELECT ID_tipo, descripcion FROM Tipo";
+                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 cbTipoFactura.DataSource = dt;
-                cbTipoFactura.DisplayMember = "NombreTipo";
+                cbTipoFactura.DisplayMember = "descripcion";
                 cbTipoFactura.ValueMember = "ID_tipo";
             }
         }
@@ -191,12 +206,12 @@ namespace pulperia_mym
 
         private decimal ObtenerPrecio(int productoId)
         {
-            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            using (var sqlConn = conn.GetConnection())
             {
                 string query = "SELECT Precio FROM Producto WHERE IdProducto = @id";
-                SqlCommand cmd = new SqlCommand(query, conn);
+                SqlCommand cmd = new SqlCommand(query, sqlConn);
                 cmd.Parameters.AddWithValue("@id", productoId);
-                conn.Open();
+                sqlConn.Open();
                 return (decimal)cmd.ExecuteScalar();
             }
         }
@@ -213,25 +228,25 @@ namespace pulperia_mym
 
         private void cbTipoFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection("TU_CONEXION"))
+            using (var sqlConn = conn.GetConnection())
             {
                 string query = "SELECT ID_tipo, NombreTipo FROM Tipo";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
                 cbTipoFactura.DataSource = dt;
-                cbTipoFactura.DisplayMember = "NombreTipo"; // O el campo que tengas
+                cbTipoFactura.DisplayMember = "NombreTipo";
                 cbTipoFactura.ValueMember = "ID_tipo";
             }
         }
 
         private void cbProductosFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            using (var sqlConn = conn.GetConnection())
             {
                 string query = "SELECT IdProducto, Nombre FROM Producto";
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(query, sqlConn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
@@ -273,17 +288,17 @@ namespace pulperia_mym
             foreach (DataGridViewRow row in dgfactura.Rows)
                 total += Convert.ToDecimal(row.Cells["Subtotal"].Value);
 
-            using (SqlConnection conn = new SqlConnection("MEI\\SQLEXPRESS"))
+            using (var sqlConn = conn.GetConnection())
             {
-                conn.Open();
-                SqlTransaction trans = conn.BeginTransaction();
+                sqlConn.Open();
+                SqlTransaction trans = sqlConn.BeginTransaction();
 
                 try
                 {
                     SqlCommand cmdFactura = new SqlCommand(@"
-                INSERT INTO Factura (codigo_interno, fecha, ID_tipo, credito, fecha_vencimiento_credito, total, total_pagado)
-                OUTPUT INSERTED.ID_factura
-                VALUES (@codigo, GETDATE(), @tipo, @credito, @vencimiento, @total, @pagado)", conn, trans);
+                        INSERT INTO Factura (codigo_interno, fecha, ID_tipo, credito, fecha_vencimiento_credito, total, total_pagado)
+                        OUTPUT INSERTED.ID_factura
+                        VALUES (@codigo, GETDATE(), @tipo, @credito, @vencimiento, @total, @pagado)", sqlConn, trans);
 
                     cmdFactura.Parameters.AddWithValue("@codigo", Guid.NewGuid().ToString().Substring(0, 8));
                     cmdFactura.Parameters.AddWithValue("@tipo", cbTipoFactura.SelectedValue);
@@ -298,7 +313,7 @@ namespace pulperia_mym
                     {
                         SqlCommand detalleCmd = new SqlCommand(@"
                     INSERT INTO DetalleFactura (IdFactura, ProductoId, Cantidad, PrecioUnitario)
-                    VALUES (@factura, @producto, @cantidad, @precio)", conn, trans);
+                    VALUES (@factura, @producto, @cantidad, @precio)", sqlConn, trans);
 
                         detalleCmd.Parameters.AddWithValue("@factura", idFactura);
                         detalleCmd.Parameters.AddWithValue("@producto", row.Cells["IdProducto"].Value);
@@ -330,7 +345,7 @@ namespace pulperia_mym
 
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-
+            CalcularTotal();
         }
         #endregion
 
@@ -362,6 +377,7 @@ namespace pulperia_mym
                             txtNmbProducto.Clear();
                             txtPrecioProducto.Clear();
                             txtStockProducto.Clear();
+                            btnMostrarProducto_Click(null, null);
                         }
                         else
                         {
@@ -413,14 +429,36 @@ namespace pulperia_mym
                 return;
             }
 
-            int idProducto = Convert.ToInt32(dgvProductos.SelectedRows[0].Cells["ID_producto"].Value);
-            string nuevoNombre = txtNmbProducto.Text.Trim();
-            string nuevoPrecio = txtPrecioProducto.Text.Trim();
-            string nuevoStock = txtStockProducto.Text.Trim();
+            var row = dgvProductos.SelectedRows[0];
+            int idProducto = Convert.ToInt32(row.Cells["ID_producto"].Value);
+            string nombreActual = row.Cells["nombre_producto"].Value?.ToString() ?? "";
+            string precioActual = row.Cells["precio"].Value?.ToString() ?? "";
+            string stockActual = row.Cells["stock"].Value?.ToString() ?? "";
 
-            if (string.IsNullOrEmpty(nuevoNombre) || string.IsNullOrEmpty(nuevoPrecio) || string.IsNullOrEmpty(nuevoStock))
+            string nuevoNombre = Microsoft.VisualBasic.Interaction.InputBox(
+                "Nombre del producto:", "Modificar producto", nombreActual);
+
+            if (string.IsNullOrWhiteSpace(nuevoNombre))
             {
-                MessageBox.Show("Completa todos los campos antes de modificar.", "Advertencia");
+                MessageBox.Show("El nombre no puede estar vacío.", "Advertencia");
+                return;
+            }
+
+            string nuevoPrecio = Microsoft.VisualBasic.Interaction.InputBox(
+                "Precio del producto:", "Modificar producto", precioActual);
+
+            if (string.IsNullOrWhiteSpace(nuevoPrecio))
+            {
+                MessageBox.Show("El precio no puede estar vacío.", "Advertencia");
+                return;
+            }
+
+            string nuevoStock = Microsoft.VisualBasic.Interaction.InputBox(
+                "Stock del producto:", "Modificar producto", stockActual);
+
+            if (string.IsNullOrWhiteSpace(nuevoStock))
+            {
+                MessageBox.Show("El stock no puede estar vacío.", "Advertencia");
                 return;
             }
 
@@ -430,8 +468,8 @@ namespace pulperia_mym
                 {
                     sqlConn.Open();
                     string query = @"UPDATE Producto 
-                     SET nombre_producto = @Nombre, precio = @Precio, stock = @Stock 
-                     WHERE ID_producto = @ID";
+                        SET nombre_producto = @Nombre, precio = @Precio, stock = @Stock 
+                        WHERE ID_producto = @ID";
 
                     using (SqlCommand cmd = new SqlCommand(query, sqlConn))
                     {
@@ -445,9 +483,7 @@ namespace pulperia_mym
                         if (filasAfectadas > 0)
                         {
                             MessageBox.Show("Producto modificado correctamente.", "Éxito");
-                            txtNmbProducto.Clear();
-                            txtPrecioProducto.Clear();
-                            txtStockProducto.Clear();
+                            btnMostrarProducto_Click(null, null);
                         }
                         else
                         {
@@ -491,6 +527,7 @@ namespace pulperia_mym
                         if (filasAfectadas > 0)
                         {
                             MessageBox.Show("Producto eliminado correctamente.", "Éxito");
+                            btnMostrarProducto_Click(null, null);
                         }
                         else
                         {
