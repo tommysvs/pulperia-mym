@@ -25,7 +25,9 @@ namespace pulperia_mym
                 TextShade.WHITE
             );
 
-            matTabGeneral.Paint += matTabGeneral_Paint;
+            tabMenu.Paint += matTabGeneral_Paint;
+
+            SetHandCursorForMaterialButtons(this);
         }
 
         private void FormPulperia_Load(object sender, EventArgs e)
@@ -35,7 +37,7 @@ namespace pulperia_mym
             dateVencimiento.Enabled = false;
         }
 
-        #region Front End
+        #region MaterialSkin
         private void matTabGeneral_Paint(object sender, PaintEventArgs e)
         {
             var tabControl = sender as TabControl;
@@ -51,6 +53,22 @@ namespace pulperia_mym
                     tabControl.Width,
                     tabHeight + 1
                 );
+            }
+        }
+
+        private void SetHandCursorForMaterialButtons(Control parent)
+        {
+            foreach (Control control in parent.Controls)
+            {
+                if (control is MaterialSkin.Controls.MaterialButton)
+                {
+                    control.Cursor = Cursors.Hand;
+                }
+                // Si el control tiene hijos, aplicar recursivamente
+                if (control.HasChildren)
+                {
+                    SetHandCursorForMaterialButtons(control);
+                }
             }
         }
         #endregion
@@ -110,6 +128,18 @@ namespace pulperia_mym
                 txtPass.Text = "";
                 txtUser.Focus();
             }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+        #endregion
+
+        #region Inicio
+        private void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            pnlLogin.Visible = true;
         }
         #endregion
 
@@ -365,6 +395,8 @@ namespace pulperia_mym
                     dgvProductos.Columns["nombre_producto"].HeaderText = "Producto";
                     dgvProductos.Columns["precio"].HeaderText = "Precio";
                     dgvProductos.Columns["stock"].HeaderText = "Stock";
+                    dgvProductos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
                 }
                 catch (Exception ex)
                 {
@@ -502,6 +534,8 @@ namespace pulperia_mym
                     dgvSolicitud.Columns["cantidad"].HeaderText = "Cantidad";
                     dgvSolicitud.Columns["descripcion"].HeaderText = "Descripción";
                     dgvSolicitud.Columns["fecha_solicitud"].HeaderText = "Fecha";
+
+                    dgvSolicitud.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
                 catch (Exception ex)
                 {
@@ -643,6 +677,8 @@ namespace pulperia_mym
                     dgvUsuarios.Columns["nombre_usuario"].HeaderText = "Nombre";
                     dgvUsuarios.Columns["rol"].HeaderText = "Rol";
                     dgvUsuarios.Columns["activo"].HeaderText = "Activo";
+
+                    dgvUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 }
                 catch (Exception ex)
                 {
@@ -825,6 +861,7 @@ namespace pulperia_mym
                 DataTable dtTopProd = new DataTable();
                 dtTopProd.Load(cmdTopProd.ExecuteReader());
                 dgvMasvendido.DataSource = dtTopProd;
+                dgvMasvendido.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
                 con.Close();
             }
