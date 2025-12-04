@@ -40,7 +40,7 @@ namespace pulperia_mym
 
         private void FormPulperia_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         #region MaterialSkin
@@ -339,7 +339,7 @@ namespace pulperia_mym
                     cmdVenta.Parameters.AddWithValue("@codigo", Guid.NewGuid().ToString().Substring(0, 8));
                     cmdVenta.Parameters.AddWithValue("@tipo", cbTipoFactura.SelectedValue);
                     cmdVenta.Parameters.AddWithValue("@cliente", cbCliente.SelectedValue);
-                    cmdVenta.Parameters.AddWithValue("@usuario", 2); 
+                    cmdVenta.Parameters.AddWithValue("@usuario", 2);
                     cmdVenta.Parameters.AddWithValue("@credito", esCredito);
                     cmdVenta.Parameters.AddWithValue("@vencimiento", esCredito ? dateVencimiento.Value : DBNull.Value);
                     cmdVenta.Parameters.AddWithValue("@total", total);
